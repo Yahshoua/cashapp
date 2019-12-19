@@ -1,14 +1,71 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-slides pager="true" [options]="slideOpts" style="height: 100%;">
+    <ion-slide>
+      <img class="image1" src="assets/images/image1.png">
+      <h1>CREE TON PARI</h1>
+    </ion-slide>
+    <ion-slide>
+      <img class="image2" src="assets/images/image2.png">
+      <h1>FIXE LE PRIX DU GAGNANT</h1>
+    </ion-slide>
+    <ion-slide>
+      <img class="image3" src="assets/images/image5.png">
+      <h1>INVITE DES PARTICIPANTS</h1>
+    </ion-slide>
+    <ion-slide>
+      <img class="image4" src="assets/images/image4.png">
+      <h1>GAGNE TON PARI</h1>
+    </ion-slide>
+    <ion-slide>
+        <div style="display: grid;">
+          <form [formGroup]="formConnexion" (ngSubmit)="connexion(formConnexion.value)">
+            <div style="margin-top:-76px"> 
+              <div style="text-align: center;height: 100px;">
+                    <img src="assets/images/logo.png" style="width: 99px">
+              </div>
+              
+                <ion-item>
+                      <ion-label position="floating">Email</ion-label>
+                      <ion-input (ionFocus)="onInputs()" [(ngModel)]="email" type="text" formControlName="email" [autofocus] = "!focused"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                      <ion-label position="floating">Mot de passe</ion-label>
+                      <ion-input (ionFocus)="onInputs()" [(ngModel)]="password" type="password" formControlName="password" [autofocus] = "focused">
+                          <ion-icon name="eye-off" slot="end" style="position: absolute;right: 0;font-size: 20px"></ion-icon>
+                      </ion-input>
+                  </ion-item>  
+             </div> 
+             <div>
+               <ion-button expand="full" color="primary" type="submit" [disabled]="!formConnexion.valid" style="margin-top: 38px;">Connexion</ion-button>
+              <ion-button expand="full" color="light"> Inscription </ion-button>
+             </div>
+              
+              <div style="text-align: center;">
+                  <p style="font-size: small;
+                  color: gray;">
+                    Mot de passe oublié ?
+                  </p>
+              </div>
+              <p style="font-size: medium;color: gray;">Autre moyen de connexion</p>
+              <ion-grid>
+                <ion-row>
+                    <ion-col size="6">
+                        <div class="col-facebook">
+                           <ion-icon name="logo-facebook" style="color: blue;margin: auto"></ion-icon>
+                        </div>
+                     
+                    </ion-col>
+                    <ion-col size="6">
+                      <div class="col-google">
+                        <ion-icon slot="end" name="logo-google" style="color: #FF5722;margin: auto"></ion-icon>
+                      </div>
+                    </ion-col>
+                </ion-row>
+              </ion-grid>
+          </form> 
+        </div>
+      </ion-slide>
+  </ion-slides>
 </ion-content>
