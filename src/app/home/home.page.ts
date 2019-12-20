@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
       }
   }
   connexion(user) {
-    this.navCtrl.navigateForward('/page-login')
+    this.navCtrl.navigateForward('/accueil')
   }
   onInputs() {
     this.focused = !this.focused;
