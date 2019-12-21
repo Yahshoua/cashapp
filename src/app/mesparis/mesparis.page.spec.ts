@@ -1,20 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AccueilPage } from './accueil.page';
 
-describe('AccueilPage', () => {
-  let component: AccueilPage;
-  let fixture: ComponentFixture<AccueilPage>;
+import { MesparisPage } from './mesparis.page';
+
+describe('MesparisPage', () => {
+  let component: MesparisPage;
+  let fixture: ComponentFixture<MesparisPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccueilPage ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      declarations: [ MesparisPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AccueilPage);
+    fixture = TestBed.createComponent(MesparisPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -42,7 +42,10 @@
                 "input": "src/assets/css/all.css"
               }
             ],
-            "scripts": []
+            "scripts": [
+                "src/assets/js/jquery.js",
+                "src/assets/js/materialize.js"
+            ]
           },
           "configurations": {
             "production": {

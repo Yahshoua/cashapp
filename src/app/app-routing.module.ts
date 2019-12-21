@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { MesparisPage } from './mesparis/mesparis.page';
+import { ProfilPage } from './profil/profil.page';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -9,8 +11,19 @@ const routes: Routes = [
     loadChildren: () => import('./accueil/accueil.module').then( m => m.AccueilPageModule)
   },
   {
-    path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+    path: 'allparis',
+    loadChildren: () => import('./allparis/allparis.module').then( m => m.AllparisPageModule)
+  },
+  {
+    path: 'profil',
+    component: ProfilPage,
+      children: [
+        {
+            path: 'mesparis',
+            component: MesparisPage,
+            outlet:"myoutlet"
+        }
+    ]
   }
 ];
 
