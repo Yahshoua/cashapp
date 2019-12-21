@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MesparisPage } from './mesparis/mesparis.page';
 import { ProfilPage } from './profil/profil.page';
+import { Router, Routes } from '@angular/router';
 @NgModule({
   declarations: [AppComponent, MesparisPage, ProfilPage],
   entryComponents: [],

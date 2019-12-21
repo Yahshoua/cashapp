@@ -1,5 +1,7 @@
+import { RouterModule } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Router, Routes } from '@angular/router';
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
@@ -7,10 +9,11 @@ import { NavController } from '@ionic/angular';
 })
 export class TabsComponent implements OnInit {
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController, public router: Router) { }
 
   ngOnInit() {}
   go() {
-    this.navCtrl.navigateForward('profil')
+    // this.navCtrl.navigateForward(['profil', 'mesparis'])
+    this.router.navigate(['profil', {outlets: {'myoutlet': ['mesparis']}}])
   }
 }
