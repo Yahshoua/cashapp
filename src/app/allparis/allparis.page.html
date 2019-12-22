@@ -1,28 +1,27 @@
 <ion-content class="content">
-    
-  <ion-grid>
+  <ion-grid style="margin-top: 5%;" *ngFor="let pari of paris">
       <ion-row>
           <ion-col size="12" class="col-name">
-             <h2>John Doe</h2>
+             <h2> {{ pari.auteur }} </h2>
           </ion-col>
           <ion-col size="12" class="pari-item">
             <ion-row>
               <ion-col style="margin: 0;padding: 0" size="2">
                 <ion-avatar>
-                  <img style="width:50%;height: 50%" src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                  <img style="width:50%;height: 50%" src={{pari.profil}}>
                 </ion-avatar>
               </ion-col>
               <ion-col size="3" class="col-item">
                        <div style="font-size: 14px;height: 0">Titre</div>
-                       <p style="font-size: 13px;"><strong>Mon Pari</strong></p>
+                       <p style="font-size: 13px;"><strong> {{pari.titre}} </strong></p>
                 </ion-col>
                 <ion-col size="3" class="col-item">
                   <div style="font-size: 14px;
                   height: 0;">Prix</div>
-                  <span><strong>10000fr</strong></span>
+                  <span><strong> {{pari.prix}} fr</strong></span>
                 </ion-col>
                 <ion-col size="4">
-                  <ion-button style="padding: 4px">Parier</ion-button>
+                  <ion-button style="padding: 4px" [routerLink]="['/parisdetail/', pari.id]" routerLinkActive="router-link-active" >Parier</ion-button>
                 </ion-col> 
             </ion-row>
           </ion-col>

@@ -1,3 +1,4 @@
+import { ServerService } from './../server.service';
 import { Component, OnInit } from '@angular/core';
 declare var $, M: any
 @Component({
@@ -7,7 +8,7 @@ declare var $, M: any
 })
 export class AccueilPage implements OnInit {
 
-  constructor() { }
+  constructor(public service: ServerService) { }
 
   ngOnInit() {
     var instance = M.Tabs.init('.tabs');

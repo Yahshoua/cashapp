@@ -1,0 +1,51 @@
+.mybackgs ion-toolbar {
+    height: 160px !important;
+}
+.active-item {
+    --color: var(--ion-color-primary);
+}
+.mybackgs {
+    --border-color: none;
+    height: 270px;
+    position: relative;
+}
+.col-perso-detail {
+    text-align: center;
+    display: grid;
+    color: #fff
+}
+.col-perso-detail h3 {
+    margin: 0;
+    margin-top: 5px;
+    font-size: 15px;
+    color: #000;
+}
+.col-info-paris {
+    bottom: -33%;
+    left: 0;
+    z-index: 200;
+    right: 0;
+    height: 73px;
+    background: #fff;
+}
+.col-info-paris font {
+    font-size: 11px;
+}
+.col-info-paris span {
+    font-size: 18px;
+}
+.col-info-paris ion-col {
+    text-align: center;
+}
+.activates {
+    color: #1449c5;
+}
+.col-info-paris ion-col {
+    cursor: pointer;
+}
+.item-paris ion-col {
+    text-align: center;
+}
+.item-active {
+    border-bottom: 1px solid #3880ff;
+}

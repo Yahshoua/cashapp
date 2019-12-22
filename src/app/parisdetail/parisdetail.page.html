@@ -1,0 +1,63 @@
+<ion-header style="background: #ebebeb;">
+  <ion-toolbar class="mybackgs">
+    <ion-icon name="arrow-round-back" slot="start" style="font-size: 22px;
+    margin: 10px;color: #2196F3;margin-bottom: 50%;position: absolute;
+    top: 0;" [routerLink]="['/accueil']" routerLinkActive="router-link-active" ></ion-icon>
+    
+     <div style="margin-top: 25%">
+        <ion-avatar style="margin: auto;height: 100%;width: 100%;text-align: center;">
+          <img src={{pari.profil}} style="width: 100px;height: 100px;">
+        </ion-avatar>
+        <div class="col-perso-detail">
+            <h3>{{pari.auteur}}</h3>
+            <span style="font-size: 10px;color: #000">
+              Libreville
+            </span>
+        </div>
+     </div>
+     <div style="text-align: center;">
+       <ion-button shape="round">Parier avec {{pari.auteur}}</ion-button>
+     </div>
+     
+  </ion-toolbar>
+  <div class="col-info-paris" style="margin: auto;">
+      <ion-grid>
+        <ion-row>
+            <ion-col size="4" style="display: grid;" class="activates" [routerLink]="[{outlets: { myoutlet: ['mesparis'] } }]" routerLinkActive="router-link-active">
+                <font>Prix</font>
+                <span> {{pari.prix}} </span>
+            </ion-col>
+            <ion-col size="4" style="display: grid;">
+              <font> date de début </font>
+              <span> {{pari.debut}} </span>
+            </ion-col>
+            <ion-col size="4" style="display: grid;">
+              <font>  date de fin </font>
+              <span> {{pari.fin}} </span>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+  </div>
+</ion-header>
+<div  style="border-bottom: #8080802e 1px solid">
+  <ion-grid style="padding: 0">
+      <ion-row class="item-paris">
+          <ion-col size="4" class="item-active">
+              detail
+          </ion-col>
+          <ion-col size="4">
+              Participants
+          </ion-col>
+          <ion-col size="4">
+              invitations
+          </ion-col>
+      </ion-row>
+  </ion-grid>
+</div>
+<ion-grid>
+    <ion-row>
+        <ion-col>
+
+        </ion-col>
+    </ion-row>
+</ion-grid>

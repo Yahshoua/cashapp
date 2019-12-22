@@ -24,6 +24,10 @@ const routes: Routes = [
             outlet:"myoutlet"
         }
     ]
+  },
+  {
+    path: 'parisdetail/:id',
+    loadChildren: () => import('./parisdetail/parisdetail.module').then( m => m.ParisdetailPageModule)
   }
 ];
 
