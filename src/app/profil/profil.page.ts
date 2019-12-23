@@ -1,6 +1,6 @@
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.page.html',
@@ -8,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilPage implements OnInit {
 
-  constructor(public navCtrl: NavController) { }
-
+  constructor(public navCtrl: NavController, public route: Router) { }
+  goback() {
+    this.navCtrl.navigateBack(['accueil'])
+  }
   ngOnInit() {
   }
   goparis() {

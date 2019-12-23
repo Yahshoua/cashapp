@@ -96,3 +96,112 @@ ion-label {
     --background:#2b62e200;
     --box-shadow: none
 }
+.mestabs {
+    line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  @media only screen and (min-width: 1200px) {
+    html {
+      font-size: 15px;
+    }
+  }
+  ul:not(.browser-default) {
+    padding-left: 0;
+    list-style-type: none;
+    overflow: hidden;
+  }
+  
+  .tabs {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 48px;
+    width: 100%;
+    background-color: #fff;
+    margin: 0 auto;
+    white-space: nowrap;
+  }
+  
+  .tabs.tabs-transparent {
+    background-color: transparent;
+  }
+  
+  .tabs.tabs-transparent .tab a,
+  .tabs.tabs-transparent .tab.disabled a,
+  .tabs.tabs-transparent .tab.disabled a:hover {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: blink;
+  }
+  
+  .tabs.tabs-transparent .tab a:hover,
+  .tabs.tabs-transparent .tab a.active {
+    color: #fff;
+  }
+  
+  .tabs.tabs-transparent .indicator {
+    background-color: #fff;
+  }
+  
+  .tabs.tabs-fixed-width {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  
+  .tabs.tabs-fixed-width .tab {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+  }
+  
+  .tabs .tab {
+    display: inline-block;
+    text-align: center;
+    line-height: 48px;
+    height: 48px;
+    padding: 0;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  
+  .tabs .tab a {
+    color: #3880ff;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0 24px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-transition: color .28s ease, background-color .28s ease;
+    transition: color .28s ease, background-color .28s ease;
+    text-decoration: blink;
+  }
+  
+  .tabs .tab a:focus, .tabs .tab a:focus.active {
+    background-color: rgba(178, 205, 246, 0.2);
+    outline: none;
+  }
+  
+  .tabs .tab a:hover, .tabs .tab a.active {
+    background-color: transparent;
+    color: #3880ff;
+  }
+  
+  .tabs .tab.disabled a,
+  .tabs .tab.disabled a:hover {
+    color: #3880ff;
+    cursor: default;
+  }
+  
+  .tabs .indicator {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: #91b8fa;
+    will-change: left, right;
+  }

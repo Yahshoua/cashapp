@@ -6,7 +6,6 @@
 }
 .mybackgs {
     --border-color: none;
-    height: 270px;
     position: relative;
 }
 .col-perso-detail {
@@ -46,8 +45,18 @@
 .item-paris ion-col {
     text-align: center;
 }
-.item-active {
-    border-bottom: 1px solid #3880ff;
+.col-swip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border: 1px solid #3880ff;
+    transition: all .3s
+}
+.item-paris {
+    position: relative
+}
+.item-paris ion-col {
+    cursor: pointer
 }
 .col-desc {
     padding: 28px;
@@ -55,3 +64,15 @@
     padding-left: 17px;
     color: gray;
 }
+.mestabs {
+    line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.87);
+  }
+//   @media only screen and (min-width: 1200px) {
+//     html {
+//       font-size: 15px;
+//     }
+//   }
+ 

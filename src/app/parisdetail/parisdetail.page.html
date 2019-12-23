@@ -2,7 +2,7 @@
   <ion-toolbar class="mybackgs">
     <ion-icon name="arrow-round-back" slot="start" style="font-size: 22px;
     margin: 10px;color: #2196F3;margin-bottom: 50%;position: absolute;
-    top: 0;" [routerLink]="['/accueil']" routerLinkActive="router-link-active" ></ion-icon>
+    top: 0;" (click)="goback()" routerLinkActive="router-link-active" ></ion-icon>
     
      <div style="margin-top: 25%">
         <ion-avatar style="margin: auto;height: 100%;width: 100%;text-align: center;">
@@ -18,9 +18,9 @@
      <div style="text-align: center;">
        <ion-button shape="round">Parier avec {{pari.auteur}}</ion-button>
      </div>
-     
   </ion-toolbar>
-  <div class="col-info-paris" style="margin: auto;">
+</ion-header>
+<div class="col-info-paris">
       <ion-grid>
         <ion-row>
             <ion-col size="4" style="display: grid;" class="activates" [routerLink]="[{outlets: { myoutlet: ['mesparis'] } }]" routerLinkActive="router-link-active">
@@ -38,26 +38,24 @@
         </ion-row>
       </ion-grid>
   </div>
-</ion-header>
-<div  style="border-bottom: #8080802e 1px solid">
-  <ion-grid style="padding: 0">
-      <ion-row class="item-paris">
-          <ion-col size="4" class="item-active">
-              Description
-          </ion-col>
-          <ion-col size="4">
-              Participants
-          </ion-col>
-          <ion-col size="4">
-              Invitations
-          </ion-col>
-      </ion-row>
-  </ion-grid>
-</div>
-<ion-grid>
-    <ion-row>
-        <ion-col class="col-desc">
-            {{pari.description}}
-        </ion-col>
-    </ion-row>
-</ion-grid>
+  <div  style="border-bottom: #8080802e 1px solid">
+    <ion-grid style="padding: 0">
+        <ion-row class="item-paris">
+            <ion-col size="4" class="item-active" id="0"  (click)="godesc()">
+                Description
+            </ion-col>
+            <ion-col size="4" id="1" (click)="gopart()">
+                Participants
+            </ion-col>
+            <ion-col size="4" id="2" (click)="goinv()">
+                Invitations
+            </ion-col>
+            <span class="col-swip"></span>
+        </ion-row>
+    </ion-grid>
+  </div>
+  <ion-content class="">
+    <router-outlet name="outlet2"></router-outlet>
+</ion-content>
+  
+  

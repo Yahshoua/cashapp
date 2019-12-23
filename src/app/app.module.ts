@@ -10,8 +10,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { MesparisPage } from './mesparis/mesparis.page';
 import { ProfilPage } from './profil/profil.page';
 import { Router, Routes } from '@angular/router';
+import { ParisdetailPage } from './parisdetail/parisdetail.page';
+import { DescriptionPage } from './description/description.page';
+import { ParticipantsPage } from './participants/participants.page';
+import { InvitationsPage } from './invitations/invitations.page';
 @NgModule({
-  declarations: [AppComponent, MesparisPage, ProfilPage],
+  declarations: [AppComponent, MesparisPage,ParisdetailPage, ProfilPage, DescriptionPage, ParticipantsPage, InvitationsPage],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [
