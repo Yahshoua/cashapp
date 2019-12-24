@@ -26,7 +26,7 @@ export class ServerService {
         },
         {
           id: 3,
-          nom: 'Mr z'
+          nom: 'Mr k'
         },
         {
           id: 4,

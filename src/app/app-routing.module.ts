@@ -49,7 +49,7 @@ const routes: Routes = [
        outlet: 'outlet2'
       }
     ]
-  },
+  }
   
 ];
 

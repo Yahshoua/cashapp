@@ -1,6 +1,8 @@
 import { Subject } from 'rxjs';
 import { ServerService } from './../server.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-allparis',
   templateUrl: './allparis.page.html',
@@ -8,13 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllparisPage implements OnInit {
   paris
-  constructor(public services: ServerService) { }
+  constructor(public services: ServerService, public navCtrl: NavController, public route: Router, public routes: ActivatedRoute, private zone: NgZone) { }
 
   ngOnInit() {
     this.getdata()
   }
   ionViewWillEnter(){
-    console.log('fiiiire')
         this.services.parisSubscription.subscribe((e: any)=>{
             this.paris = e
             console.log('ooook ', this.paris)

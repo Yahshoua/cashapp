@@ -16,7 +16,7 @@ export class ParisdetailPage implements OnInit {
   constructor(public route: ActivatedRoute, public service: ServerService, public navCtrl: NavController,  public router: Router) { }
 
   goback() {
-    this.navCtrl.navigateBack('accueil')
+    this.navCtrl.back()
   }
   godesc() {
     this.router.navigate(['parisdetail',this.id, {outlets: {'outlet2': ['description']}}], { queryParams: { id: this.id } })
