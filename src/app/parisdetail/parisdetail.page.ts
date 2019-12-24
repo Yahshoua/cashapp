@@ -2,6 +2,7 @@ import { ServerService } from './../server.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Location } from "@angular/common";
 declare var $
 @Component({
   selector: 'app-parisdetail',
@@ -13,10 +14,12 @@ export class ParisdetailPage implements OnInit {
   par
   enft
   id
-  constructor(public route: ActivatedRoute, public service: ServerService, public navCtrl: NavController,  public router: Router) { }
+  prevUrl
+  constructor(public route: ActivatedRoute, public service: ServerService, public navCtrl: NavController, public router: Router, private location: Location) { }
 
   goback() {
-    this.navCtrl.back()
+    this.navCtrl.navigateBack([this.prevUrl, { animated: true,
+      animationDirection: 'back'}])
   }
   godesc() {
     this.router.navigate(['parisdetail',this.id, {outlets: {'outlet2': ['description']}}], { queryParams: { id: this.id } })
@@ -29,6 +32,8 @@ export class ParisdetailPage implements OnInit {
   }
   ngOnInit() {
     let id = this.route.snapshot.params.id
+   this.prevUrl = this.route.snapshot.queryParams.url
+    console.log('prevUrl ', this.prevUrl)
     this.id = id
     this.service.parisSubscription.subscribe((e:any)=> {
       this.pari = e.find((i)=> {

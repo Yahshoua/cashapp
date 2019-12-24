@@ -15,30 +15,41 @@ export class AccueilPage implements OnInit {
   color2 = 'none'
   zap:boolean = false
   constructor(public service: ServerService, public navCtrl: NavController, public route: Router, public routes: ActivatedRoute, private zone: NgZone) { }
-   govosparis() {
-    this.navCtrl.navigateForward(['accueil', 'accueil', 'vosparis']).then((elm)=> {
-        console.log('e ', elm)
-      }).catch((err)=> {
-        console.log('error ', err)
-      })
-      this.color = "none"
-      this.zap = true
-      this.color2 = 'light'
-  }
   mycolor() {
     return this.color
   }
   mycolor2() {
     return this.color2
   }
+   govosparis() {
+    this.navCtrl.navigateForward(['accueil', 'accueil', 'vosparis']).then((elm)=> {
+        console.log('e ', elm)
+        this.color = "none"
+        this.zap = true
+        this.color2 = 'light'
+        console.log('etat de button1', this.mycolor())
+    console.log('etat de button2 ',this.mycolor2())
+      }).catch((err)=> {
+        console.log('error ', err)
+      })
+      
+  }
+  ionViewWillEnter(){
+    console.log('etat de btn1', this.mycolor())
+    console.log('etat de bnt2 ',this.mycolor2())
+  }
+  
   clic() {
+    this.navCtrl.navigateForward(['accueil','accueil', 'allparis']).then((elm)=> {
+      console.log('e ', elm)
+    }).catch((err)=> {
+      console.log('error ', err)
+    })
     this.color= "light"
     this.color2 = 'none'
     this.zap = false
   }
   ngOnInit() {
-    var instance = M.Tabs.init('.tabs');
-       $('.tabs').tabs();
   }
 
 }

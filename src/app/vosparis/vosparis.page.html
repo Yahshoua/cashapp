@@ -21,7 +21,7 @@
                 <span><strong> {{pari.prix}} fr</strong></span>
               </ion-col>
               <ion-col size="4">
-      <ion-button style="padding: 4px" [routerLink]="['/parisdetail/',pari.id, {outlets: { outlet2: ['description']} }]"  [queryParams]="{id: pari.id}" routerLinkActive="router-link-active">Parier</ion-button>
+      <ion-button style="padding: 4px" [routerLink]="['/parisdetail/',pari.id, {outlets: { outlet2: ['description']} }]"  [queryParams]="{id: pari.id, url: 'accueil/accueil/vosparis'}" routerLinkActive="router-link-active">Parier</ion-button>
               </ion-col> 
           </ion-row>
         </ion-col>
