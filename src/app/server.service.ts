@@ -7,6 +7,7 @@ export class ServerService {
 
   constructor() {
   }
+  // private paris=[]
   private paris = [
     {
       id: 0,

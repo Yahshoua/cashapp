@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 @Component({
@@ -7,12 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profil.page.scss'],
 })
 export class ProfilPage implements OnInit {
+  prevUrl
+  constructor(public navCtrl: NavController, public route: Router, public router:ActivatedRoute) { }
 
-  constructor(public navCtrl: NavController, public route: Router) { }
-  goback() {
-    this.navCtrl.navigateBack(['accueil'])
-  }
+    goback() {
+      this.navCtrl.back({ animated: true,
+        animationDirection: 'back'})
+    }
   ngOnInit() {
+    this.prevUrl = this.router.snapshot.queryParams.url
   }
   goparis() {
       // this.navCtrl.navigateForward('mesparis')

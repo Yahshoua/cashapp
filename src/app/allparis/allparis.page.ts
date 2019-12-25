@@ -9,7 +9,7 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./allparis.page.scss'],
 })
 export class AllparisPage implements OnInit {
-  paris
+  paris:[]
   constructor(public services: ServerService, public navCtrl: NavController, public route: Router, public routes: ActivatedRoute, private zone: NgZone) { }
 
   ngOnInit() {
@@ -18,6 +18,7 @@ export class AllparisPage implements OnInit {
   ionViewWillEnter(){
         this.services.parisSubscription.subscribe((e: any)=>{
             this.paris = e
+            console.log(typeof this.paris)
             console.log('ooook ', this.paris)
           })
     this.services.getparis()

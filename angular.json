@@ -40,11 +40,16 @@
               },
               {
                 "input": "src/assets/css/all.css"
+              },
+              {
+                "input": "src/assets/css/jquery.pagepiling.css"
               }
             ],
             "scripts": [
                 "src/assets/js/jquery.js",
-                "src/assets/js/materialize.js"
+                "src/assets/js/materialize.js",
+                "src/assets/js/jquery.pagepiling.js",
+                "src/assets/js/moment.min.js"
             ]
           },
           "configurations": {

@@ -49,6 +49,10 @@ const routes: Routes = [
        outlet: 'outlet2'
       }
     ]
+  },
+  {
+    path: 'creation',
+    loadChildren: () => import('./creation/creation.module').then( m => m.CreationPageModule)
   }
   
 ];

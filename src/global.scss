@@ -205,3 +205,15 @@ ion-label {
     background-color: #91b8fa;
     will-change: left, right;
   }
+  .empty {
+    text-align: center;
+    margin-top: 50%;
+    display: grid;
+}
+.empty p {
+    color: gray;
+}
+.empty span {
+  font-size: 16px;
+  color: gray;
+}

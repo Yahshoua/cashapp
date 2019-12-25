@@ -1,4 +1,9 @@
 <ion-content class="content">
+
+  <div *ngIf="paris?.length <= 0" class="empty">
+      <p> Il n' y a aucun paris pour le moment </p>
+  </div>
+
   <ion-grid style="margin-top: 5%;" *ngFor="let pari of paris">
       <ion-row>
           <ion-col size="12" class="col-name">
