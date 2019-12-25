@@ -37,7 +37,8 @@ export class CreationPage implements OnInit {
       direction: 'horizontal',
       navigation: false,
       scrollingSpeed: 300,
-      sectionsColor: ['#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2']
+      keyboardScrolling: false,
+      sectionsColor: ['#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2']
     });
     $.fn.pagepiling.setAllowScrolling(false);
   }
@@ -107,7 +108,7 @@ export class CreationPage implements OnInit {
     if(this.description.length <= 0 || this.description.length <= 3 || this.description == undefined) {
       toast.present();
           } else {
-            await alert.present();
+            $.fn.pagepiling.moveTo(6);
       }
   }
   async next1() {

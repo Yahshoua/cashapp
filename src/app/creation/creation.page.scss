@@ -14,3 +14,17 @@ ion-input {
 .alert-message2 {
     font-size: 10px !important;
 }
+.succ ion-icon {
+    --color: lightgreen
+}
+.div-warn {
+    display: grid;
+    white-space: initial;
+    padding-left: 10%;
+}
+.div-warn p {
+    font-size: 12px;
+    line-height: 160%;
+    text-align: justify;
+    white-space: pre-line;
+}
