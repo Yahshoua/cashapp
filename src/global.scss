@@ -217,3 +217,9 @@ ion-label {
   font-size: 16px;
   color: gray;
 }
+.my-custom-modal-css .modal-wrapper {
+  position: absolute !important;
+  top: 75% !important;
+  display: block;
+  height: 80% !important;
+}

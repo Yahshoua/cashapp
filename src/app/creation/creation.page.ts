@@ -1,3 +1,4 @@
+import { ServerService } from './../server.service';
 import { NavController, ToastController, AlertController } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -18,7 +19,7 @@ export class CreationPage implements OnInit {
   prix =''
   description = ''
   customDayShortNames = ['s\u00f8n', 'man', 'tir', 'ons', 'tor', 'fre', 'l\u00f8r'];
-  constructor(public navCtrl: NavController, public formBuild: FormBuilder, public toastController: ToastController, public alertController: AlertController) { }
+  constructor(public navCtrl: NavController, public formBuild: FormBuilder, public toastController: ToastController, public alertController: AlertController, public service: ServerService) { }
 
   titre: String = ''
   messages: String
@@ -31,7 +32,8 @@ export class CreationPage implements OnInit {
       date1: ['', Validators.required],
       date2: ['', Validators.required],
       prix: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      auteur: ''
     })
     $('#pagepiling').pagepiling({
       direction: 'horizontal',
@@ -96,19 +98,24 @@ export class CreationPage implements OnInit {
       color: "danger"
     });
     //fin
-
-    //alert
+    // alert
     const alert = await this.alertController.create({
-      header: "Bravo. Vous avez fait un pari",
-      cssClass: 'alertcls',
-      message: "<small style='font-size: 20px'>Vous pouvez à present inviter les gens à relever votre defis. Vous pouvez aussi contrôler si votre pari soit visible par le publique ou seulement par des personnes que vous inviter. Rendez-vous dans votre page de profil pour plus d'options. Lire aussi nos conditions d\'utilisation.</small>",
+      header: 'Oups !',
+      message: 'Une erreur inconnu s\'est produite !',
       buttons: ['OK']
     });
-    //
+    // fin
     if(this.description.length <= 0 || this.description.length <= 3 || this.description == undefined) {
       toast.present();
           } else {
             $.fn.pagepiling.moveTo(6);
+            console.log(this.formPari.value)
+            this.service.setPari(this.formPari.value).then((res:any)=> {
+              console.log('resultait ', res)
+            }).catch(async(err)=> {
+              console.log('erreur ', err)
+              await alert.present();
+            })
       }
   }
   async next1() {

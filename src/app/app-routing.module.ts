@@ -53,6 +53,14 @@ const routes: Routes = [
   {
     path: 'creation',
     loadChildren: () => import('./creation/creation.module').then( m => m.CreationPageModule)
+  },
+  {
+    path: 'maodalinscription',
+    loadChildren: () => import('./maodalinscription/maodalinscription.module').then( m => m.MaodalinscriptionPageModule)
+  },
+  {
+    path: 'inscription',
+    loadChildren: () => import('./inscription/inscription.module').then( m => m.InscriptionPageModule)
   }
   
 ];

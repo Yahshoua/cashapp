@@ -1,3 +1,4 @@
+import { MaodalinscriptionPageModule } from './maodalinscription/maodalinscription.module';
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -14,10 +15,11 @@ import { ParisdetailPage } from './parisdetail/parisdetail.page';
 import { DescriptionPage } from './description/description.page';
 import { ParticipantsPage } from './participants/participants.page';
 import { InvitationsPage } from './invitations/invitations.page';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [AppComponent, MesparisPage,ParisdetailPage, ProfilPage, DescriptionPage, ParticipantsPage, InvitationsPage],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule, MaodalinscriptionPageModule],
   providers: [
     StatusBar,
     SplashScreen,

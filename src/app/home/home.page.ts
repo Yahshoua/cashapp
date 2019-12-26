@@ -1,3 +1,4 @@
+import { MaodalinscriptionPage } from './../maodalinscription/maodalinscription.page';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +17,7 @@ export class HomePage implements OnInit {
     initialSlide: 0,
     speed: 400
   };
-  constructor(public route: ActivatedRoute, public formBuild: FormBuilder, public alertController: AlertController, public navCtrl:NavController, public loadingController: LoadingController) {}
+  constructor(public route: ActivatedRoute, public formBuild: FormBuilder, public alertController: AlertController, public navCtrl:NavController, public loadingController: LoadingController, public modalCtrl: ModalController) {}
 
   async ngOnInit() {
     this.formConnexion = this.formBuild.group({
@@ -36,5 +37,12 @@ export class HomePage implements OnInit {
   onInputs() {
     this.focused = !this.focused;
     console.log(this.focused)
+  }
+  async callinscrip() {
+    const modal = await this.modalCtrl.create({
+      component: MaodalinscriptionPage,
+      cssClass: 'my-custom-modal-css'
+    })
+    return await modal.present();
   }
 }

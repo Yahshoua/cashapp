@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import  { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { resolve } from 'url';
 @Injectable({
   providedIn: 'root'
 })
 export class ServerService {
 
-  constructor() {
+  url = 'http://localhost/phpcashapp/setParis.php';
+  url2 = 'http://localhost/phpcashapp/setUser.php';
+  header = new HttpHeaders({'Content-Type': 'application/json'})
+  constructor(public http: HttpClient) {
   }
   // private paris=[]
   private paris = [
@@ -62,4 +67,28 @@ export class ServerService {
   sutoto() {
     this.getparis()
   }
+  //requete de creation d'un nouveau pari
+  setPari(paris) {
+    const req = new Promise((resolve, reject)=> {
+      this.http.post(this.url, paris, {headers: this.header})
+      .toPromise()
+      .then(res => {
+          resolve(res)
+      })
+    })
+    return req;
+  }
+    //requete de creation d'un nouvel user
+    setUser(user) {
+      const req = new Promise((resolve, reject)=> {
+        this.http.post(this.url2, user, {headers: this.header})
+        .toPromise()
+        .then(res => {
+            resolve(res)
+        }).catch((err: any)=> {
+           reject(err)
+        })
+      })
+      return req;
+    }
 }
