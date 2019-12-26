@@ -27,6 +27,7 @@ export class InscriptionPage implements OnInit {
     this.formInscription = this.formBuild.group({
       nom: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
+      type: 'formulaire',
       password: ['', Validators.compose([Validators.required, Validators.minLength(4),Validators.maxLength(10)])],
       password2: ['', Validators.compose([Validators.required, Validators.minLength(4),Validators.maxLength(10)])]
     },

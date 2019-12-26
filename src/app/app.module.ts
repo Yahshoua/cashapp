@@ -16,6 +16,7 @@ import { DescriptionPage } from './description/description.page';
 import { ParticipantsPage } from './participants/participants.page';
 import { InvitationsPage } from './invitations/invitations.page';
 import { HttpClientModule } from '@angular/common/http';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 @NgModule({
   declarations: [AppComponent, MesparisPage,ParisdetailPage, ProfilPage, DescriptionPage, ParticipantsPage, InvitationsPage],
   entryComponents: [],
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
+    Facebook,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
