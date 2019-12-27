@@ -6,7 +6,8 @@ import { resolve } from 'url';
   providedIn: 'root'
 })
 export class ServerService {
-
+  auth: boolean
+  utilisateur: []
   url = 'http://localhost/phpcashapp/setParis.php';
   url2 = 'http://localhost/phpcashapp/setUser.php';
   header = new HttpHeaders({'Content-Type': 'application/json'})
@@ -90,5 +91,19 @@ export class ServerService {
         })
       })
       return req;
+    }
+    setStorage(user) {
+      let log = JSON.parse(sessionStorage.getItem('user')) || []
+      if(log.length <=0) {
+        sessionStorage.setItem('user', JSON.stringify(user))
+        this.utilisateur = JSON.parse(sessionStorage.getItem('user'))
+        this.auth = true
+      }
+    }
+    getStorageUser() {
+      let user = JSON.parse(sessionStorage.getItem('user')) || []
+      user.length <=0? this.auth= false: this.auth = true
+      this.utilisateur = user
+      return this.utilisateur
     }
 }

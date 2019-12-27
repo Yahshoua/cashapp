@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "518940197353",
+    "firebase_url": "https://cash-app-76b84.firebaseio.com",
+    "project_id": "cash-app-76b84",
+    "storage_bucket": "cash-app-76b84.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518940197353:android:f2eec710cede7199438b78",
+        "android_client_info": {
+          "package_name": "io.ionic.cashapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518940197353-nvb2c7m1cr2h4ji1efb3k3q9ae9g1eo0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFIniwLQHje2woKJNH3V_FzaHvfrlbTOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518940197353-nvb2c7m1cr2h4ji1efb3k3q9ae9g1eo0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
