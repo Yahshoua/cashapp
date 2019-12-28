@@ -1,3 +1,5 @@
+import { GuardhomeService } from './guardhome.service';
+import { GuardService } from './guard.service';
 import { MaodalinscriptionPageModule } from './maodalinscription/maodalinscription.module';
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -31,6 +33,8 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
     TwitterConnect,
     GooglePlus,
     Sim,
+    GuardService,
+    GuardhomeService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

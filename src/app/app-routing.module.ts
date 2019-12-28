@@ -6,12 +6,14 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { MesparisPage } from './mesparis/mesparis.page';
 import { ProfilPage } from './profil/profil.page';
 import { ParisdetailPage } from './parisdetail/parisdetail.page';
-
+import { GuardService } from './guard.service';
+import { GuardhomeService } from './guardhome.service';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
+  { path: 'home',canActivate: [GuardhomeService], loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   {
     path: 'accueil',
+    canActivate: [GuardService],
     loadChildren: () => import('./accueil/accueil.module').then( m => m.AccueilPageModule)
   },
   {

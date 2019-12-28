@@ -17,13 +17,25 @@ export class AllparisPage implements OnInit {
   }
   ionViewWillEnter(){
         this.services.parisSubscription.subscribe((e: any)=>{
-            this.paris = e
+            this.paris = e.sort((a, b) => a.id < b.id ? 1 : -1)
             console.log(typeof this.paris)
             console.log('ooook ', this.paris)
           })
     this.services.getparis()
   }
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+      this.getdata()
+    }, 2000);
+  }
     getdata() {
-       
+       this.services.getallparis().then((e: any)=> {
+         console.log(e)
+         //this.paris = e.sort((a, b) => a.id < b.id ? 1 : -1)
+       })
     }
 }

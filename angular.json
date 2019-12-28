@@ -49,7 +49,8 @@
                 "src/assets/js/jquery.js",
                 "src/assets/js/materialize.js",
                 "src/assets/js/jquery.pagepiling.js",
-                "src/assets/js/moment.min.js"
+                "src/assets/js/moment.min.js",
+                "src/assets/js/fr.js"
             ]
           },
           "configurations": {

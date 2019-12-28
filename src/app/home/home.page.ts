@@ -18,6 +18,8 @@ export class HomePage implements OnInit {
   password;
   focused: boolean;
   userData
+  eye = 'eye-off'
+  text = 'password'
   formConnexion: FormGroup;
   slideOpts = {
     initialSlide: 0,
@@ -31,16 +33,27 @@ export class HomePage implements OnInit {
       email: ['', Validators.compose([Validators.required, Validators.email]) ],
       password: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)])]
     })
-      if (this.route.snapshot.queryParams.email) {
-        this.email = this.route.snapshot.queryParams.email
-        this.password = this.route.snapshot.queryParams.password
-        let user = {'email': this.email, 'password': this.password}
-        this.connexion(user)
-      }
   }
   
   connexion(user) {
-    this.navCtrl.navigateForward('/accueil')
+    this.service.login(user).then(async (e:any)=> {
+      console.log('resltat de la connection ', e)
+      if(e.status == 1) {
+        this.service.setStorage(e).then(res=> {
+          this.navCtrl.navigateForward(['accueil'])
+      })
+    }
+      const toast = await this.toastCtrl.create({
+        message: e.message,
+        duration: 7000,
+        position: 'top',
+        color: e.couleur
+      });
+      toast.present() })
+  }
+  view() {
+    this.eye == 'eye-off'? this.eye = 'eye': this.eye = 'eye-off'
+    this.text == 'password'? this.text= 'text': this.text='password'
   }
   onInputs() {
     this.focused = !this.focused;
@@ -98,7 +111,10 @@ export class HomePage implements OnInit {
        if (e.type == 'formulaire' || e.type == null) {
           e.response += '. Connectez-vous au formulaire !'
         } else if (e.type=="facebook" || e.type== 'google') {
-         //  this.navCtrl.navigateForward(['accueil'])
+          this.service.setStorage(e).then(res=> {
+              this.navCtrl.navigateForward(['accueil'])
+          })
+          
         }
         const toast = await this.toastCtrl.create({
           message: e.response,

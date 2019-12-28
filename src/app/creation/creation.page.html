@@ -12,7 +12,7 @@
       <div class="section">
         <ion-item class="myinput">
           <ion-label position="floating">Le nom du paris*</ion-label>
-          <ion-input [(ngModel)]="titre" formControlName="titre" autofocus="true" type="text" maxlength="12" minlength="4" name="titre" required="true" #myInput></ion-input>
+          <ion-input [(ngModel)]="titre" formControlName="titre" type="text" maxlength="12" minlength="4" name="titre" required="true" #myInput></ion-input>
         </ion-item>
         <div style="text-align: center;padding: 30%;">
           <ion-button shape="round" (click)="next1()">
@@ -24,7 +24,7 @@
       <div class="section">
         <ion-item class="myinput">
           <ion-label position="floating">Determiner la date de début du paris*</ion-label>
-          <ion-datetime [dayShortNames]="customDayShortNames" displayFormat="DDDD DD-MMM-YYYY à H:mm"  placeholder="Choissisez la date et l'heure" dayShortNames="Lun, Mar, Merc, Jeu, Ven, Sa, Dim" dayNames="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche" doneText="Ok" cancelText="Retour" formControlName="date1" [(ngModel)]="date1" monthNames="Janvier, Fevrier, Mars, Avril, Mai, Juin, Juillet, Aout, Septembre, Octobre, Novembre, Decembre" [min]="dates"></ion-datetime>
+          <ion-datetime [dayShortNames]="customDayShortNames" displayFormat="DDDD DD-MMM-YYYY à H:mm"  placeholder="Choissisez la date et l'heure" dayShortNames="Lun, Mar, Merc, Jeu, Ven, Sa, Dim" dayNames="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche" doneText="Ok" cancelText="Retour" formControlName="debut" [(ngModel)]="debut" monthNames="Janvier, Fevrier, Mars, Avril, Mai, Juin, Juillet, Aout, Septembre, Octobre, Novembre, Decembre" [min]="dates"></ion-datetime>
         </ion-item>
           <div style="text-align: center;padding: 30%;">
             <ion-button shape="round" (click)="next2()">
@@ -36,7 +36,7 @@
       <div class="section">
         <ion-item class="myinput">
           <ion-label position="floating">Determiner la date de fin du paris*</ion-label>
-          <ion-datetime [dayShortNames]="customDayShortNames" displayFormat="DDDD DD-MMM-YYYY à H:mm"  placeholder="Choissisez la date et l'heure de fin" dayShortNames="Lun, Mar, Merc, Jeu, Ven, Sa, Dim" dayNames="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche" doneText="Ok" cancelText="Retour" formControlName="date2" [(ngModel)]="date2" monthNames="Janvier, Fevrier, Mars, Avril, Mai, Juin, Juillet, Aout, Septembre, Octobre, Novembre, Decembre" [min]="minFin"></ion-datetime>
+          <ion-datetime [dayShortNames]="customDayShortNames" displayFormat="DDDD DD-MMM-YYYY à H:mm"  placeholder="Choissisez la date et l'heure de fin" dayShortNames="Lun, Mar, Merc, Jeu, Ven, Sa, Dim" dayNames="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche" doneText="Ok" cancelText="Retour" formControlName="fin" [(ngModel)]="fin" monthNames="Janvier, Fevrier, Mars, Avril, Mai, Juin, Juillet, Aout, Septembre, Octobre, Novembre, Decembre" [min]="minFin"></ion-datetime>
         </ion-item>
           <div style="text-align: center;padding: 30%;">
             <ion-button shape="round" (click)="next3()">

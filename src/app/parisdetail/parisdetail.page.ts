@@ -3,20 +3,23 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Location } from "@angular/common";
-declare var $
+declare var $, moment
 @Component({
   selector: 'app-parisdetail',
   templateUrl: './parisdetail.page.html',
   styleUrls: ['./parisdetail.page.scss'],
 })
 export class ParisdetailPage implements OnInit {
-  pari
+  pari: any
   par
   enft
   id
   prevUrl
   constructor(public route: ActivatedRoute, public service: ServerService, public navCtrl: NavController, public router: Router, private location: Location) { }
-
+  parseDate(date) {
+    moment().locale('fr')
+    return moment(date).format('DD-MM-YYYY')
+  }
   goback() {
     this.navCtrl.navigateBack([this.prevUrl, { animated: true,
       animationDirection: 'back'}])
@@ -35,12 +38,17 @@ export class ParisdetailPage implements OnInit {
    this.prevUrl = this.route.snapshot.queryParams.url
     console.log('prevUrl ', this.prevUrl)
     this.id = id
-    this.service.parisSubscription.subscribe((e:any)=> {
-      this.pari = e.find((i)=> {
-          return i.id == id
+    
+      this.service.parisSubscription.subscribe((e:any)=> {
+        this.pari = e.find((i)=> {
+            return i.id_p == this.id
+        })
       })
-    })
-    this.service.getparis()
+      this.service.getparis()
+    // console.log('taille de paris ', this.pari.length)
+    // if(this.pari.length<=0) {
+    //   this.service.getallparis()
+    // }
     $(document).ready(function(){
       $('.item-paris ion-col').on('click', function(){
         var par = $('.item-paris').width()
@@ -64,5 +72,8 @@ export class ParisdetailPage implements OnInit {
       let swipsize = $('.item-active').width()
       console.log('item active ', swipsize)
       $('.col-swip').css('width', swipsize)
+      var date1 = moment(this.pari.debut)
+      var date2 = moment(this.pari.fin)
     }
+   
 }

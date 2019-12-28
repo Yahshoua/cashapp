@@ -20,7 +20,7 @@
     </ion-slide>
     <ion-slide>
         <div style="display: grid;">
-          <form [formGroup]="formConnexion" (ngSubmit)="connexion(formConnexion.value)">
+          <form [formGroup]="formConnexion">
             <div style="margin-top:-10%;"> 
               <div style="text-align: center;height: 100px;">
                     <img src="assets/images/logo.png" style="width: 99px">
@@ -28,18 +28,19 @@
               
                 <ion-item>
                       <ion-label position="floating">Email</ion-label>
-                      <ion-input (ionFocus)="onInputs()" [(ngModel)]="email" type="text" formControlName="email" [autofocus] = "!focused"></ion-input>
+                      <ion-input (ionFocus)="onInputs()" [(ngModel)]="email" type="email" formControlName="email" [autofocus] = "!focused"></ion-input>
                   </ion-item>
                   <ion-item>
                       <ion-label position="floating">Mot de passe</ion-label>
-                      <ion-input (ionFocus)="onInputs()" [(ngModel)]="password" type="password" formControlName="password" [autofocus] = "focused">
-                          <ion-icon name="eye-off" slot="end" style="position: absolute;right: 0;font-size: 20px"></ion-icon>
-                      </ion-input>
-                  </ion-item>  
+                      <ion-input [type]="text" (ionFocus)="onInputs()" [(ngModel)]="password" formControlName="password" [autofocus] = "focused"> </ion-input>
+                      <ion-icon (click)="view()" [name]="eye" slot="end" style="padding-top: 10%;right: 0;font-size: 20px;cursor: pointer"></ion-icon>
+                     
+                  </ion-item>
              </div> 
              <div>
-               <ion-button expand="full" color="primary" type="submit" [disabled]="!formConnexion.valid" style="margin-top: 38px;">Connexion</ion-button>
-              <ion-button (click)="callinscrip()" expand="full" color="light" style="margin-top: 17px"> Inscription </ion-button>
+               <ion-button expand="full" color="primary" type="submit" [disabled]="!formConnexion.valid" style="margin-top: 38px;" (click)="connexion(formConnexion.value)">Connexion</ion-button>
+              
+               <ion-button (click)="callinscrip()" expand="full" color="light" style="margin-top: 17px"> Inscription </ion-button>
              </div>
               
               <div style="text-align: center;">

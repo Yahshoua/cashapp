@@ -17,10 +17,12 @@ export class ParticipantsPage implements OnInit {
     this.id = id
     this.service.parisSubscription.subscribe((e:any)=> {
       this.pari = e.find((i)=> {
-          return i.id == id
+        
+          return i.id_p == id
       })
     })
     this.service.getparis()
+    console.log('paris current ', this.pari)
   }
 
 }

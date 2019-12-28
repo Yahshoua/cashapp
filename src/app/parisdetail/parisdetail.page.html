@@ -6,7 +6,7 @@
     
      <div style="margin-top: 25%">
         <ion-avatar style="margin: auto;height: 100%;width: 100%;text-align: center;">
-          <img src={{pari.profil}} style="width: 100px;height: 100px;">
+          <img src={{pari.photo}} style="width: 100px;height: 100px;">
         </ion-avatar>
         <div class="col-perso-detail">
             <h3>{{pari.auteur}}</h3>
@@ -29,11 +29,11 @@
             </ion-col>
             <ion-col size="4" style="display: grid;">
               <font> date de début </font>
-              <span> {{pari.debut}} </span>
+              <span> {{parseDate(pari.debut)}} </span>
             </ion-col>
             <ion-col size="4" style="display: grid;">
               <font>  date de fin </font>
-              <span> {{pari.fin}} </span>
+              <span> {{parseDate(pari.date2)}} </span>
             </ion-col>
         </ion-row>
       </ion-grid>

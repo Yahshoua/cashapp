@@ -35,8 +35,7 @@ export class AccueilPage implements OnInit {
       
   }
   ionViewWillEnter(){
-    console.log('etat de btn1', this.mycolor())
-    console.log('etat de bnt2 ',this.mycolor2())
+    this.service.getStorageUser()
   }
   
   clic() {

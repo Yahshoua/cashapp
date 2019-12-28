@@ -1,5 +1,7 @@
 <ion-content class="content">
-
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div *ngIf="paris?.length <= 0" class="empty">
       <p> Il n' y a aucun paris pour le moment </p>
   </div>
@@ -13,7 +15,7 @@
             <ion-row>
               <ion-col style="margin: 0;padding: 0" size="2">
                 <ion-avatar>
-                  <img style="width:50%;height: 50%" src={{pari.profil}}>
+                  <img style="width:50%;height: 50%" src={{pari.photo}}>
                 </ion-avatar>
               </ion-col>
               <ion-col size="3" class="col-item">
@@ -26,7 +28,7 @@
                   <span><strong> {{pari.prix}} fr</strong></span>
                 </ion-col>
                 <ion-col size="4">
-        <ion-button style="padding: 4px" [routerLink]="['/parisdetail/',pari.id, {outlets: { outlet2: ['description']} }]"  [queryParams]="{id: pari.id, url: 'accueil/accueil/allparis'}" routerLinkActive="router-link-active" >Parier</ion-button>
+        <ion-button style="padding: 4px" [routerLink]="['/parisdetail/',pari.id_p, {outlets: { outlet2: ['description']} }]"  [queryParams]="{id: pari.id_p, url: 'accueil/accueil/allparis'}" routerLinkActive="router-link-active" >Parier</ion-button>
                 </ion-col> 
             </ion-row>
           </ion-col>

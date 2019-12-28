@@ -7,60 +7,16 @@ import { resolve } from 'url';
 })
 export class ServerService {
   auth: boolean
-  utilisateur: []
+  utilisateur: any
   url = 'http://localhost/phpcashapp/setParis.php';
   url2 = 'http://localhost/phpcashapp/setUser.php';
+  url3 = 'http://localhost/phpcashapp/login.php';
+  url4 = 'http://localhost/phpcashapp/getallparis.php';
   header = new HttpHeaders({'Content-Type': 'application/json'})
   constructor(public http: HttpClient) {
   }
   // private paris=[]
-  private paris = [
-    {
-      id: 0,
-      titre: 'Paris 1',
-      prix: 2000,
-      createdAt: '20.12.19',
-      auteur: 'Mr x',
-      debut: '21.12.19',
-      fin: '25.12.19',
-      status: 'en cours',
-      description: "Contrairement à une opinion répandue, le Lorem Ipsum n'est pas simplement du texte aléatoire",
-      profil: "http://lorempixel.com/400/200",
-      participants: [
-        {
-          id: 2,
-          nom: 'Mr y'
-        },
-        {
-          id: 3,
-          nom: 'Mr k'
-        },
-        {
-          id: 4,
-          nom: 'Mr Z'
-        }
-      ]
-    },
-    {
-      id: 5,
-      titre: 'Paris 5',
-      prix: 2000,
-      createdAt: '03.05.19',
-      auteur: 'Mr pinochio',
-      debut: '30.01.2020',
-      fin: '01.02.2020',
-      description: "Contrairement à une opinion répandue, le Lorem Ipsum n'est pas simplement du texte aléatoire",
-      profil: "http://lorempixel.com/400/200",
-      status: 'en cours',
-      participants: [
-        {
-          id: 2,
-          nom: 'Mr y'
-        }
-      ]
-    }
-    
-  ]
+  private paris = []
   parisSubscription = new Subject();
   getparis() {
     this.parisSubscription.next(this.paris)
@@ -74,7 +30,9 @@ export class ServerService {
       this.http.post(this.url, paris, {headers: this.header})
       .toPromise()
       .then(res => {
-          resolve(res)
+          this.paris.push(paris)
+          this.getparis()
+          resolve(this.paris)
       })
     })
     return req;
@@ -85,7 +43,7 @@ export class ServerService {
         this.http.post(this.url2, user, {headers: this.header})
         .toPromise()
         .then(res => {
-            resolve(res)
+            resolve(user)
         }).catch((err: any)=> {
            reject(err)
         })
@@ -93,17 +51,43 @@ export class ServerService {
       return req;
     }
     setStorage(user) {
-      let log = JSON.parse(sessionStorage.getItem('user')) || []
-      if(log.length <=0) {
-        sessionStorage.setItem('user', JSON.stringify(user))
-        this.utilisateur = JSON.parse(sessionStorage.getItem('user'))
-        this.auth = true
-      }
+      return new Promise((resolve, reject)=> {
+          let log = JSON.parse(localStorage.getItem('user')) || []
+          localStorage.setItem('user', JSON.stringify(user))
+          this.utilisateur = JSON.parse(localStorage.getItem('user'))
+          this.auth = true
+          resolve(this.utilisateur)
+      }).catch(reject=> {
+        alert("une erreur s'est produit "+reject)
+      })
     }
     getStorageUser() {
-      let user = JSON.parse(sessionStorage.getItem('user')) || []
-      user.length <=0? this.auth= false: this.auth = true
+      let user = JSON.parse(localStorage.getItem('user')) || []
+      user.length <=0? this.auth= false:this.auth = true
       this.utilisateur = user
-      return this.utilisateur
+      return {
+            user: this.utilisateur,
+            auth: this.auth
+      }
+    }
+    getallparis() {
+      return new Promise((resolve, reject)=> {
+        this.http.post(this.url4, {headers: this.header})
+        .toPromise()
+        .then((res: any) => {
+          this.paris = res
+          this.getparis()
+          resolve(this.paris)
+        })
+      })
+    }
+    login(user) {
+      return new Promise((resolve, reject)=> {
+        this.http.post(this.url3, user, {headers: this.header})
+        .toPromise()
+        .then(res => {
+            resolve(res)
+        })
+      })
     }
 }
