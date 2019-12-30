@@ -16,7 +16,7 @@
         </div>
      </div>
      <div style="text-align: center;">
-       <ion-button shape="round">Parier avec {{pari.auteur}}</ion-button>
+       <ion-button shape="round" [disabled]="parier() || canMacth" (click)="parigo()">Parier avec {{pari.auteur}}</ion-button>
      </div>
   </ion-toolbar>
 </ion-header>

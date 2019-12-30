@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
 import  { Subject } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
+declare var $
 import { resolve } from 'url';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ServerService {
   auth: boolean
   utilisateur: any
-  url = 'http://localhost/phpcashapp/setParis.php';
-  url2 = 'http://localhost/phpcashapp/setUser.php';
-  url3 = 'http://localhost/phpcashapp/login.php';
-  url4 = 'http://localhost/phpcashapp/getallparis.php';
-  header = new HttpHeaders({'Content-Type': 'application/json'})
+  server1 = 'http://localhost'
+  server2= 'https://kazimo.ga/cashapp'
+  url = this.server2+'/phpcashapp/setParis.php';
+  url2 = this.server2+'/phpcashapp/setUser.php';
+  url3 = this.server2+'/phpcashapp/login.php';
+  url4 = this.server2+'/phpcashapp/getallparis.php';
+  url5 = this.server2+'/phpcashapp/setParieur.php';
+  header = new HttpHeaders({'Content-Type': 'application/json', "Accept": 'application/json'})
   constructor(public http: HttpClient) {
   }
   // private paris=[]
@@ -25,30 +30,26 @@ export class ServerService {
     this.getparis()
   }
   //requete de creation d'un nouveau pari
-  setPari(paris) {
-    const req = new Promise((resolve, reject)=> {
-      this.http.post(this.url, paris, {headers: this.header})
-      .toPromise()
-      .then(res => {
-          this.paris.push(paris)
-          this.getparis()
-          resolve(this.paris)
-      })
+  async setPari(paris) {
+    let p = $.ajax({
+      url: this.url,
+      type: 'POST',
+      data: paris
+    }).done(res=> {
+      this.paris.push(paris)
+      this.getparis()
+      return this.paris
     })
-    return req;
+    return await p;
   }
     //requete de creation d'un nouvel user
-    setUser(user) {
-      const req = new Promise((resolve, reject)=> {
-        this.http.post(this.url2, user, {headers: this.header})
-        .toPromise()
-        .then(res => {
-            resolve(user)
-        }).catch((err: any)=> {
-           reject(err)
-        })
+    async setUser(user) {
+      let k = $.ajax({
+        method: 'POST',
+        url: this.url2,
+        data: user
       })
-      return req;
+      return await k
     }
     setStorage(user) {
       return new Promise((resolve, reject)=> {
@@ -70,24 +71,51 @@ export class ServerService {
             auth: this.auth
       }
     }
-    getallparis() {
-      return new Promise((resolve, reject)=> {
-        this.http.post(this.url4, {headers: this.header})
-        .toPromise()
-        .then((res: any) => {
-          this.paris = res
-          this.getparis()
-          resolve(this.paris)
-        })
+    // Requete pour ajouter un nouveau parieur en BDD
+    setParieur(user, id, date) {
+      user.id_pari = id
+      user.date = date
+      const req= $.ajax({
+        method: 'POST',
+        url: this.url5,
+        data: user
+      }).done(e=> {
+        console.log('envoie reussi...')
+      }).fail(err=> {
+        console.log('erreur lors de l\'envoie', err)
       })
+    
+      for(var i=0;i <this.paris.length;i++) {
+        if(this.paris[i].id_p == id) {
+          this.paris[i].participants.push(user)
+          break
+        }
+      }
+      this.getparis()
+  }
+
+   async getallparis() {
+      const req= $.ajax({
+        method: 'POST',
+        url: this.url4
+      }).done(e=> {
+       // console.log('voila voila ', e)
+        this.paris = JSON.parse(e)
+        this.getparis()
+      }).fail(err=> {
+        console.log('erreur ', err)
+      })
+      return await req
     }
-    login(user) {
-      return new Promise((resolve, reject)=> {
-        this.http.post(this.url3, user, {headers: this.header})
-        .toPromise()
-        .then(res => {
-            resolve(res)
-        })
+    async login(user) {
+      let req = $.ajax({
+        method: 'POST',
+        url: this.url3,
+        data: user
+          }).done((res: any)=> {
+
+            }).fail(err=> {
       })
+      return await (req)
     }
 }

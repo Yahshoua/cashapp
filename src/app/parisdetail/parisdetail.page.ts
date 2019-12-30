@@ -1,7 +1,7 @@
 import { ServerService } from './../server.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController, ToastController  } from '@ionic/angular';
 import { Location } from "@angular/common";
 declare var $, moment
 @Component({
@@ -15,7 +15,8 @@ export class ParisdetailPage implements OnInit {
   enft
   id
   prevUrl
-  constructor(public route: ActivatedRoute, public service: ServerService, public navCtrl: NavController, public router: Router, private location: Location) { }
+  canMacth: boolean
+  constructor(public route: ActivatedRoute, public service: ServerService, public navCtrl: NavController, public router: Router, private location: Location, private alertController: AlertController, public toastController: ToastController) { }
   parseDate(date) {
     moment().locale('fr')
     return moment(date).format('DD-MM-YYYY')
@@ -33,8 +34,41 @@ export class ParisdetailPage implements OnInit {
   goinv() {
     this.router.navigate(['parisdetail',this.id, {outlets: {'outlet2': ['invitations']}}], { queryParams: { id: this.id } })
   }
+  async parigo() {
+    const alert = await this.alertController.create({
+      header: 'PARIER ?',
+      subHeader: 'Voulez-vous parier avec '+this.pari.auteur +' ?',
+      message: 'Une fois que vous parier, vous ne pouriez plus annuler.',
+      buttons: [{
+        text: 'Annuler',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: (blah) => {
+          console.log('annuler');
+        }
+      },
+    {
+      text: 'Je parie !',
+      handler: () => {
+            this.setParieur()
+          }
+    }]
+    });
+
+    await alert.present()
+  }
+  async setParieur() {
+    const toast = await this.toastController.create({
+      message: 'Vous avez pariez !',
+      duration: 2000,
+      position: 'top'
+    });
+    toast.present();
+    var date = moment().format()
+    this.service.setParieur(this.service.utilisateur.data, parseInt(this.id), date)
+  }
   ngOnInit() {
-    let id = this.route.snapshot.params.id
+   let id = this.route.snapshot.params.id
    this.prevUrl = this.route.snapshot.queryParams.url
     console.log('prevUrl ', this.prevUrl)
     this.id = id
@@ -45,6 +79,7 @@ export class ParisdetailPage implements OnInit {
         })
       })
       this.service.getparis()
+      console.log('le pari current ', this.pari)
     // console.log('taille de paris ', this.pari.length)
     // if(this.pari.length<=0) {
     //   this.service.getallparis()
@@ -66,7 +101,16 @@ export class ParisdetailPage implements OnInit {
    				}
       })
     })
-     
+    var suisje = this.pari.participants.filter(e=> {
+      var suisje: any = e.id_part == this.service.utilisateur.data.id
+      suisje.length <=0? this.canMacth=false:this.canMacth=true
+      })
+  }
+  parier() {
+    var monID = parseInt(this.service.utilisateur.data.id)
+    var idAuteurPari = parseInt(this.pari.id_auteur)
+    var res = monID == idAuteurPari? true: false
+    return res
   }
     ionViewWillEnter(){
       let swipsize = $('.item-active').width()

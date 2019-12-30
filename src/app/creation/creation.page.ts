@@ -130,7 +130,6 @@ export class CreationPage implements OnInit {
             var tab = []
             this.formulaire.value.participants = tab
             console.log('formulaire à send ', this.formulaire.value)
-           
             this.service.setPari(this.formPari.value).then((res:any)=> {
               console.log('resultait ', res)
             }).catch(async(err)=> {

@@ -37,7 +37,8 @@ export class HomePage implements OnInit {
   
   connexion(user) {
     this.service.login(user).then(async (e:any)=> {
-      console.log('resltat de la connection ', e)
+      console.log('resltat de la connection ', JSON.parse(e))
+      e = JSON.parse(e)
       if(e.status == 1) {
         this.service.setStorage(e).then(res=> {
           this.navCtrl.navigateForward(['accueil'])
@@ -70,10 +71,12 @@ export class HomePage implements OnInit {
   twiter() {
     this.googlePlus.login({})
       .then(profile =>{
+        console.log('profil google ', profile)
         this.userData = { email: profile['email'], first_name: profile['givenName'], photo: profile['imageUrl'], nom: profile['displayName'], 'type': 'google' }
         this.setuser(this.userData)
       })
       .catch(async (err) => {
+        console.log('erreur ', err)
         const alert = await this.alrtCtrl.create({
           header: 'Oups !',
           message: 'une erreur s\'est produite <br> <small>'+ err.statusText +'<br>'+err.message+'</small>',
@@ -85,14 +88,6 @@ export class HomePage implements OnInit {
     // fin
     //connection avec facebook
   facebook() {
-    this.sim.requestReadPermission().then(
-      () => console.log('Permission granted'),
-      () => console.log('Permission denied')
-    )
-    this.sim.getSimInfo().then(
-      (info) => console.log('Sim info: ', info),
-      (err) => console.log('Unable to get sim info: ', err)
-    );
     this.fb.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
       this.fb.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', []).then(profile => {
         this.userData = {email: profile['email'], first_name: profile['first_name'], photo: profile['picture_large']['data']['url'], nom: profile['name'], 'type': 'facebook'}
@@ -101,12 +96,14 @@ export class HomePage implements OnInit {
       }).catch(err=> {
         alert('une erreur s\'est produit '+ err)
       })
-    });
-        
+    }).catch(err=> {
+      console.log('erreur facebook ', err)
+      alert(JSON.stringify(err))
+    })
   }
-
     setuser(user) {
       this.service.setUser(user).then(async (e: any)=> {
+        e = JSON.parse(e)
         console.log('reponse ', e, 'couleur ', e.couleur)
        if (e.type == 'formulaire' || e.type == null) {
           e.response += '. Connectez-vous au formulaire !'

@@ -3,6 +3,7 @@ import { ServerService } from './../server.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+declare var moment
 @Component({
   selector: 'app-allparis',
   templateUrl: './allparis.page.html',
@@ -19,9 +20,14 @@ export class AllparisPage implements OnInit {
         this.services.parisSubscription.subscribe((e: any)=>{
             this.paris = e.sort((a, b) => a.id < b.id ? 1 : -1)
             console.log(typeof this.paris)
-            console.log('ooook ', this.paris)
+            console.log('ooook ', this.paris, ' e ', e)
           })
     this.services.getparis()
+  }
+  dateParse(date) {
+    moment.locale('fr')
+    date = moment(date).format('DD MM YYYY à HH:mm')
+    return date
   }
   doRefresh(event) {
     console.log('Begin async operation');

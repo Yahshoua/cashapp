@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.cashapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>cash_app</name>
+    <name>cash app</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
@@ -100,12 +100,12 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-sim" spec="^1.3.3" />
-    <plugin name="cordova-plugin-googleplus" source="git" spec="git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git">
-        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.535114051844-irki1ee69qmrj1kkdo66pdvva20jdarq" />
-        <variable name="WEB_APPLICATION_CLIENT_ID" value="535114051844-irki1ee69qmrj1kkdo66pdvva20jdarq.apps.googleusercontent.com" />
-    </plugin>
     <plugin name="cordova-plugin-facebook4" spec="^6.2.0">
         <variable name="APP_ID" value="747435385758231" />
         <variable name="APP_NAME" value="cash_app" />
+    </plugin>
+    <plugin name="cordova-plugin-googleplus" source="git" spec="git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git">
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.153419674619-k4o292afmofrvlvo70pijh35asostc4f" />
+        <variable name="WEB_APPLICATION_CLIENT_ID" value="153419674619-k4o292afmofrvlvo70pijh35asostc4f.apps.googleusercontent.com" />
     </plugin>
 </widget>

@@ -6,3 +6,16 @@ ion-content {
     --padding-end: 15px;
     --color: gray;
 }
+ion-content div::before {
+    content: "";
+    position: absolute;
+    height: 21px;
+    width: 8px;
+    background-color: #3880ff;
+    left: 5%;
+}
+ion-content div p {
+    text-align: justify;
+    margin-left: 18px;
+    margin-right: 18px;
+}

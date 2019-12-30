@@ -22,6 +22,8 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { Sim } from '@ionic-native/sim/ngx';
 import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts/ngx';
+import { SMS } from '@ionic-native/sms/ngx';
 @NgModule({
   declarations: [AppComponent, MesparisPage,ParisdetailPage, ProfilPage, DescriptionPage, ParticipantsPage, InvitationsPage],
   entryComponents: [],
@@ -35,6 +37,8 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
     Sim,
     GuardService,
     GuardhomeService,
+    Contacts,
+    SMS,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

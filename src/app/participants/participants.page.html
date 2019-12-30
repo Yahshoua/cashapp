@@ -8,5 +8,7 @@
       <img style="width: 30px;height: 30px;" src={{part.photo}}>
     </ion-avatar>
     <ion-label>{{part.nom}}</ion-label>
+    <ion-badge color="primary" *ngIf="badge">Vous</ion-badge>
+    <ion-badge color="light"> {{timer(part.dates)}} </ion-badge>
   </ion-item>
 </ion-content>
