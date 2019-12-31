@@ -1,0 +1,41 @@
+<ion-header style="background: #ebebeb;">
+  <ion-toolbar class="mybackgs">
+    <ion-icon name="arrow-round-back" slot="start" style="font-size: 22px;
+    margin: 10px;color: #fff;margin-bottom: 50%" (click)="goback()" routerLinkActive="router-link-active" ></ion-icon>
+     <ion-icon name="cog" slot="end" style="font-size: 20px;
+     margin: 10px;color: #fff;margin-bottom: 50%"></ion-icon>
+     <div style="margin-top: 25%">
+        <ion-avatar style="margin: auto;height: 100%;width: 100%;text-align: center;">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" style="height:80px;width: 80px">
+        </ion-avatar>
+        <div class="col-perso-detail">
+            <h3>Joh Doe</h3>
+            <span style="font-size: 10px">
+              Libreville
+            </span>
+        </div>
+     </div>
+  </ion-toolbar>
+  <div class="col-info-paris" style="margin: auto;">
+      <ion-grid>
+        <ion-row>
+            <ion-col size="4" style="display: grid;" class="activates" [routerLink]="[{outlets: { myoutlet: ['mesparis'] } }]" routerLinkActive="router-link-active">
+                <font>Vos paris</font>
+                <span> 0 </span>
+            </ion-col>
+            <ion-col size="4" style="display: grid;">
+              <font> Argent gagné </font>
+              <span> 200k </span>
+            </ion-col>
+            <ion-col size="4" style="display: grid;">
+              <font>  prochain paris </font>
+              <span> 2 </span>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+  </div>
+</ion-header>
+
+<ion-content class="content">
+  <app-tabs></app-tabs>
+</ion-content>

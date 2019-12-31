@@ -1,33 +1,36 @@
 <ion-content>
-  <div *ngIf="parie?.length <= 0" class="empty">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="paris?.length <= 0" class="empty">
     <p> Tu ne participe à aucun paris pour le moment. </p>
 </div>
-  <ion-grid style="margin-top: 5%;" *ngFor="let pari of parie">
-    <ion-row>
-        <ion-col size="12" class="col-name">
-           <h2> {{ pari.auteur }} </h2>
-        </ion-col>
-        <ion-col size="12" class="pari-item">
-          <ion-row>
-            <ion-col style="margin: 0;padding: 0" size="2">
-              <ion-avatar>
-                <img style="width:50%;height: 50%" src={{pari.profil}}>
-              </ion-avatar>
+<ion-grid style="margin-top: 5%;" *ngFor="let pari of paris">
+  <ion-row>
+      <ion-col size="12" class="col-name">
+         <h2> {{pari.titre }} </h2>
+      </ion-col>
+      <ion-col size="12" class="pari-item">
+        <ion-row>
+          <ion-col style="margin: 0;padding: 0" size="2">
+            <ion-avatar>
+              <img style="width:50%;height: 50%" src={{pari.photo}}>
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="3" class="col-item">
+                   <div style="font-size: 14px;height: 0">Début</div>
+                   <p style="font-size: 13px;"><strong> {{dateParse(debut)}} </strong></p>
             </ion-col>
             <ion-col size="3" class="col-item">
-                     <div style="font-size: 14px;height: 0">Titre</div>
-                     <p style="font-size: 13px;"><strong> {{pari.titre}} </strong></p>
-              </ion-col>
-              <ion-col size="3" class="col-item">
-                <div style="font-size: 14px;
-                height: 0;">Prix</div>
-                <span><strong> {{pari.prix}} fr</strong></span>
-              </ion-col>
-              <ion-col size="4">
-      <ion-button style="padding: 4px" [routerLink]="['/parisdetail/',pari.id, {outlets: { outlet2: ['description']} }]"  [queryParams]="{id: pari.id, url: 'accueil/accueil/vosparis'}" routerLinkActive="router-link-active">Parier</ion-button>
-              </ion-col> 
-          </ion-row>
-        </ion-col>
-    </ion-row>
+              <div style="font-size: 14px;
+              height: 0;">Gagnant</div>
+              <span><strong> {{pari.prix}} fr</strong></span>
+            </ion-col>
+            <ion-col size="4">
+    <ion-button style="padding: 4px" [routerLink]="['/parisdetail/',pari.id_p, {outlets: { outlet2: ['description']} }]"  [queryParams]="{id: pari.id_p, url: 'accueil/accueil/vosparis'}" routerLinkActive="router-link-active" >parier</ion-button>
+            </ion-col> 
+        </ion-row>
+      </ion-col>
+  </ion-row>
 </ion-grid>
 </ion-content>

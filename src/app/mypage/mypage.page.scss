@@ -1,0 +1,48 @@
+.mybackgs ion-toolbar {
+    height: 160px !important;
+}
+.active-item {
+    --color: var(--ion-color-primary);
+}
+.mybackgs {
+    --background: linear-gradient(45deg, #39a2f5 0%, rgba(225, 5, 34, 0) 70%), linear-gradient(135deg, #2462e2 10%, rgba(49, 5, 209, 0) 80%), linear-gradient(225deg, #0a41b9 10%, rgba(10, 219, 216, 0) 80%), linear-gradient(315deg, #464bf9 100%, rgba(9, 245, 5, 0) 70%);
+    --border-color: none;
+    height: 260px;
+    position: relative;
+}
+.col-perso-detail {
+    text-align: center;
+    display: grid;
+    color: #fff
+}
+.col-perso-detail h3 {
+    margin: 0;
+    margin-top: 5px;
+    font-size: 15px;
+}
+.col-info-paris {
+    width: 94%;
+    position: absolute;
+    bottom: -16%;
+    left: 0;
+    z-index: 200;
+    right: 0;
+    height: 73px;
+    background: #fff;
+    border-radius: 5px;
+}
+.col-info-paris font {
+    font-size: 11px;
+}
+.col-info-paris span {
+    font-size: 26px;
+}
+.col-info-paris ion-col {
+    text-align: center;
+}
+.activates {
+    color: #1449c5;
+}
+.col-info-paris ion-col {
+    cursor: pointer;
+}

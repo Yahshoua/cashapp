@@ -1,0 +1,16 @@
+<ion-content class="ion-padding">
+      <h2 style="font-size: 18px;color: gray">Proposer votre paris (soyez bref.)</h2>
+      <form [formGroup]="formOp">
+        <ion-item>
+          <ion-label position="floating"> Ecrivez ici </ion-label>
+          <ion-textarea
+          [(ngModel)]="opinion" formControlName="opinion">
+          </ion-textarea>
+        </ion-item> 
+        <br>
+        <div style="display: flex;height: 100px;" class="div-conf">
+          <ion-button style="margin: auto" shape="round" (click)="sender(formOp.value)">Je confirme !</ion-button>
+        </div>
+        
+      </form>
+</ion-content>

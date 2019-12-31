@@ -63,6 +63,14 @@ const routes: Routes = [
   {
     path: 'inscription',
     loadChildren: () => import('./inscription/inscription.module').then( m => m.InscriptionPageModule)
+  },
+  {
+    path: 'opinion',
+    loadChildren: () => import('./opinion/opinion.module').then( m => m.OpinionPageModule)
+  },
+  {
+    path: 'mypage',
+    loadChildren: () => import('./mypage/mypage.module').then( m => m.MypagePageModule)
   }
   
 ];

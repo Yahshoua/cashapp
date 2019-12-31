@@ -1,3 +1,4 @@
+import { OpinionPageModule } from './opinion/opinion.module';
 import { GuardhomeService } from './guardhome.service';
 import { GuardService } from './guard.service';
 import { MaodalinscriptionPageModule } from './maodalinscription/maodalinscription.module';
@@ -27,7 +28,7 @@ import { SMS } from '@ionic-native/sms/ngx';
 @NgModule({
   declarations: [AppComponent, MesparisPage,ParisdetailPage, ProfilPage, DescriptionPage, ParticipantsPage, InvitationsPage],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule, MaodalinscriptionPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule, MaodalinscriptionPageModule, OpinionPageModule],
   providers: [
     StatusBar,
     SplashScreen,

@@ -1,8 +1,10 @@
 import { ServerService } from './../server.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController, AlertController, ToastController  } from '@ionic/angular';
+import { NavController, AlertController, ToastController, ModalController } from '@ionic/angular';
 import { Location } from "@angular/common";
+import { OpinionPage } from '../opinion/opinion.page';
+
 declare var $, moment
 @Component({
   selector: 'app-parisdetail',
@@ -15,8 +17,9 @@ export class ParisdetailPage implements OnInit {
   enft
   id
   prevUrl
-  canMacth: boolean
-  constructor(public route: ActivatedRoute, public service: ServerService, public navCtrl: NavController, public router: Router, private location: Location, private alertController: AlertController, public toastController: ToastController) { }
+  @Input() canMacth: boolean
+  @Input() closed: any;
+  constructor(public route: ActivatedRoute, public service: ServerService, public navCtrl: NavController, public router: Router, private location: Location, private alertController: AlertController, public toastController: ToastController, private modalCtrl: ModalController) { }
   parseDate(date) {
     moment().locale('fr')
     return moment(date).format('DD-MM-YYYY')
@@ -35,44 +38,25 @@ export class ParisdetailPage implements OnInit {
     this.router.navigate(['parisdetail',this.id, {outlets: {'outlet2': ['invitations']}}], { queryParams: { id: this.id } })
   }
   async parigo() {
-    const alert = await this.alertController.create({
-      header: 'PARIER ?',
-      subHeader: 'Voulez-vous parier avec '+this.pari.auteur +' ?',
-      message: 'Une fois que vous parier, vous ne pouriez plus annuler.',
-      buttons: [{
-        text: 'Annuler',
-        role: 'cancel',
-        cssClass: 'secondary',
-        handler: (blah) => {
-          console.log('annuler');
-        }
-      },
-    {
-      text: 'Je parie !',
-      handler: () => {
-            this.setParieur()
-          }
-    }]
-    });
-
-    await alert.present()
-  }
-  async setParieur() {
-    const toast = await this.toastController.create({
-      message: 'Vous avez pariez !',
-      duration: 2000,
-      position: 'top'
-    });
-    toast.present();
-    var date = moment().format()
-    this.service.setParieur(this.service.utilisateur.data, parseInt(this.id), date)
+    const modal = await this.modalCtrl.create({
+      component: OpinionPage,
+      cssClass: 'my-custom-modal-opinion',
+      componentProps: {
+        'idPari': this.id,
+        'canMacth': false
+      }
+    })
+    return await modal.present();
   }
   ngOnInit() {
    let id = this.route.snapshot.params.id
    this.prevUrl = this.route.snapshot.queryParams.url
     console.log('prevUrl ', this.prevUrl)
+    this.service.canBetSubscription.subscribe((e: any)=> {
+        this.canMacth = e
+    })
+    this.service.getCanBet()
     this.id = id
-    
       this.service.parisSubscription.subscribe((e:any)=> {
         this.pari = e.find((i)=> {
             return i.id_p == this.id

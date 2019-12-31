@@ -28,7 +28,6 @@ export class HomePage implements OnInit {
   constructor(public route: ActivatedRoute, public formBuild: FormBuilder, public alertController: AlertController, public navCtrl:NavController, public loadingController: LoadingController, public modalCtrl: ModalController, private fb: Facebook, public service: ServerService, private toastCtrl: ToastController, private alrtCtrl: AlertController, private sim: Sim, private twitter: TwitterConnect, private googlePlus: GooglePlus) {}
 
    ngOnInit() {
-    
     this.formConnexion = this.formBuild.group({
       email: ['', Validators.compose([Validators.required, Validators.email]) ],
       password: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)])]

@@ -10,6 +10,7 @@ import { resolve } from 'url';
 export class ServerService {
   auth: boolean
   utilisateur: any
+  canBet: Boolean
   server1 = 'http://localhost'
   server2= 'https://kazimo.ga/cashapp'
   url = this.server2+'/phpcashapp/setParis.php';
@@ -23,8 +24,16 @@ export class ServerService {
   // private paris=[]
   private paris = []
   parisSubscription = new Subject();
+  canBetSubscription = new Subject()
   getparis() {
     this.parisSubscription.next(this.paris)
+  }
+  getCanBet() {
+    this.canBetSubscription.next(this.canBet)
+  }
+  changeCanbet() {
+    this.canBet = true
+    this.getCanBet()
   }
   sutoto() {
     this.getparis()
@@ -72,19 +81,9 @@ export class ServerService {
       }
     }
     // Requete pour ajouter un nouveau parieur en BDD
-    setParieur(user, id, date) {
+    async setParieur(user, id, date) {
       user.id_pari = id
       user.date = date
-      const req= $.ajax({
-        method: 'POST',
-        url: this.url5,
-        data: user
-      }).done(e=> {
-        console.log('envoie reussi...')
-      }).fail(err=> {
-        console.log('erreur lors de l\'envoie', err)
-      })
-    
       for(var i=0;i <this.paris.length;i++) {
         if(this.paris[i].id_p == id) {
           this.paris[i].participants.push(user)
@@ -92,6 +91,18 @@ export class ServerService {
         }
       }
       this.getparis()
+      return new Promise((res, rej)=> {
+            const req= $.ajax({
+              method: 'POST',
+              url: this.url5,
+              data: user
+            }).done(e=> {
+              console.log('envoie reussi...')
+            }).fail(err=> {
+              console.log('erreur lors de l\'envoie', err)
+            })
+          return res(req)
+      })
   }
 
    async getallparis() {

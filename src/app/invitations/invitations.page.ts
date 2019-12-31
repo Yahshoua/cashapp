@@ -19,7 +19,8 @@ export class InvitationsPage implements OnInit {
   constructor(private contacts: Contacts, private alrtCtrl: AlertController, private sms: SMS, private routes: ActivatedRoute, private service: ServerService, private toastController: ToastController) { }
   ngOnInit() {
     moment().locale('fr')
-    this.id = this.routes.snapshot.params.id
+    console.log('snap ', this.routes.snapshot)
+    this.id = this.routes.snapshot.queryParams.id
     this.service.parisSubscription.subscribe((e:any)=> {
       this.pari = e.find((i)=> {
           return i.id_p == this.id
@@ -33,14 +34,13 @@ export class InvitationsPage implements OnInit {
       console.log('voici le contatc ', res)
       this.nom = res.displayName
       this.contact = res.phoneNumbers[0].value
-      this.send(this.contact)
+      this.send()
     }).catch(err=> {
       
     })
   }
-  async send(number) {
-    this.nom = 'Toto'
-   var dataParse = moment(this.pari.debut).format('DD MMMM YYY à HH:mm')
+  async send() {
+  
     var message = `En cliquant sur oui, ${this.nom} recevra un sms d\'invation de votre part à participer à ce paris `
         const alert = await this.alrtCtrl.create({
           header: 'Invitation',
@@ -58,18 +58,23 @@ export class InvitationsPage implements OnInit {
             text: 'Oui',
             handler: (send)=> {
               console.log('envoi du sms...');
-              this.sms.send(number, 'Salut. Je t\'invite à participer au paris de '+this.pari.auteur +' appelé '+this.pari.titre+ ' qui commence le '+ dataParse +'. Télecharge Cash app sur Google Play et gagne de l\'argent si tu gagne ce pari ( plus de '+ this.pari.prix +' Fcfa)');
+              this.setSend()
             }
           }
         ]
         });
         await alert.present();
+  }
+  async setSend() {
         const toast = await this.toastController.create({
           message: 'Vous avez envoyé un sms à '+ this.nom,
           duration: 2000,
-          position: 'top',
-          color: 'success'
+          position: 'top'
         });
-        toast.present();
+      toast.present();
+      var dataParse = moment(this.pari.debut).format('DD MMMM YYY à HH:mm')
+      console.log('contact ', this.contact,' type ', typeof this.contact)
+     // let numero = parseInt(this.contact)
+      this.sms.send('0605776944', 'Salut. Je t\'invite à participer au paris de '+this.pari.auteur +' appelé '+this.pari.titre+ ' qui commence le '+ dataParse +'. Télecharge Cash app sur Google Play et gagne de l\'argent si tu gagne ce pari ( plus de '+ this.pari.prix +' Fcfa)');
   }
 }

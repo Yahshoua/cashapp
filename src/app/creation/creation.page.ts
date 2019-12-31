@@ -125,7 +125,7 @@ export class CreationPage implements OnInit {
             this.formulaire.value.date2 = date2
             this.formulaire.value.status = 'en cours'
             this.formulaire.value.createdAt= moment().format('Do MMMM YYYY à HH:mm:ss')
-            this.formulaire.value.profil = this.utilisateur.photo
+            this.formulaire.value.photo = this.utilisateur.photo
             this.formulaire.value.dateBrut = date
             var tab = []
             this.formulaire.value.participants = tab
