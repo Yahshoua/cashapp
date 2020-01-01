@@ -13,7 +13,7 @@ export class TabsComponent implements OnInit {
 
   ngOnInit() {}
   go() {
-    this.navCtrl.navigateForward(['mypage'])
-   // this.router.navigate(['profil', {outlets: {'myoutlet': ['mesparis']}}])
+   // this.navCtrl.navigateForward(['mypage'])
+   this.router.navigate(['mypage'])
   }
 }

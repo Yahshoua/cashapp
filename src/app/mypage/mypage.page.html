@@ -1,15 +1,17 @@
 <ion-header style="background: #ebebeb;">
   <ion-toolbar class="mybackgs">
-    <ion-icon name="arrow-round-back" slot="start" style="font-size: 22px;
-    margin: 10px;color: #fff;margin-bottom: 50%" (click)="goback()" routerLinkActive="router-link-active" ></ion-icon>
-     <ion-icon name="cog" slot="end" style="font-size: 20px;
-     margin: 10px;color: #fff;margin-bottom: 50%"></ion-icon>
+    <ion-icon name="arrow-round-back" slot="start" (click)="goback()" routerLinkActive="router-link-active" ></ion-icon>
+    <button class="hamburger hamburger--emphatic" type="button" (click)="openmenu()">
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
      <div style="margin-top: 25%">
         <ion-avatar style="margin: auto;height: 100%;width: 100%;text-align: center;">
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" style="height:80px;width: 80px">
+          <img src={{profil.photo}} style="height:80px;width: 80px">
         </ion-avatar>
         <div class="col-perso-detail">
-            <h3>Joh Doe</h3>
+            <h3>{{profil.nom}}</h3>
             <span style="font-size: 10px">
               Libreville
             </span>
@@ -20,7 +22,7 @@
       <ion-grid>
         <ion-row>
             <ion-col size="4" style="display: grid;" class="activates" [routerLink]="[{outlets: { myoutlet: ['mesparis'] } }]" routerLinkActive="router-link-active">
-                <font>Vos paris</font>
+                <font>Abonné</font>
                 <span> 0 </span>
             </ion-col>
             <ion-col size="4" style="display: grid;">
@@ -28,14 +30,37 @@
               <span> 200k </span>
             </ion-col>
             <ion-col size="4" style="display: grid;">
-              <font>  prochain paris </font>
+              <font>  Abonnement </font>
               <span> 2 </span>
             </ion-col>
         </ion-row>
       </ion-grid>
   </div>
 </ion-header>
-
+<ion-menu side="start" menuId="first" contentId="content1" type="overlay" class="my-custom-menu" (ionDidClose)="close()">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>
+        <ion-avatar style="float: left;display: flex;">
+          <img style="width: 50px;height: 50px;margin: auto" src={{profil.photo}}>
+        </ion-avatar>
+        <p> {{profil.nom}}</p>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item lines="none">  <i class="fas fa-home" style="color: #13a0ff"></i> <span style="padding-left: ">Accueil</span>  </ion-item>
+      <br>
+      <ion-item lines="none"> <i class="fas fa-info-circle" style="color: #fda90e"></i> 
+        <span>Condition d'utilisation</span> </ion-item>
+        <br>
+      <ion-item lines="none"><i class="fas fa-question-circle" style="color: #05cdff"></i> <span>A propos</span> </ion-item>
+      <br>
+      <ion-item lines="none"><i class="fas fa-power-off" style="color: #fd460e"></i> <span>Se deconnecter</span> </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
 <ion-content class="content">
-  <app-tabs></app-tabs>
+  <app-tabs-profil></app-tabs-profil>
 </ion-content>

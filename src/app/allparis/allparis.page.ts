@@ -15,15 +15,7 @@ export class AllparisPage implements OnInit {
 
   ngOnInit() {
     this.services.parisSubscription.subscribe((e: any)=>{
-      this.paris = e.sort((a, b) => {
-        if (a.id_p < b.id_p ) {
-          return 1;
-        }
-        if (a.id_p > b.id_p ) {
-          return -1;
-        }
-        return 0;
-      })
+      this.paris = e
       console.log(typeof this.paris)
       console.log('ooook ', this.paris, ' e ', e)
     })
@@ -52,7 +44,7 @@ export class AllparisPage implements OnInit {
   }
     getdata() {
        this.services.getallparis().then((e: any)=> {
-         console.log(e)
+        // console.log(e)
          //this.paris = e.sort((a, b) => a.id < b.id ? 1 : -1)
        })
     }

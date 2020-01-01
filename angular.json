@@ -43,6 +43,12 @@
               },
               {
                 "input": "src/assets/css/jquery.pagepiling.css"
+              },
+              {
+                "input": "src/assets/css/hamburgers.css"
+              },
+              {
+                "input": "src/assets/css/Chart.css"
               }
             ],
             "scripts": [
@@ -50,7 +56,8 @@
                 "src/assets/js/materialize.js",
                 "src/assets/js/jquery.pagepiling.js",
                 "src/assets/js/moment.min.js",
-                "src/assets/js/fr.js"
+                "src/assets/js/fr.js",
+                "src/assets/js/Chart.js"
             ]
           },
           "configurations": {

@@ -5,8 +5,21 @@ import { MypagePage } from './mypage.page';
 
 const routes: Routes = [
   {
+    path: 'profil',
+    component: MypagePage,
+    children: [{
+      path: 'compte',
+      loadChildren: () => import('../moncompte/moncompte.module').then( m => m.MoncomptePageModule)
+    },
+    {
+        path: 'premium',
+        loadChildren: () => import('../premium/premium.module').then( m => m.PremiumPageModule)
+    }
+  ]
+  },
+  {
     path: '',
-    component: MypagePage
+    redirectTo: 'profil/compte',
   }
 ];
 

@@ -46,3 +46,28 @@
 .col-info-paris ion-col {
     cursor: pointer;
 }
+ion-icon[name=arrow-round-back] {
+    font-size: 22px;
+    margin: 10px;
+    color: #fff;
+    margin-bottom: 50%;
+    position: absolute;
+    top: 0;
+}
+button.hamburger {
+    float: right;
+    margin: -5px;
+}
+.hamburger-inner {
+    width: 25px !important
+}
+.hamburger:focus {
+    outline: none !important;
+}
+.my-custom-menu ion-content {
+     --width: 200px !important;
+     --width: 200px !important;
+  }
+  ion-item span {
+    margin-left: 3%;
+  }

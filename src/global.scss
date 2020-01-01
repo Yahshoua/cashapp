@@ -32,6 +32,10 @@
     src: url('assets/fonts/Lato-Regular.ttf')
 }
 @font-face {
+  font-family:'Oswald';
+  src: url('assets/fonts/Oswald-Bold.ttf')
+}
+@font-face {
     font-family:'ubuntu';
     src: url('assets/fonts/Ubuntu-Light.ttf')
 }
@@ -228,4 +232,7 @@ ion-label {
   top: 45% !important;
   display: block;
   height: 80% !important;
+}
+ion-fab-button:focus {
+  outline: none !important;
 }

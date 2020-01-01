@@ -111,7 +111,16 @@ export class ServerService {
         url: this.url4
       }).done(e=> {
        // console.log('voila voila ', e)
-        this.paris = JSON.parse(e)
+      let p  = JSON.parse(e)
+      this.paris = p.sort((a, b)=> {
+            if (a.id_p < b.id_p ) {
+            return 1;
+          }
+          if (a.id_p > b.id_p ) {
+            return -1;
+          }
+          return 0;
+      })
         this.getparis()
       }).fail(err=> {
         console.log('erreur ', err)

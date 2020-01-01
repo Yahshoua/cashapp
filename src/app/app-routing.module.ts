@@ -1,3 +1,4 @@
+import { MypagePage } from './mypage/mypage.page';
 import { InvitationsPage } from './invitations/invitations.page';
 import { ParticipantsPage } from './participants/participants.page';
 import { DescriptionPage } from './description/description.page';
@@ -71,8 +72,11 @@ const routes: Routes = [
   {
     path: 'mypage',
     loadChildren: () => import('./mypage/mypage.module').then( m => m.MypagePageModule)
+  },
+  {
+    path: 'editer',
+    loadChildren: () => import('./editer/editer.module').then( m => m.EditerPageModule)
   }
-  
 ];
 
 @NgModule({

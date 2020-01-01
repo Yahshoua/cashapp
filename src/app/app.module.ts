@@ -25,6 +25,8 @@ import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts/ngx';
 import { SMS } from '@ionic-native/sms/ngx';
+import { MenuController } from '@ionic/angular';
+import { MypagePage } from './mypage/mypage.page';
 @NgModule({
   declarations: [AppComponent, MesparisPage,ParisdetailPage, ProfilPage, DescriptionPage, ParticipantsPage, InvitationsPage],
   entryComponents: [],
@@ -40,6 +42,7 @@ import { SMS } from '@ionic-native/sms/ngx';
     GuardhomeService,
     Contacts,
     SMS,
+    MenuController,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
