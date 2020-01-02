@@ -18,6 +18,7 @@ export class ServerService {
   url3 = this.server2+'/phpcashapp/login.php';
   url4 = this.server2+'/phpcashapp/getallparis.php';
   url5 = this.server2+'/phpcashapp/setParieur.php';
+  url6 = this.server2+'/phpcashapp/updatePari.php';
   header = new HttpHeaders({'Content-Type': 'application/json', "Accept": 'application/json'})
   constructor(public http: HttpClient) {
   }
@@ -126,6 +127,33 @@ export class ServerService {
         console.log('erreur ', err)
       })
       return await req
+    }
+    updatepari(newValue) {
+       for(var i=0;i<this.paris.length;i++) {
+         console.log('paris ', this.paris[i].id)
+         if(this.paris[i].id_p== newValue.idPari) {
+           console.log('trouvé ')
+           this.paris[i].visible= newValue.visible
+           this.paris[i].voirnum= newValue.voirnum
+           this.paris[i].noti_invit= newValue.noti_invit
+           this.paris[i].nbparticipant= newValue.nbparticipant
+           this.paris[i].invitation= newValue.invitation
+           break
+         }
+       }
+       this.getparis()
+       $.ajax({
+         method: 'POST',
+         url: this.url6,
+         data: newValue,
+         dataType: 'json',
+         success: function(res) {
+           console.log('mise-à-jour effectuées ', res)
+         },
+         error: function(err) {
+            console.log('une erreur s\'est produite durant l\envoie ', err)
+         }
+       })
     }
     async login(user) {
       let req = $.ajax({

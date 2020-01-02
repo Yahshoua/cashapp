@@ -1,0 +1,34 @@
+ion-toolbar {
+    --background: #fbfbfb
+}
+.logo {
+    margin: auto;
+    width: 167px;
+    height: 150px;
+    margin-top: 19%;
+}
+@keyframes moves {
+    from {
+        margin-left: 66%;
+    }
+    to {
+        margin-left: 15%;
+    }
+}
+.main {
+    height: 26%;
+    width: 25%;
+    margin-left: 40%;
+    margin-bottom: 11%;
+    -webkit-animation: moves 5s infinite; /* Safari 4.0 - 8.0 */
+  animation: moves 5s infinite;
+}
+.text {
+    padding: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+    text-align: justify;
+    font-size: 11px;
+    color: gray;
+    line-height: 14px;
+}

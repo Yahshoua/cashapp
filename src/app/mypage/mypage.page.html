@@ -50,17 +50,29 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-item lines="none">  <i class="fas fa-home" style="color: #13a0ff"></i> <span style="padding-left: ">Accueil</span>  </ion-item>
+      <ion-item lines="none" class="ion-activatable">  
+        <i class="fas fa-home" style="color: #13a0ff"></i> <span>Accueil</span>
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect> 
+      </ion-item>
       <br>
-      <ion-item lines="none"> <i class="fas fa-info-circle" style="color: #fda90e"></i> 
-        <span>Condition d'utilisation</span> </ion-item>
+      <ion-item [routerLink]="['/conditions']" (click)="goCondition()" routerLinkActive="router-link-active"  lines="none" class="ion-activatable"> <i class="fas fa-info-circle" style="color: #fda90e"></i> 
+        <span>Condition d'utilisation</span> 
+      <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+      </ion-item>
+         
         <br>
-      <ion-item lines="none"><i class="fas fa-question-circle" style="color: #05cdff"></i> <span>A propos</span> </ion-item>
+      <ion-item lines="none" class="ion-activatable"><i class="fas fa-question-circle" style="color: #05cdff"></i> <span>A propos</span> 
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect> 
+      </ion-item>
       <br>
-      <ion-item lines="none"><i class="fas fa-power-off" style="color: #fd460e"></i> <span>Se deconnecter</span> </ion-item>
+      <ion-item lines="none" class="ion-activatable"><i class="fas fa-power-off" style="color: #fd460e"></i> <span>Se deconnecter</span> 
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect> 
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>
+<ion-router-outlet id="content1"></ion-router-outlet>
+
 <ion-content class="content">
   <app-tabs-profil></app-tabs-profil>
 </ion-content>

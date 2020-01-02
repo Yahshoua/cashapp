@@ -76,6 +76,10 @@ const routes: Routes = [
   {
     path: 'editer',
     loadChildren: () => import('./editer/editer.module').then( m => m.EditerPageModule)
+  },
+  {
+    path: 'conditions',
+    loadChildren: () => import('./conditions/conditions.module').then( m => m.ConditionsPageModule)
   }
 ];
 

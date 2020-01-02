@@ -1,5 +1,5 @@
 import { ServerService } from './../server.service';
-import { NavController, MenuController } from '@ionic/angular';
+import { NavController, MenuController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { hamburgers } from 'hamburgers';
 declare var $
@@ -11,10 +11,13 @@ declare var $
 export class MypagePage implements OnInit {
   pari
   profil
-  constructor(private navCtrl: NavController, private menu: MenuController, private service: ServerService) { }
+  constructor(private navCtrl: NavController, private menu: MenuController, private service: ServerService,public toastController: ToastController) { }
   openmenu() {
       this.menu.enable(true, 'first');
       this.menu.open('first');
+  }
+  goCondition(){
+    this.menu.close('first');
   }
   close() {
     $('.hamburger').removeClass('is-active')
