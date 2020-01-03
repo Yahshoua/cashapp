@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { ServerService } from './../server.service';
 import { NavController, MenuController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +12,8 @@ declare var $
 export class MypagePage implements OnInit {
   pari
   profil
-  constructor(private navCtrl: NavController, private menu: MenuController, private service: ServerService,public toastController: ToastController) { }
+  url
+  constructor(private navCtrl: NavController, private menu: MenuController, private service: ServerService,public toastController: ToastController, private route: ActivatedRoute) { }
   openmenu() {
       this.menu.enable(true, 'first');
       this.menu.open('first');
@@ -23,6 +25,7 @@ export class MypagePage implements OnInit {
     $('.hamburger').removeClass('is-active')
   }
   ngOnInit() {
+    this.url = this.route.snapshot.queryParams.url
     this.service.parisSubscription.subscribe((e: any)=> {
       this.pari = e.filter(i=> {
         return i.id_auteur == this.service.utilisateur.data.id
@@ -37,7 +40,7 @@ export class MypagePage implements OnInit {
     this.profil = this.service.utilisateur.data
   }
   goback() {
-    this.navCtrl.back({ animated: true,
+    this.navCtrl.navigateBack(this.url, { animated: true,
       animationDirection: 'back'})
   }
 }
