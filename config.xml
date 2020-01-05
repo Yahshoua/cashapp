@@ -104,8 +104,15 @@
         <variable name="APP_ID" value="747435385758231" />
         <variable name="APP_NAME" value="cash_app" />
     </plugin>
+    <plugin name="phonegap-plugin-push" spec="^2.3.0">
+        <variable name="SENDER_ID" value="518940197353" />
+        <variable name="FCM_VERSION" value="17.0.+" />
+    </plugin>
     <plugin name="cordova-plugin-googleplus" source="git" spec="git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git">
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.153419674619-k4o292afmofrvlvo70pijh35asostc4f" />
         <variable name="WEB_APPLICATION_CLIENT_ID" value="153419674619-k4o292afmofrvlvo70pijh35asostc4f.apps.googleusercontent.com" />
     </plugin>
+    <platform name="android">
+        <resource-file src="google-services.json" target="app/google-services.json" />
+    </platform>
 </widget>

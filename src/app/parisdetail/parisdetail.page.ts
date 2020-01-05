@@ -22,7 +22,7 @@ export class ParisdetailPage implements OnInit {
   constructor(public route: ActivatedRoute, public service: ServerService, public navCtrl: NavController, public router: Router, private location: Location, private alertController: AlertController, public toastController: ToastController, private modalCtrl: ModalController) { }
   parseDate(date) {
     moment().locale('fr')
-    return moment(date).format('DD-MM-YYYY')
+    return moment(date).format('DD-MM-YY')
   }
   goback() {
     this.navCtrl.navigateBack([this.prevUrl, { animated: true,

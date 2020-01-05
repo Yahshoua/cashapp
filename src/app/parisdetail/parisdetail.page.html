@@ -23,15 +23,19 @@
 <div class="col-info-paris">
       <ion-grid>
         <ion-row>
-            <ion-col size="4" style="display: grid;" class="activates" [routerLink]="[{outlets: { myoutlet: ['mesparis'] } }]" routerLinkActive="router-link-active">
-                <font>Prix</font>
+            <ion-col size="3" style="display: grid;" class="activates" [routerLink]="[{outlets: { myoutlet: ['mesparis'] } }]" routerLinkActive="router-link-active">
+                <font>Mise</font>
                 <span> {{pari.prix}} </span>
             </ion-col>
-            <ion-col size="4" style="display: grid;">
+            <ion-col size="3" style="display: grid;">
+              <font> Participation </font>
+              <span> 5000 </span>
+            </ion-col>
+            <ion-col size="3" style="display: grid;">
               <font> date de début </font>
               <span> {{parseDate(pari.debut)}} </span>
             </ion-col>
-            <ion-col size="4" style="display: grid;">
+            <ion-col size="3" style="display: grid;">
               <font>  date de fin </font>
               <span> {{parseDate(pari.date2)}} </span>
             </ion-col>

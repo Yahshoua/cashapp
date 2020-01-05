@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import  { Subject } from 'rxjs';
+import  { Subject, from } from 'rxjs';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 declare var $
 import { resolve } from 'url';
@@ -19,6 +19,8 @@ export class ServerService {
   url4 = this.server2+'/phpcashapp/getallparis.php';
   url5 = this.server2+'/phpcashapp/setParieur.php';
   url6 = this.server2+'/phpcashapp/updatePari.php';
+  
+  // option = new RequestOptions();
   header = new HttpHeaders({'Content-Type': 'application/json', "Accept": 'application/json'})
   constructor(public http: HttpClient) {
   }
@@ -36,6 +38,39 @@ export class ServerService {
     this.canBet = true
     this.getCanBet()
   }
+    sendNotification(token, titre, description) {
+      let key="AAAAeNM_Aek:APA91bGwSDIqncH7GHoJxKoLP8iq5OBxkxzO5eO2PJVvlvAraZ8IE7ffUcDw8yelPK94bGvQI57LUXHTaDUEVBe2PfKzE2eajvHC5A8Ssz69ZfecAxNJXtgsC_D5ddkob9vKYkRY8NOh";
+      $.ajax({        
+        type : 'POST',
+        url : "https://fcm.googleapis.com/fcm/send",
+        headers : {
+            Authorization : 'key=' + key
+        },
+        contentType : 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({"to": token, "priority": "high", "notification": {"title":"Test","body":"Test", "forceStart": "1"}}),
+        success : function(response) {
+            console.log(response);
+        },
+        error : function(xhr, status, error) {
+            console.log(xhr.error);                   
+        }
+    });
+  }
+     updateRegistration(senderID) {
+        return new Promise((resolve, reject)=> {
+            $.ajax({
+                method: 'POST',
+                url: 'https://kazimo.ga/cashapp/phpcashapp/registration.php',
+                dataType: 'json',
+                data: {registration: senderID, user: this.utilisateur.data.id}
+            }).done(res=> {
+              resolve(res)
+            }).fail(err=> {
+              reject('erreur '+ err)
+            })
+        })
+    }
   sutoto() {
     this.getparis()
   }

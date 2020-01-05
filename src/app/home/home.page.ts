@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController, AlertController, NavController, LoadingController, ToastController } from '@ionic/angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { Sim  } from '@ionic-native/sim/ngx';
-import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 @Component({
   selector: 'app-home',
@@ -25,7 +24,7 @@ export class HomePage implements OnInit {
     initialSlide: 0,
     speed: 400
   };
-  constructor(public route: ActivatedRoute, public formBuild: FormBuilder, public alertController: AlertController, public navCtrl:NavController, public loadingController: LoadingController, public modalCtrl: ModalController, private fb: Facebook, public service: ServerService, private toastCtrl: ToastController, private alrtCtrl: AlertController, private sim: Sim, private twitter: TwitterConnect, private googlePlus: GooglePlus) {}
+  constructor(public route: ActivatedRoute, public formBuild: FormBuilder, public alertController: AlertController, public navCtrl:NavController, public loadingController: LoadingController, public modalCtrl: ModalController, private fb: Facebook, public service: ServerService, private toastCtrl: ToastController, private alrtCtrl: AlertController, private sim: Sim, private googlePlus: GooglePlus) {}
 
    ngOnInit() {
     this.formConnexion = this.formBuild.group({

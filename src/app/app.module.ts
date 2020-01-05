@@ -21,12 +21,13 @@ import { InvitationsPage } from './invitations/invitations.page';
 import { HttpClientModule } from '@angular/common/http';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { Sim } from '@ionic-native/sim/ngx';
-import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts/ngx';
 import { SMS } from '@ionic-native/sms/ngx';
 import { MenuController } from '@ionic/angular';
 import { MypagePage } from './mypage/mypage.page';
+import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
 @NgModule({
   declarations: [AppComponent, MesparisPage,ParisdetailPage, ProfilPage, DescriptionPage, ParticipantsPage, InvitationsPage],
   entryComponents: [],
@@ -35,7 +36,6 @@ import { MypagePage } from './mypage/mypage.page';
     StatusBar,
     SplashScreen,
     Facebook,
-    TwitterConnect,
     GooglePlus,
     Sim,
     GuardService,
@@ -43,6 +43,8 @@ import { MypagePage } from './mypage/mypage.page';
     Contacts,
     SMS,
     MenuController,
+    Push,
+    FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
