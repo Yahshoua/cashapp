@@ -1,4 +1,9 @@
 <ion-content class="ion-padding">
+  <div style="border-bottom: 1px solid #80808014;">
+    <p class="text">
+      Attention! {{auteur}} pourra vous reclamer {{participation}} Fcfa de frais de participation avant d'accepter de vous ajouter à son paris.
+    </p>
+  </div>
       <h2 style="font-size: 18px;color: gray">Proposer votre paris (soyez bref.)</h2>
       <form [formGroup]="formOp">
         <ion-item>
@@ -9,7 +14,7 @@
         </ion-item> 
         <br>
         <div style="display: flex;height: 100px;" class="div-conf">
-          <ion-button style="margin: auto" shape="round" (click)="sender(formOp.value)">Je confirme !</ion-button>
+          <ion-button style="margin: auto" shape="round" (click)="sender(formOp)">Je confirme !</ion-button>
         </div>
         
       </form>

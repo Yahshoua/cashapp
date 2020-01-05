@@ -27,7 +27,12 @@ export class ServerService {
   // private paris=[]
   private paris = []
   parisSubscription = new Subject();
-  canBetSubscription = new Subject()
+  canBetSubscription = new Subject();
+  badgeSubscription = new Subject();
+  badgeUser
+  getBadge() {
+    this.badgeSubscription.next(this.badgeUser)
+  }
   getparis() {
     this.parisSubscription.next(this.paris)
   }
@@ -81,8 +86,21 @@ export class ServerService {
       type: 'POST',
       data: paris
     }).done(res=> {
-      this.paris.push(paris)
+      let data = JSON.parse(res)
+      let monpari = data[0]
+      monpari.participants = []
+      this.paris.push(monpari)
+      this.paris = this.paris.sort((a, b)=> {
+        if (a.id_p < b.id_p ) {
+        return 1;
+          }
+          if (a.id_p > b.id_p ) {
+            return -1;
+          }
+          return 0;
+      })
       this.getparis()
+      console.log('le paris ', this.paris , 'resultat ', data)
       return this.paris
     })
     return await p;
@@ -107,6 +125,14 @@ export class ServerService {
         alert("une erreur s'est produit "+reject)
       })
     }
+    async badge(pari) {
+      let e = pari.participants.filter((e: any)=> {
+       let i = parseInt(e.id) ==  this.utilisateur.data.id? true : false
+              console.log('la valuer de i ', i)
+              this.badgeUser = i
+       return i
+     })
+    }
     getStorageUser() {
       let user = JSON.parse(localStorage.getItem('user')) || []
       user.length <=0? this.auth= false:this.auth = true
@@ -120,13 +146,18 @@ export class ServerService {
     async setParieur(user, id, date) {
       user.id_pari = id
       user.date = date
+      user.statu = '0'
+     // fonction qui servira à pusher un parieur.....wait :)
       for(var i=0;i <this.paris.length;i++) {
         if(this.paris[i].id_p == id) {
+          this.paris[i].participants.status = 0
           this.paris[i].participants.push(user)
           break
         }
       }
       this.getparis()
+      this.badgeUser = true
+      this.getBadge()
       return new Promise((res, rej)=> {
             const req= $.ajax({
               method: 'POST',

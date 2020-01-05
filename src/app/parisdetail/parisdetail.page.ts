@@ -17,6 +17,7 @@ export class ParisdetailPage implements OnInit {
   enft
   id
   prevUrl
+  participation
   @Input() canMacth: boolean
   @Input() closed: any;
   constructor(public route: ActivatedRoute, public service: ServerService, public navCtrl: NavController, public router: Router, private location: Location, private alertController: AlertController, public toastController: ToastController, private modalCtrl: ModalController) { }
@@ -43,6 +44,8 @@ export class ParisdetailPage implements OnInit {
       cssClass: 'my-custom-modal-opinion',
       componentProps: {
         'idPari': this.id,
+        'participation': this.pari.participation,
+        'auteur': this.pari.auteur,
         'canMacth': false
       }
     })

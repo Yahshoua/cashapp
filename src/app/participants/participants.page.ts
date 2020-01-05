@@ -27,13 +27,19 @@ export class ParticipantsPage implements OnInit {
     })
     this.service.getparis()
     console.log('paris current ', this.pari)
-    var e = this.pari.participants.filter(e=> {
-      console.log('id partic', this.service.utilisateur.data)
-      this.badge = parseInt(e.id_part) ==  this.service.utilisateur.data.id?true: false
-   })
-    console.log('checking...', e)
+    this.service.badge(this.pari).then(e=> {
+      console.log('res badge ', e)
+    })
+      this.service.badgeSubscription.subscribe((res:Boolean)=> {
+        
+        this.badge = res
+      })
+      this.service.getBadge()
+      console.log('le badge ', this.badge)
   }
-    
+    ngAfterViewInit() {
+      
+    }
   timer(date) {
     var m = moment(date).format("YYYYMMDDhmmssa")
      return moment(m, "YYYYMMDDhmmssa").fromNow();

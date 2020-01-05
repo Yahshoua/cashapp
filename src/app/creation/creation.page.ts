@@ -20,6 +20,7 @@ export class CreationPage implements OnInit {
   description = ''
   utilisateur: any
   formulaire: any
+  participation = ''
   customDayShortNames = ['s\u00f8n', 'man', 'tir', 'ons', 'tor', 'fre', 'l\u00f8r'];
   constructor(public navCtrl: NavController, public formBuild: FormBuilder, public toastController: ToastController, public alertController: AlertController, public service: ServerService) { }
 
@@ -33,6 +34,7 @@ export class CreationPage implements OnInit {
       debut: ['', Validators.required],
       fin: ['', Validators.required],
       prix: ['', Validators.required],
+      participation: ['', Validators.required],
       description: ['', Validators.required]
     })
     $('#pagepiling').pagepiling({
@@ -89,6 +91,20 @@ export class CreationPage implements OnInit {
       }
   }
   async next5() {
+    let messages = "Entrez la participation !"
+    const toast = await this.toastController.create({
+      message: messages,
+      position: 'top',
+      duration: 5000,
+      color: "danger"
+    });
+    if(this.participation.length <= 0 || this.participation.length <= 3 || this.participation == undefined) {
+      toast.present();
+          } else {
+          $.fn.pagepiling.moveTo(6);
+      }
+  }
+  async next6() {
     let messages = "Decrivez en quelques mots votre pari"
     //Toast
     const toast = await this.toastController.create({
@@ -116,7 +132,7 @@ export class CreationPage implements OnInit {
             var date1 = moment(this.formPari.value.debut).format('DD-MM-YYYY')
             var date2 = moment(this.formPari.value.fin).format('DD-MM-YYYY')
             console.log('date debut parsé ', date1)
-            $.fn.pagepiling.moveTo(6);
+            $.fn.pagepiling.moveTo(7);
             console.log(this.formPari.value)
             this.formulaire = this.formPari
             this.formulaire.value.id = this.utilisateur.id

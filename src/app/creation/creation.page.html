@@ -68,13 +68,40 @@
             </ion-button>
           </div>
       </div>
+      <div class="section" style="display: grid;">
+        <div style="border-bottom: 1px solid #80808014;">
+          <p class="text">
+            Important: La participation c'est la somme que chaque parieur doit vous donner avant qu'il ne participe à votre paris.
+          </p>
+        </div>
+        <ion-row style="margin-top: 22%;">
+            <ion-col size="8">
+              <ion-item class="myinput">
+                <ion-label position="floating">Participation*</ion-label>
+                <ion-input [(ngModel)]="participation" formControlName="participation" type="number" maxlength="12" minlength="4" name="participation" required="true"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4" style="margin-top: 2%;display: flex">
+                <span style="    text-align: left;
+                margin: auto;
+                float: left;">Fcfa</span>
+            </ion-col>
+        </ion-row>
+     
+      <div style="text-align: center;padding: 27%;">
+        <ion-button shape="round" (click)="next5()">
+          suivant
+        <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+        </ion-button>
+      </div>
+  </div>
       <div class="section">
         <ion-item class="myinput">
           <ion-label position="floating">Description</ion-label>
           <ion-textarea [(ngModel)]="description" formControlName="description" placeholder="en quoi consiste votre pari ?" required="true"></ion-textarea>
         </ion-item>
         <div style="text-align: center;padding: 30%;">
-          <ion-button shape="round" (click)="next5()">
+          <ion-button shape="round" (click)="next6()">
             Terminer
           </ion-button>
         </div>

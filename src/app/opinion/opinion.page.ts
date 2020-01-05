@@ -13,16 +13,20 @@ export class OpinionPage implements OnInit {
   @Input() idPari: any;
   @Input() canMacth: Boolean
   id
+  auteur
+  participation
+  op: any
   constructor(private formBuild: FormBuilder, private toastCtrl: ToastController, private navParam: NavParams, private service: ServerService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.id = this.navParam.get('idPari');
+    this.auteur = this.navParam.get('auteur')
+    this.participation = this.navParam.get('participation')
     this.formOp = this.formBuild.group({
       opinion: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(15)])],
     })
   }
   async sender(form) {
-      console.log(form, this.formOp)
       if(this.formOp.status == "INVALID") {
         const toast = await this.toastCtrl.create({
           message: 'Vous n\'avez rien proposer ! ',
@@ -33,18 +37,21 @@ export class OpinionPage implements OnInit {
       toast.present();
       return
       }
-      this.setParieur(form.opinion)
+      this.setParieur(form)
   }
   async setParieur(opinion) {
     const toast = await this.toastCtrl.create({
-      message: 'Vous avez pariez !',
-      duration: 2000,
+      message:`Vous avez pariez ! ${this.auteur} examinera votre votre demande avant de vous ajouter à son paris`,
+      duration: 7000,
       position: 'bottom',
       color: 'success'
     });
     toast.present();
     var date = moment().format()
-    this.service.utilisateur.data.opinion = opinion
+    this.op = opinion
+    this.op.status = 0
+    this.service.utilisateur.data.opinion = this.op.value.opinion
+    this.service.utilisateur.data.status = this.op.value.status
     this.service.setParieur(this.service.utilisateur.data, parseInt(this.id), date).then((e)=> {
       console.log('dismissed !')
       this.canMacth= true
