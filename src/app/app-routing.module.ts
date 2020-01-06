@@ -80,6 +80,22 @@ const routes: Routes = [
   {
     path: 'conditions',
     loadChildren: () => import('./conditions/conditions.module').then( m => m.ConditionsPageModule)
+  },
+  {
+    path: 'notification',
+    loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
+  },
+  {
+    path: 'visitprofil',
+    loadChildren: () => import('./visitprofil/visitprofil.module').then( m => m.VisitprofilPageModule)
+  },
+  {
+    path: 'visiteprofil',
+    loadChildren: () => import('./visiteprofil/visiteprofil.module').then( m => m.VisiteprofilPageModule)
+  },
+  {
+    path: 'fiche',
+    loadChildren: () => import('./fiche/fiche.module').then( m => m.FichePageModule)
   }
 ];
 

@@ -19,7 +19,8 @@ export class ServerService {
   url4 = this.server2+'/phpcashapp/getallparis.php';
   url5 = this.server2+'/phpcashapp/setParieur.php';
   url6 = this.server2+'/phpcashapp/updatePari.php';
-  
+  url7 = this.server2+'/phpcashapp/getNotification.php';
+  url8 = this.server2+'/phpcashapp/pusher.php';
   // option = new RequestOptions();
   header = new HttpHeaders({'Content-Type': 'application/json', "Accept": 'application/json'})
   constructor(public http: HttpClient) {
@@ -29,7 +30,14 @@ export class ServerService {
   parisSubscription = new Subject();
   canBetSubscription = new Subject();
   badgeSubscription = new Subject();
+  notifSubscriber = new Subject();
+  notifications: any
   badgeUser
+
+
+  getNotif() {
+    this.notifSubscriber.next(this.notifications)
+  }
   getBadge() {
     this.badgeSubscription.next(this.badgeUser)
   }
@@ -61,6 +69,17 @@ export class ServerService {
             console.log(xhr.error);                   
         }
     });
+  }
+  setPusher() {
+    $.ajax({
+      method: 'POST',
+      url: this.url8,
+      data: {'data': 'salut toi'}
+    }).done(res=> {
+      console.log('success ', res)
+    }).fail(err=> {
+        console.log('erreur pusher ', err)
+    })
   }
      updateRegistration(senderID) {
         return new Promise((resolve, reject)=> {
@@ -113,6 +132,24 @@ export class ServerService {
         data: user
       })
       return await k
+    }
+    // Recuperation des notifications
+    getNotification() {
+      let id = this.utilisateur.data.id
+      return new Promise((resolve, reject)=> {
+          $.ajax({
+              method: "POST",
+              url: this.url7,
+              dataType: 'json',
+              data: {'id': id}
+          }).done(rs=> {
+            this.notifications = rs.notifications
+            resolve(rs)
+          }).fail(err=> {
+            reject('une erreur est arrivée durant la recuperation des notifications '+ err)
+            this.notifications = []
+          })
+      })
     }
     setStorage(user) {
       return new Promise((resolve, reject)=> {

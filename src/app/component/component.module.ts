@@ -3,10 +3,10 @@ import { TabsComponent } from './../tabs/tabs.component';
 import { TestComponent } from './../test/test.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicModule } from "@ionic/angular";
-import { VosparisPage } from '../vosparis/vosparis.page';
+import { CommonModule } from '@angular/common';
 @NgModule({
     declarations: [TabsComponent, TestComponent, TabsProfilComponent],
-    imports: [IonicModule],
+    imports: [IonicModule, CommonModule],
     exports: [TabsComponent, TabsProfilComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

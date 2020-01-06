@@ -1,0 +1,44 @@
+<ion-header style="background: #ebebeb;">
+  <ion-toolbar class="mybackgs">
+    <ion-icon name="arrow-round-back" slot="start" (click)="goback()" routerLinkActive="router-link-active" ></ion-icon>
+    <!-- <button class="hamburger hamburger--emphatic" type="button" (click)="openmenu()">
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button> -->
+    <ion-icon slot="end" name="more" class="params"></ion-icon>
+     <div style="margin-top: 25%">
+        <ion-avatar style="margin: auto;height: 100%;width: 100%;text-align: center;">
+          <img src={{profil.photo}} style="height:80px;width: 80px">
+        </ion-avatar>
+        <div class="col-perso-detail">
+            <h3>{{profil.nom}}</h3>
+            <span style="font-size: 10px">
+              Libreville
+            </span>
+        </div>
+     </div>
+  </ion-toolbar>
+  <div class="col-info-paris" style="margin: auto;">
+      <ion-grid>
+        <ion-row>
+            <ion-col size="4" style="display: grid;" class="activates" [routerLink]="[{outlets: { myoutlet: ['mesparis'] } }]" routerLinkActive="router-link-active">
+                <font>Abonné</font>
+                <span> 0 </span>
+            </ion-col>
+            <ion-col size="4" style="display: grid;">
+              <font> Argent gagné </font>
+              <span> 200k </span>
+            </ion-col>
+            <ion-col size="4" style="display: grid;">
+              <font>  Abonnement </font>
+              <span> 2 </span>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+  </div>
+</ion-header>
+
+<ion-content class="content">
+  <app-tabs></app-tabs>
+</ion-content>

@@ -1,3 +1,4 @@
+import { TabsComponent } from './tabs/tabs.component';
 import { OpinionPageModule } from './opinion/opinion.module';
 import { GuardhomeService } from './guardhome.service';
 import { GuardService } from './guard.service';
