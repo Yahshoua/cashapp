@@ -57,25 +57,7 @@ export class ServerService {
     this.canBet = true
     this.getCanBet()
   }
-    sendNotification(token, titre, description) {
-      let key="AAAAeNM_Aek:APA91bGwSDIqncH7GHoJxKoLP8iq5OBxkxzO5eO2PJVvlvAraZ8IE7ffUcDw8yelPK94bGvQI57LUXHTaDUEVBe2PfKzE2eajvHC5A8Ssz69ZfecAxNJXtgsC_D5ddkob9vKYkRY8NOh";
-      $.ajax({        
-        type : 'POST',
-        url : "https://fcm.googleapis.com/fcm/send",
-        headers : {
-            Authorization : 'key=' + key
-        },
-        contentType : 'application/json',
-        dataType: 'json',
-        data: JSON.stringify({"to": token, "priority": "high", "notification": {"title":"Test","body":"Test", "forceStart": "1"}}),
-        success : function(response) {
-            console.log(response);
-        },
-        error : function(xhr, status, error) {
-            console.log(xhr.error);                   
-        }
-    });
-  }
+    
    getChat(idExp, idRecp) {
      return new Promise((resolve, reject)=> {
         $.ajax({
@@ -95,20 +77,40 @@ export class ServerService {
      })
        
   }
-  setChat(idExp, idRecep, message, dates, chaine,nom, photo) {
+  setChat(idExp, idRecep, message, dates, chaine,nom, photo, token, senderName, chaine2) {
       $.ajax({
         method: 'POST',
         url: this.url10,
         dataType: 'json',
-        data: {'idExp': idExp, 'idRecep': idRecep, 'message': message, 'dates': dates, 'chaine': chaine, 'nom': nom, 'photo': photo},
+        data: {'idExp': idExp, 'idRecep': idRecep, 'message': message, 'dates': dates, 'chaine': chaine, 'nom': nom, 'photo': photo, 'chaineRecep': chaine2},
         success: (res)=>{
           console.log('message envoyé avec success ! ', res)
+          this.sendNotification(token, 'Message de '+nom, senderName+', vous avez reçu un message de '+nom)
         },
         error: (err)=> {
             console.error("Une erreur s'est passé durant la requete du chat de recuperation du chat "+ err)
         }
       })
   }
+  sendNotification(token, titre, description) {
+    let key="AAAAeNM_Aek:APA91bGwSDIqncH7GHoJxKoLP8iq5OBxkxzO5eO2PJVvlvAraZ8IE7ffUcDw8yelPK94bGvQI57LUXHTaDUEVBe2PfKzE2eajvHC5A8Ssz69ZfecAxNJXtgsC_D5ddkob9vKYkRY8NOh";
+    $.ajax({        
+      type : 'POST',
+      url : "https://fcm.googleapis.com/fcm/send",
+      headers : {
+          Authorization : 'key=' + key
+      },
+      contentType : 'application/json',
+      dataType: 'json',
+      data: JSON.stringify({"to": token, "priority": "high", "notification": {"title":titre,"body":description, "forceStart": "1"}}),
+      success : function(response) {
+          console.log(response);
+      },
+      error : function(xhr, status, error) {
+          console.log(xhr.error);                   
+      }
+  });
+}
   setPusher() {
     $.ajax({
       method: 'POST',
@@ -172,15 +174,21 @@ export class ServerService {
       })
       return await k
     }
+    // MAJ des notifs
+    setNotifications(notifs) {
+      this.notifications = notifs
+      this.getNotif()
+    }
     // Recuperation des notifications
     getNotification() {
       let id = this.utilisateur.data.id
+      let chaine = this.utilisateur.data.chaine_notif
       return new Promise((resolve, reject)=> {
           $.ajax({
               method: "POST",
-              url: this.url7,
+              url: this.url10,
               dataType: 'json',
-              data: {'id': id}
+              data: {'id_user': id, 'chaine': chaine}
           }).done(rs=> {
             this.notifications = rs.notifications
             resolve(rs)

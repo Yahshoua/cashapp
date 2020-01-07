@@ -64,9 +64,14 @@ messages
   send(form) {
     let id_exp = this.user.id
     let id_recep = this.profil.id_exp
+    let token = this.profil.token
     let dates = moment().format('dd MM.YYYY à HH:mm')
     let message = form.value.message
-    this.service.setChat(id_exp, id_recep, message, dates, this.chaine, this.user.nom, this.user.photo)
+    let chaine2 = this.profil.chaine_notif
+    this.service.setChat(id_exp, id_recep, message, dates, this.chaine, this.user.nom, this.user.photo, token, this.profil.nom, chaine2)
     this.form.reset()
+  }
+  goback() {
+    this.navCtrl.back()
   }
 }

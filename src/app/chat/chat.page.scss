@@ -4,8 +4,9 @@
     right: 0;
 }
 .col-btn ion-input {
-    width: 83%;
+    width: 80%;
     float: left;
+    --padding-start: 2%
 }
 .col-btn ion-fab-button {
     float: right;
@@ -29,4 +30,7 @@ ion-grid[class=mydiv] {
 }
 ion-input {
     --padding-top: 19px;
+}
+ion-toolbar {
+    --background: #fbfcfd;
 }

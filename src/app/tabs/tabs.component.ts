@@ -11,11 +11,25 @@ declare var Pusher, $
 })
 export class TabsComponent implements OnInit {
   notification: Array<string>= []
-  chaineNoti: any
+  chaine: any
   constructor(public navCtrl: NavController, public router: Router, private service: ServerService) { }
 
   ngOnInit() {
-    this.chaineNoti = this.service.utilisateur.data.chaine_notif
+    this.chaine = this.service.utilisateur.data.chaine_notif
+    var pusher = new Pusher('cd29f2f1d7ed1ce9bd9c', {
+      cluster: 'eu',
+      encrypted: true
+      //forceTLS: true
+    });
+      var channel = pusher.subscribe(this.chaine);
+      channel.bind('notifications', (data)=> {
+        console.log('notification pusher', data);
+        this.notification = data.notifications
+        this.service.setNotifications(data.notifications)
+        console.log('nouvelles notifs ', this.notification)
+      });
+
+    
     this.service.getNotification().then((e: any)=> {
       this.service.notifSubscriber.subscribe((res: [])=> {
         this.notification = res

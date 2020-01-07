@@ -1,15 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon style="font-size: 26px;" name="arrow-round-back" slot="start" (click)="goback()" routerLinkActive="router-link-active" ></ion-icon>
+    <ion-title style="font-size: 93%;">Chatter avec {{profil.nom}} </ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content class="cnt" style="position: relative"  id="mydiv" >
   <ion-grid style="margin-top: 12%;" class="mydiv" *ngIf="chating?.length >= 1">
-        <ion-item *ngFor="let chat of chating" lines="full" style="background: #ffffffed">
-        <ion-avatar [slot]="slot(chat.id_exp)">
-          <img src={{chat?.photo}}>
-        </ion-avatar>
-        <ion-label [ngStyle]="{'text-align': align(chat?.id_exp)}">
-          <h2>{{chat?.nom}}</h2>
-          <span style="font-size: 69%;color: gray"> {{chat?.dates}} </span>
-          <p>{{chat?.messages}}</p>
-        </ion-label>
-      </ion-item> 
+      <div style="position: absolute;bottom: 0">
+          <ion-item *ngFor="let chat of chating" lines="none" style="background: #ffffffed">
+          <ion-avatar [slot]="slot(chat.id_exp)">
+            <img src={{chat?.photo}}>
+          </ion-avatar>
+          <ion-label [ngStyle]="{'text-align': align(chat?.id_exp)}">
+            <h2>{{chat?.nom}}</h2>
+            <span style="font-size: 69%;color: gray"> {{chat?.dates}} </span>
+            <p>{{chat?.messages}}</p>
+          </ion-label>
+        </ion-item> 
+      </div>
+        
   </ion-grid>
 </ion-content>  
 <form [formGroup]="form" class="myform" style="background: #a9a9a914">

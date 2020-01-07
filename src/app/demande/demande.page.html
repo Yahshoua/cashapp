@@ -1,4 +1,5 @@
-<div class="ion-padding myblock" style="position: relative" scroll="false">
+<ion-grid style="margin-top: 75%;">
+  <div class="myblock" style="position: relative" scroll="false">
     <ion-grid >
       <ion-row>
         <ion-col size="12" style="margin-top: 7%;">
@@ -15,7 +16,7 @@
       </ion-row>
     </ion-grid>
   </div>
-<div style="overflow-y: auto;background: rgb(255, 255, 255);padding: 4%" class="col-info">
+<div style="background: rgb(255, 255, 255);padding-left: 4%;padding-right: 4%;" class="col-info">
   <ion-item lines="none">
     <ion-label style="padding-bottom: 4px;border-bottom: 1px dotted #d6d6d6">
       <span> 
@@ -33,4 +34,6 @@
   <p style="font-size: 76%;text-align: center">Pas de numéro ? Vous pouvez chatter en directe avec {{profil.nom}} pour avoir plus d'information sur lui </p>
   <ion-button expand="full" color="light" (click)="goChat()"> <ion-icon slot="start" name="chatboxes"></ion-icon> Chatter avec {{profil.nom}}</ion-button>
 </div>
+
+</ion-grid>
 

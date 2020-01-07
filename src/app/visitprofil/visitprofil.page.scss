@@ -80,3 +80,7 @@ button.hamburger {
     margin-bottom: 50%;
     position: absolute;
   }
+  ion-content {
+      --padding-top: 5em;
+      --margin-top: 5em
+  }

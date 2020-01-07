@@ -42,7 +42,11 @@ export class NotificationPage implements OnInit {
           yy: "%d ans"
         }
     });
-            this.notification = this.service.notifications
+            this.notification = this.service.notifSubscriber.subscribe(e=> {
+              this.notification = e
+            })
+            this.service.getNotif()
+            
             for(var i=0;i<this.notification.length;i++) {
               var dates = moment(this.notification[i].createdAt).format('YYYY, MMMM, DDDD')
               var today= moment().format('YYYY, MMMM, DD')
@@ -59,9 +63,23 @@ export class NotificationPage implements OnInit {
             }
             console.log('les notifs ', this.notification, 'les weeks ', this.week)
   }
-
+  getRoute(type, idpari, id) {
+    console.log(type, idpari, id)
+    if(type == 'participation') {
+        this.goTovist(idpari)
+    } else if(type== 'chat') {
+      this.goChat(id)
+    }
+}
   goTovist(id) {
     this.navCtrl.navigateForward(['visitprofil'], {queryParams: {'idpari': id}})
+  }
+  goChat(id) {
+    let user = JSON.stringify(this.service.utilisateur.data)
+    let profil =this.service.notifications.find(e=> {
+      return e.id_exp = id
+    })
+    this.navCtrl.navigateForward(['chat'], {queryParams: {'profil': profil, 'user': user}})
   }
   goback() {
     this.navCtrl.navigateBack(this.url, { animated: true,

@@ -23,12 +23,12 @@ export class DemandePage implements OnInit {
       var h1 = $('.myblock').height()
       var h2 = $('.heads').height()
       var height = 100 - ($('app-demande').height() - h2)
-      $('.col-info').css({'height': height +'%'})
+     // $('.col-info').css({'height': height +'%'})
       console.log('height ', height)
       
     })
   }
   goChat() {
-    this.navCtrl.navigateForward(['visitprofil', 'chat'], {queryParams: {'profil': JSON.stringify(this.profil), 'user': JSON.stringify(this.user)}})
+    this.navCtrl.navigateForward(['chat'], {queryParams: {'profil': JSON.stringify(this.profil), 'user': JSON.stringify(this.user)}})
   }
 }

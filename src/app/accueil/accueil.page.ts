@@ -74,6 +74,7 @@ export class AccueilPage implements OnInit {
   
   ngOnInit() {
     
+        
         // Return a list of currently configured channels
         this.push.listChannels().then((channels) => console.log('List of channels', channels))
         // to initialize push notifications
