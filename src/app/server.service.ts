@@ -76,20 +76,24 @@ export class ServerService {
         }
     });
   }
-  getChat(idExp, idRecp) {
+   getChat(idExp, idRecp) {
+     return new Promise((resolve, reject)=> {
         $.ajax({
-          method: 'POST',
-          url: this.url9,
-          dataType: 'json',
-          data: {Exp: idExp, Recep: idRecp},
-          success: (res)=>{
-            this.chat = res
-            this.getChatSubsciption()
-          },
-          error: (err)=> {
-              console.error("Une erreur s'est passé durant la requete du chat de recuperation du chat "+ err)
-          }
-        })
+            method: 'POST',
+            url: this.url9,
+            dataType: 'json',
+            data: {Exp: idExp, Recep: idRecp},
+            success: (res)=>{
+              this.chat = res
+              this.getChatSubsciption()
+              resolve(res)
+            },
+            error: (err)=> {
+                reject("Une erreur s'est passé durant la requete du chat de recuperation du chat "+ err)
+            }
+          })
+     })
+       
   }
   setChat(idExp, idRecep, message, dates, chaine,nom, photo) {
       $.ajax({

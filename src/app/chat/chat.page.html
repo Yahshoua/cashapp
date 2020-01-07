@@ -1,19 +1,20 @@
-<ion-content class="cnt" style="position: relative">
+<ion-content class="cnt" style="position: relative"  id="mydiv" >
   <ion-grid style="margin-top: 12%;" class="mydiv" *ngIf="chating?.length >= 1">
-        <ion-item *ngFor="let chat of chating" lines="none">
-        <ion-avatar [slot]="slot(chat.id)">
-          <img src={{chat.photo}}>
+        <ion-item *ngFor="let chat of chating" lines="full" style="background: #ffffffed">
+        <ion-avatar [slot]="slot(chat.id_exp)">
+          <img src={{chat?.photo}}>
         </ion-avatar>
-        <ion-label [ngStyle]="{'text-align': align(chat.id)}">
-          <h2>{{chat.nom}}</h2>
-          <p>{{chat.messages}}</p>
+        <ion-label [ngStyle]="{'text-align': align(chat?.id_exp)}">
+          <h2>{{chat?.nom}}</h2>
+          <span style="font-size: 69%;color: gray"> {{chat?.dates}} </span>
+          <p>{{chat?.messages}}</p>
         </ion-label>
       </ion-item> 
   </ion-grid>
 </ion-content>  
-<form [formGroup]="form" class="myform">
+<form [formGroup]="form" class="myform" style="background: #a9a9a914">
   <div class="col-btn">
-    <ion-input placeholder="Dites quelque chose à {{profil.nom}}..." formControlName="message"></ion-input>
+    <ion-input [(ngModel)]="messages" placeholder="Dites quelque chose à {{profil.nom}}..." formControlName="message"></ion-input>
       <ion-fab-button slot="end" [disabled]="!form.valid" (click)="send(form)">
         <ion-icon name="send"></ion-icon>
       </ion-fab-button>
