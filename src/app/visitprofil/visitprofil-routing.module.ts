@@ -13,8 +13,8 @@ const routes: Routes = [
           loadChildren: () => import('../demande/demande.module').then( m => m.DemandePageModule)
       },
       {
-        path: 'visiteprofil',
-        loadChildren: () => import('../visiteprofil/visiteprofil.module').then( m => m.VisiteprofilPageModule)
+        path: 'chat',
+        loadChildren: () => import('../chat/chat.module').then( m => m.ChatPageModule)
       }
     ]
   }

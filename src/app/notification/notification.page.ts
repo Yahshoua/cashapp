@@ -58,7 +58,6 @@ export class NotificationPage implements OnInit {
               }
             }
             console.log('les notifs ', this.notification, 'les weeks ', this.week)
-        
   }
 
   goTovist(id) {

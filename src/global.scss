@@ -39,9 +39,9 @@
     font-family:'ubuntu';
     src: url('assets/fonts/Ubuntu-Light.ttf')
 }
-* {
-    font-family: 'ubuntu';
-}
+// * {
+//     font-family: 'ubuntu';
+// }
 ion-label {
     font-family: 'ubuntu' !important;
 }
@@ -66,6 +66,7 @@ ion-label {
 }
 .col-item span, strong {
     font-family: 'ubuntu';
+    font-size: 71% !important;
 }
 .pari-item {
     background-color: #fff;

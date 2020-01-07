@@ -90,12 +90,12 @@ const routes: Routes = [
     loadChildren: () => import('./visitprofil/visitprofil.module').then( m => m.VisitprofilPageModule)
   },
   {
-    path: 'visiteprofil',
-    loadChildren: () => import('./visiteprofil/visiteprofil.module').then( m => m.VisiteprofilPageModule)
-  },
-  {
     path: 'fiche',
     loadChildren: () => import('./fiche/fiche.module').then( m => m.FichePageModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
   }
 ];
 

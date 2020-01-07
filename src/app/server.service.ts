@@ -21,20 +21,26 @@ export class ServerService {
   url6 = this.server2+'/phpcashapp/updatePari.php';
   url7 = this.server2+'/phpcashapp/getNotification.php';
   url8 = this.server2+'/phpcashapp/pusher.php';
+  url9 = this.server2+'/phpcashapp/getChat.php';
+  url10 = this.server2+'/phpcashapp/setChat.php';
   // option = new RequestOptions();
   header = new HttpHeaders({'Content-Type': 'application/json', "Accept": 'application/json'})
   constructor(public http: HttpClient) {
   }
   // private paris=[]
-  private paris = []
+  public paris = []
   parisSubscription = new Subject();
   canBetSubscription = new Subject();
   badgeSubscription = new Subject();
   notifSubscriber = new Subject();
   notifications: any
+  chatSubscription = new Subject()
+  chat = []
   badgeUser
 
-
+  getChatSubsciption() {
+    this.chatSubscription.next(this.chat)
+  }
   getNotif() {
     this.notifSubscriber.next(this.notifications)
   }
@@ -69,6 +75,35 @@ export class ServerService {
             console.log(xhr.error);                   
         }
     });
+  }
+  getChat(idExp, idRecp) {
+        $.ajax({
+          method: 'POST',
+          url: this.url9,
+          dataType: 'json',
+          data: {Exp: idExp, Recep: idRecp},
+          success: (res)=>{
+            this.chat = res
+            this.getChatSubsciption()
+          },
+          error: (err)=> {
+              console.error("Une erreur s'est passé durant la requete du chat de recuperation du chat "+ err)
+          }
+        })
+  }
+  setChat(idExp, idRecep, message, dates, chaine,nom, photo) {
+      $.ajax({
+        method: 'POST',
+        url: this.url10,
+        dataType: 'json',
+        data: {'idExp': idExp, 'idRecep': idRecep, 'message': message, 'dates': dates, 'chaine': chaine, 'nom': nom, 'photo': photo},
+        success: (res)=>{
+          console.log('message envoyé avec success ! ', res)
+        },
+        error: (err)=> {
+            console.error("Une erreur s'est passé durant la requete du chat de recuperation du chat "+ err)
+        }
+      })
   }
   setPusher() {
     $.ajax({

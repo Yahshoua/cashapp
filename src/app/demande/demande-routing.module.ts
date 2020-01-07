@@ -5,7 +5,7 @@ import { DemandePage } from './demande.page';
 
 const routes: Routes = [
   {
-    path: 'demande',
+    path: '',
     component: DemandePage,
     children: [
       {
@@ -13,10 +13,7 @@ const routes: Routes = [
         loadChildren: () => import('../fiche/fiche.module').then( m => m.FichePageModule)
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: 'demande/fiche'
+    
   }
 ];
 

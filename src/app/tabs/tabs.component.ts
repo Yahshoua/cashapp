@@ -23,17 +23,6 @@ export class TabsComponent implements OnInit {
       })
       this.service.getNotif()
   })
-    Pusher.logToConsole = true;
-          var pusher = new Pusher('cd29f2f1d7ed1ce9bd9c', {
-            cluster: 'eu',
-            encrypted: true
-            //forceTLS: true
-          });
-          var channel = pusher.subscribe(this.chaineNoti);
-            channel.bind('my-event', function(data) {
-             
-              console.log(JSON.stringify(data));
-            });
   }
   ngAfterViewInit() {
     
