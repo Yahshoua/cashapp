@@ -11,8 +11,8 @@ declare var moment, $
 export class NotificationPage implements OnInit {
   notification:any= []
   //signifit un tableau de chaine
-  week: Array<string> = []
-  month: Array<string> = []
+  week: any
+  month: any
   url
   constructor(private service: ServerService,private navCtrl: NavController, private route: ActivatedRoute) { }
 
@@ -47,6 +47,8 @@ export class NotificationPage implements OnInit {
             })
             this.service.getNotif()
             if(this.notification.length>=1) {
+              let tab=[]
+              let tab2=[]
               for(var i=0;i<this.notification.length;i++) {
                 var dates = moment(this.notification[i].createdAt).format('YYYY, MMMM, DDDD')
                 var today= moment().format('YYYY, MMMM, DD')
@@ -56,11 +58,29 @@ export class NotificationPage implements OnInit {
                 var b = moment([dates]);
                 var diff = a.diff(b, 'days')
                 if(diff <=7) {
-                  this.week.push(this.notification[i])
+                  tab.push(this.notification[i])
                 } else {
-                  this.month.push(this.notification[i])
+                  tab2.push(this.notification[i])
                 }
               }  
+              this.week = tab.sort((a, b)=> {
+                if (a.id < b.id ) {
+                      return 1;
+                  }
+                  if (a.id > b.id ) {
+                    return -1;
+                  }
+                  return 0;
+              })
+              this.month = tab2.sort((a, b)=> {
+                if (a.id < b.id ) {
+                return 1;
+                  }
+                  if (a.id > b.id ) {
+                    return -1;
+                  }
+                  return 0;
+              })
             }
             console.log('les notifs ', this.notification, 'les weeks ', this.week)
   }
