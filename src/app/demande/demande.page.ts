@@ -9,7 +9,7 @@ declare var $
   styleUrls: ['./demande.page.scss'],
 })
 export class DemandePage implements OnInit {
-  profil: Array<string>
+  profil: any
   paris: Array<string>
   user: Array<string>
   constructor(private route: ActivatedRoute, private navCtrl: NavController, private service: ServerService) { }
@@ -27,6 +27,14 @@ export class DemandePage implements OnInit {
       console.log('height ', height)
       
     })
+  }
+  getNumero(numero) {
+    if(numero=='' || numero == undefined) {
+      let texte = `${this.profil.nom} n 'a pas donné son numéro`
+      return  texte
+    } else {
+      return numero
+    }
   }
   goChat() {
     this.navCtrl.navigateForward(['chat'], {queryParams: {'profil': JSON.stringify(this.profil), 'user': JSON.stringify(this.user)}})

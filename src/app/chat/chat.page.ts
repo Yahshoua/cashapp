@@ -1,7 +1,7 @@
 import { ServerService } from './../server.service';
-import { NavController } from '@ionic/angular';
+import { NavController, IonContent } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 declare var moment, $, Pusher
 @Component({
@@ -17,6 +17,7 @@ user: any
 chating = []
 channel
 messages
+@ViewChild(IonContent, {'static': true}) content: IonContent;
   constructor(private formBuild: FormBuilder, private routes: ActivatedRoute, private navCtrl: NavController, private service: ServerService) { }
 
   ngOnInit() {
@@ -26,7 +27,9 @@ messages
    console.info('bbb ', h1)
     this.profil = JSON.parse(this.routes.snapshot.queryParams.profil)
     this.user= JSON.parse(this.routes.snapshot.queryParams.user)
-   
+    if(this.routes.snapshot.queryParams.profil !== undefined) {
+      this.content.scrollToBottom(1000);
+    }
     this.service.getChat(this.user.id, this.profil.id_exp).then((e:any)=> {
       if(e.length>=1) {
         this.chaine = e[0].chaine
@@ -46,6 +49,7 @@ messages
       channel.bind('my-event', (data)=> {
         console.log('data pusher', data);
         this.chating.push(data)
+        this.content.scrollToBottom(1000);
       });
     })
     
@@ -66,10 +70,12 @@ messages
     let id_recep = this.profil.id_exp
     let token = this.profil.token
     let dates = moment().format('dd MM.YYYY à HH:mm')
+    let dateMoment = moment().format()
     let message = form.value.message
     let chaine2 = this.profil.chaine_notif
-    this.service.setChat(id_exp, id_recep, message, dates, this.chaine, this.user.nom, this.user.photo, token, this.profil.nom, chaine2)
+    this.service.setChat(id_exp, id_recep, message, dates, this.chaine, this.user.nom, this.user.photo, token, this.profil.nom, chaine2, dateMoment)
     this.form.reset()
+    
   }
   goback() {
     this.navCtrl.back()

@@ -31,9 +31,14 @@ export class TabsComponent implements OnInit {
 
     
     this.service.getNotification().then((e: any)=> {
-      this.service.notifSubscriber.subscribe((res: [])=> {
-        this.notification = res
-        console.log('les notifs ', this.notification)
+      this.service.notifSubscriber.subscribe((res:Array<string>=[])=> {
+        if(res.length>=1) {
+          this.notification = res.filter((e: any)=> {
+          return e.etat == 0
+            })
+          console.log('les notifs ', this.notification)
+        }
+        
       })
       this.service.getNotif()
   })

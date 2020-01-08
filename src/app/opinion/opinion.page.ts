@@ -16,12 +16,14 @@ export class OpinionPage implements OnInit {
   auteur
   participation
   op: any
+  token
   constructor(private formBuild: FormBuilder, private toastCtrl: ToastController, private navParam: NavParams, private service: ServerService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.id = this.navParam.get('idPari');
     this.auteur = this.navParam.get('auteur')
     this.participation = this.navParam.get('participation')
+    this.token = this.navParam.get('token')
     this.formOp = this.formBuild.group({
       opinion: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(15)])],
     })
@@ -52,7 +54,7 @@ export class OpinionPage implements OnInit {
     this.op.status = 0
     this.service.utilisateur.data.opinion = this.op.value.opinion
     this.service.utilisateur.data.status = this.op.value.status
-    this.service.setParieur(this.service.utilisateur.data, parseInt(this.id), date).then((e)=> {
+    this.service.setParieur(this.service.utilisateur.data, parseInt(this.id), date, this.token).then((e)=> {
       console.log('dismissed !')
       this.canMacth= true
       this.service.changeCanbet()

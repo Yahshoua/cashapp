@@ -23,6 +23,7 @@ export class ServerService {
   url8 = this.server2+'/phpcashapp/pusher.php';
   url9 = this.server2+'/phpcashapp/getChat.php';
   url10 = this.server2+'/phpcashapp/setChat.php';
+  url11 = this.server2+'/phpcashapp/changeEtatNotification.php';
   // option = new RequestOptions();
   header = new HttpHeaders({'Content-Type': 'application/json', "Accept": 'application/json'})
   constructor(public http: HttpClient) {
@@ -77,12 +78,25 @@ export class ServerService {
      })
        
   }
-  setChat(idExp, idRecep, message, dates, chaine,nom, photo, token, senderName, chaine2) {
+  changeEtat(id) {
+    $.post(this.url11, {'id': id}).done(function(){
+        console.log('l\'etat a été changé avec succès !')
+    })
+    for(var i=0;i<this.notifications;i++) {
+      if(this.notifications[i]==id) {
+        this.notifications[i].etat=1
+        break
+      }
+    }
+    this.getNotif()
+    console.log('noooo ', this.notifications)
+  }
+  setChat(idExp, idRecep, message, dates, chaine,nom, photo, token, senderName, chaine2, dateMoment) {
       $.ajax({
         method: 'POST',
         url: this.url10,
         dataType: 'json',
-        data: {'idExp': idExp, 'idRecep': idRecep, 'message': message, 'dates': dates, 'chaine': chaine, 'nom': nom, 'photo': photo, 'chaineRecep': chaine2},
+        data: {'idExp': idExp, 'idRecep': idRecep, 'message': message, 'dates': dates, 'chaine': chaine, 'nom': nom, 'photo': photo, 'chaineRecep': chaine2, 'dateMoment': dateMoment},
         success: (res)=>{
           console.log('message envoyé avec success ! ', res)
           this.sendNotification(token, 'Message de '+nom, senderName+', vous avez reçu un message de '+nom)
@@ -210,10 +224,11 @@ export class ServerService {
       })
     }
     async badge(pari) {
-      let e = pari.participants.filter((e: any)=> {
-       let i = parseInt(e.id) ==  this.utilisateur.data.id? true : false
-              console.log('la valuer de i ', i)
-              this.badgeUser = i
+      console.log('le pariii ', pari)
+        let e = pari.participants.find((e: any)=> {
+        let i = e.id_part ==  this.utilisateur.data.id? true : false
+        this.badgeUser = i
+        this.getBadge()
        return i
      })
     }
@@ -227,11 +242,10 @@ export class ServerService {
       }
     }
     // Requete pour ajouter un nouveau parieur en BDD
-    async setParieur(user, id, date) {
+    async setParieur(user, id, date, token) {
       user.id_pari = id
       user.date = date
       user.statu = '0'
-     // fonction qui servira à pusher un parieur.....wait :)
       for(var i=0;i <this.paris.length;i++) {
         if(this.paris[i].id_p == id) {
           this.paris[i].participants.status = 0
@@ -248,6 +262,7 @@ export class ServerService {
               url: this.url5,
               data: user
             }).done(e=> {
+              this.sendNotification(token,'Paticipation', user.nom+' veut participer à ton paris')
               console.log('envoie reussi...')
             }).fail(err=> {
               console.log('erreur lors de l\'envoie', err)

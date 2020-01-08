@@ -4,15 +4,15 @@
     <ion-title style="font-size: 93%;">Chatter avec {{profil.nom}} </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="cnt" style="position: relative"  id="mydiv" >
+<ion-content class="cnt" style="position: relative"  id="mydiv">
   <ion-grid style="margin-top: 12%;" class="mydiv" *ngIf="chating?.length >= 1">
-      <div style="position: absolute;bottom: 0">
+      <div style="position: absolute;bottom: 0;right: 0;
+      left: 0;height: 100%;" id="madiv" #content>
           <ion-item *ngFor="let chat of chating" lines="none" style="background: #ffffffed">
           <ion-avatar [slot]="slot(chat.id_exp)">
             <img src={{chat?.photo}}>
           </ion-avatar>
           <ion-label [ngStyle]="{'text-align': align(chat?.id_exp)}">
-            <h2>{{chat?.nom}}</h2>
             <span style="font-size: 69%;color: gray"> {{chat?.dates}} </span>
             <p>{{chat?.messages}}</p>
           </ion-label>
@@ -24,7 +24,7 @@
 <form [formGroup]="form" class="myform" style="background: #a9a9a914">
   <div class="col-btn">
     <ion-input [(ngModel)]="messages" placeholder="Dites quelque chose à {{profil.nom}}..." formControlName="message"></ion-input>
-      <ion-fab-button slot="end" [disabled]="!form.valid" (click)="send(form)">
+      <ion-fab-button id="btn" slot="end" [disabled]="!form.valid" (click)="send(form)">
         <ion-icon name="send"></ion-icon>
       </ion-fab-button>
   </div>

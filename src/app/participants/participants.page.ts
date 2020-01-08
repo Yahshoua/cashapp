@@ -31,7 +31,6 @@ export class ParticipantsPage implements OnInit {
       console.log('res badge ', e)
     })
       this.service.badgeSubscription.subscribe((res:Boolean)=> {
-        
         this.badge = res
       })
       this.service.getBadge()

@@ -46,7 +46,8 @@ export class ParisdetailPage implements OnInit {
         'idPari': this.id,
         'participation': this.pari.participation,
         'auteur': this.pari.auteur,
-        'canMacth': false
+        'canMacth': false,
+        'token': this.pari.token
       }
     })
     return await modal.present();
