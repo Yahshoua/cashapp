@@ -3,29 +3,35 @@
     <ion-grid >
       <ion-row>
         <ion-col size="12" style="margin-top: 7%;">
-          <p style="text-align: center;color: gray;font-size: 78%">
-            {{profil.nom}} souhaite participer à ton paris <span style="font-family:Oswald">{{paris.titre}}</span>
+          <p style="text-align: center;color: gray;font-size: 83%" [innerHTML]="myText()">
+            
           </p>
         </ion-col>
-          <ion-col size="6" style="text-align: right;">
-            <ion-button color="primary" shape="round">Accepter</ion-button>
+          <ion-col size="12" *ngIf="!demande" style="text-align: center;">
+            <ion-button *ngIf="!follow" (click)="follows()" fill="outline" color="primary" shape="round"><ion-icon slot="start" name="person-add"></ion-icon> Suivre</ion-button>
+            
+            <ion-button class="unfollow" *ngIf="follow" (click)="follows()" fill="outline" shape="round">
+              Ne plus suivre {{profil.nom}}</ion-button>
           </ion-col>
-          <ion-col size="6">
-            <ion-button color="danger" shape="round">Rejeter</ion-button>
+          <ion-col size="6" style="text-align: right;" *ngIf="demande">
+            <ion-button color="primary" shape="round" (click)="reponse('oui')">Accepter</ion-button>
+          </ion-col>
+          <ion-col size="6" *ngIf="demande">
+            <ion-button color="danger" shape="round" (click)="reponse('non')">Rejeter</ion-button>
           </ion-col>
       </ion-row>
     </ion-grid>
   </div>
 <div style="background: rgb(255, 255, 255);padding-left: 4%;padding-right: 4%;" class="col-info">
   <ion-item lines="none">
-    <ion-label style="padding-bottom: 4px;border-bottom: 1px dotted #d6d6d6">
+    <ion-label style="padding-bottom: 4px;border-bottom: 1px dotted #d6d6d6;font-size: 85%;">
       <span> 
         A propos de {{profil.nom}}
       </span>
     </ion-label>
   </ion-item>
   <ion-item lines="none">
-    <ion-label style="padding-bottom: 4px;white-space: inherit;">
+    <ion-label style="padding-bottom: 4px;white-space: inherit;font-size: 85%;">
       <span> 
         Numéro: {{ getNumero(profil.numero)}}
       </span>

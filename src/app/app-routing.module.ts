@@ -96,6 +96,10 @@ const routes: Routes = [
   {
     path: 'chat',
     loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
+  },
+  {
+    path: 'signal',
+    loadChildren: () => import('./signal/signal.module').then( m => m.SignalPageModule)
   }
 ];
 

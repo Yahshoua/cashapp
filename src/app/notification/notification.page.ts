@@ -85,13 +85,13 @@ export class NotificationPage implements OnInit {
             console.log('les notifs ', this.notification, 'les weeks ', this.week)
   }
   getRoute(type, idpari, id, Qid) {
-    console.log(type, idpari, id)
+    console.log(type, 'id pari ='+ idpari, id)
     if(type == 'participation') {
-        this.goTovist(idpari)
+      this.goTovist(idpari)
     } else if(type== 'chat') {
-      this.goChat(id)
+     this.goChat(id)
     }
-    this.service.changeEtat(Qid)
+   this.service.changeEtat(Qid)
 }
   goTovist(id) {
     this.navCtrl.navigateForward(['visitprofil'], {queryParams: {'idpari': id}})

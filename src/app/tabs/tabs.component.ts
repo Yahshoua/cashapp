@@ -26,6 +26,7 @@ export class TabsComponent implements OnInit {
         console.log('notification pusher', data);
         this.notification = data.notifications
         this.service.setNotifications(data.notifications)
+        this.service.getallparis()
         console.log('nouvelles notifs ', this.notification)
       });
 

@@ -11,6 +11,7 @@ export class ServerService {
   auth: boolean
   utilisateur: any
   canBet: Boolean
+  public allusers
   server1 = 'http://localhost'
   server2= 'https://kazimo.ga/cashapp'
   url = this.server2+'/phpcashapp/setParis.php';
@@ -24,6 +25,9 @@ export class ServerService {
   url9 = this.server2+'/phpcashapp/getChat.php';
   url10 = this.server2+'/phpcashapp/setChat.php';
   url11 = this.server2+'/phpcashapp/changeEtatNotification.php';
+  url12 = this.server2+'/phpcashapp/getAllUser.php';
+  url13 = this.server2+'/phpcashapp/responseParieur.php';
+  url14 = this.server2+'/phpcashapp/setFollow.php';
   // option = new RequestOptions();
   header = new HttpHeaders({'Content-Type': 'application/json', "Accept": 'application/json'})
   constructor(public http: HttpClient) {
@@ -34,11 +38,15 @@ export class ServerService {
   canBetSubscription = new Subject();
   badgeSubscription = new Subject();
   notifSubscriber = new Subject();
-  notifications: any
+  notifications: any = []
   chatSubscription = new Subject()
   chat = []
   badgeUser
+  allusersubscription = new Subject()
 
+  getuserSubcription() {
+    this.allusersubscription.next(this.allusers)
+  }
   getChatSubsciption() {
     this.chatSubscription.next(this.chat)
   }
@@ -90,6 +98,39 @@ export class ServerService {
     }
     this.getNotif()
     console.log('noooo ', this.notifications)
+  }
+  getAllUsers() {
+      return new Promise((resolve, reject)=> {
+        $.ajax({
+          method: 'POST',
+          url: this.url12,
+          dataType: 'json'
+        }).done(res=> {
+          this.allusers = res
+          console.log('iiiiiiiiiiiiii ', this.allusers )
+          this.getuserSubcription()
+          resolve(res)
+        }).fail(err=> {
+          reject('erreur lors de la recuperation des users '+ err)
+        })
+      })
+  }
+  responseParieur(id_fol?, id_user?, id_pari?, reponse?) {
+    return new Promise((resolve, reject)=> {
+      $.ajax({
+        method: 'POST',
+        url: this.url13,
+        dataType: 'json',
+        data: {'id_fol': id_fol, 'id_user': id_user,' id_pari': id_pari, reponse:reponse},
+        success: (e)=> {
+          this.getAllUsers()
+          resolve(e)
+        },
+        error: err=> {
+          reject('erreur survenue lors de l envoi de la requete '+ err)
+        }
+      })
+    })
   }
   setChat(idExp, idRecep, message, dates, chaine,nom, photo, token, senderName, chaine2, dateMoment) {
       $.ajax({
@@ -205,11 +246,28 @@ export class ServerService {
               data: {'id_user': id, 'chaine': chaine}
           }).done(rs=> {
             this.notifications = rs.notifications
+            this.getNotif()
             resolve(rs)
           }).fail(err=> {
             reject('une erreur est arrivée durant la recuperation des notifications '+ err)
             this.notifications = []
           })
+      })
+    }
+    //Requete pour follow/unfollow
+    follow(idProfil, idUser) {
+      return new Promise((resolve, reject)=> {
+        $.ajax({
+          method: 'POST',
+          url:this.url14,
+          dataType: 'json',
+          data: {'id_user': idUser, 'id_ab': idProfil }
+        }).done(e=> {
+          resolve(e)
+          this.getAllUsers()
+        }).fail(err=> {
+          reject('erreur lors de la soumission du follower '+ err)
+        })
       })
     }
     setStorage(user) {
@@ -253,7 +311,6 @@ export class ServerService {
           break
         }
       }
-      this.getparis()
       this.badgeUser = true
       this.getBadge()
       return new Promise((res, rej)=> {
@@ -264,6 +321,7 @@ export class ServerService {
             }).done(e=> {
               this.sendNotification(token,'Paticipation', user.nom+' veut participer à ton paris')
               console.log('envoie reussi...')
+              this.getparis()
             }).fail(err=> {
               console.log('erreur lors de l\'envoie', err)
             })

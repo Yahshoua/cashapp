@@ -73,7 +73,9 @@ export class AccueilPage implements OnInit {
   }
   
   ngOnInit() {
-    
+      this.service.getAllUsers().then(e=> {
+        console.log('getAlluers ', e)
+      })
         
         // Return a list of currently configured channels
         this.push.listChannels().then((channels) => console.log('List of channels', channels))

@@ -1,4 +1,5 @@
-import { NavController } from '@ionic/angular';
+import { PopoveruserComponent } from './../popoveruser/popoveruser.component';
+import { NavController, PopoverController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServerService } from './../server.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,21 +10,34 @@ declare var $
   styleUrls: ['./visitprofil.page.scss'],
 })
 export class VisitprofilPage implements OnInit {
-  profil:Array<string>
-  paris:Array<string>
-  constructor(private service: ServerService, private route: ActivatedRoute, private navCtrl: NavController, private routes: Router) { }
+  profil: any
+  paris:any
+  notifs
+  allparis
+  constructor(private service: ServerService, private route: ActivatedRoute, private navCtrl: NavController, private routes: Router, public popoverController: PopoverController) { }
 
   ngOnInit() {
     // let id = this.route.snapshot.queryParams.id
     if(this.route.snapshot.queryParams.idpari !== undefined) {
           let idpari = this.route.snapshot.queryParams.idpari
+        
           this.profil = this.service.notifications.find(e=> {
-          return e.idPari = idpari
+           
+              return e.idPari = idpari
         })
-        this.paris = this.service.paris.find(res=> {
-          return res.id_p = idpari
+        console.log('idPAri ', idpari, ' paris ', this.service.paris)
+        // this.paris = this.service.paris.find(res=> {
+        //   return res.id_p = idpari
+        // })
+         this.service.parisSubscription.subscribe((res: any)=> {
+            
+             let p =  res.find(e=> {
+               return e.id_p == idpari
+             })
+           this.paris = p
         })
-        console.log('notre pari ', this.paris)
+        this.service.getparis()
+        console.log('le pari ', this.paris)
         console.log('profil ', this.profil)
           $('#homes').on('click', ()=> {
             this.navCtrl.navigateBack(['accueil'])
@@ -31,6 +45,19 @@ export class VisitprofilPage implements OnInit {
         this.routes.navigate(['demande'], {relativeTo: this.route, queryParams: {'profil': JSON.stringify(this.profil), 'paris': JSON.stringify(this.paris)}})
     }
     
+  }
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoveruserComponent,
+      event: ev,
+      translucent: true,
+      cssClass: 'popover',
+      componentProps: {
+        'id_user': this.profil.id_exp,
+        'nom_user': this.profil.nom
+      }
+    });
+    return await popover.present();
   }
   goback() {
     this.navCtrl.navigateBack(['notification'])

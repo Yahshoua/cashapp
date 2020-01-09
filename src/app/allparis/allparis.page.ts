@@ -39,6 +39,8 @@ export class AllparisPage implements OnInit {
       console.log('Async operation has ended');
       event.target.complete();
       this.getdata()
+      this.services.getAllUsers()
+      this.services.getNotification()
       toast.present();
     }, 2000);
   }

@@ -237,3 +237,8 @@ ion-label {
 ion-fab-button:focus {
   outline: none !important;
 }
+.popover .popover-content {
+  top: 5% !important;
+    right: 5% !important;
+    left: auto !important;
+}
