@@ -26,7 +26,7 @@ export class InscriptionPage implements OnInit {
     });
     this.formInscription = this.formBuild.group({
       nom: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      email: ['', Validators.compose([Validators.required, Validators.email])],
+      numero: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       type: 'formulaire',
       password: ['', Validators.compose([Validators.required, Validators.minLength(4),Validators.maxLength(10)])],
       password2: ['', Validators.compose([Validators.required, Validators.minLength(4),Validators.maxLength(10)])]
@@ -63,7 +63,7 @@ export class InscriptionPage implements OnInit {
       this.service.setUser(form).then(async (e:any)=> {
         console.log('reponse ', e, 'couleur ', e.couleur)
         if(e.tab == '0') {
-          e.response += '. Confirmez l\'adresse email !'
+          e.response += '. Confirmez votre numéro !'
         } else if (e.tab == '1') {
           e.response += '. Connectez-vous'
         }

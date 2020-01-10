@@ -1,5 +1,6 @@
+import { ServerService } from './../server.service';
 import { Component, OnInit } from '@angular/core';
-import { NavParams, AlertController, PopoverController } from '@ionic/angular';
+import { NavParams, AlertController, PopoverController, NavController } from '@ionic/angular';
 import { MaodalinscriptionPage } from '../maodalinscription/maodalinscription.page';
 
 @Component({
@@ -9,11 +10,15 @@ import { MaodalinscriptionPage } from '../maodalinscription/maodalinscription.pa
 })
 export class PopoveruserComponent implements OnInit {
   nom
-  constructor( private navParam: NavParams,public alertController: AlertController, public popoverController: PopoverController) { }
+  id_user
+  id_victime
+  constructor( private navParam: NavParams,public alertController: AlertController, public popoverController: PopoverController, private navCtrl: NavController, private service: ServerService) { }
 
   ngOnInit() {
     console.log('ID ', this.navParam.get('id_user'), ' nom ', this.navParam.get('nom_user'))
     this.nom = this.navParam.get('nom_user')
+    this.id_user = this.navParam.get('id_user')
+    this.id_victime = this.navParam.get('id_victime')
   }
   async presentAlertPrompt() {
     const alert = await this.alertController.create({
@@ -22,21 +27,21 @@ export class PopoveruserComponent implements OnInit {
         {
           name: 'motif 1',
           type: 'radio',
-          label: 'Cette personne est menteur ',
-          value: 'menteur',
+          label: 'Cette personne est menteur',
+          value: 'Cette personne est menteur',
           checked: true
         },
         {
           name: 'motif 2',
           type: 'radio',
           label: 'Cette personne crée des faux paris',
-          value: 'faux paris'
+          value: 'Cette personne crée des faux paris'
         },
         {
           name: 'radio1',
           type: 'radio',
           label: 'Cette personne m\'a arnaqué',
-          value: 'arnaqueur'
+          value: 'Cette personne m\'a arnaqué'
         }
       ],
       buttons: [
@@ -55,14 +60,30 @@ export class PopoveruserComponent implements OnInit {
           text: 'Confirmer',
           handler: (ev) => {
             console.log('Confirm Ok', ev);
-            this.popoverController.dismiss({
+            this.service.getsignal(this.id_user, this.id_victime, ev).then((e:any)=> {
+              console.log('signale ', e)
+              if(e.etat == 1) {
+                  this.alert(e.motif)
+              }
+            })
+           const pop = this.popoverController.dismiss({
               component : PopoveruserComponent,
               'dismissed': true
-            });
+            })
           }
         }
       ]
   
+    });
+
+    await alert.present();
+  }
+  async alert(messageTxt) {
+    const alert = await this.alertController.create({
+      header: 'Information',
+      subHeader: 'Personne dèjà signalé',
+      message: `Vous avez dèjà signalé ${this.nom} avec le motif suivant: ${messageTxt}`,
+      buttons: ['OK']
     });
 
     await alert.present();

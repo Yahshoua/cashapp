@@ -53,10 +53,17 @@ export class VisitprofilPage implements OnInit {
       translucent: true,
       cssClass: 'popover',
       componentProps: {
-        'id_user': this.profil.id_exp,
-        'nom_user': this.profil.nom
+        'id_victime': this.profil.id_exp,
+        'nom_user': this.profil.nom,
+        'id_user': this.service.utilisateur.data.id
       }
     });
+
+    popover.onDidDismiss().then(e=> {
+       let sign = this.service.signal
+        if(sign==1) return
+     this.navCtrl.navigateForward(['signal'], {queryParams: {'nom': this.profil.nom}})
+    })
     return await popover.present();
   }
   goback() {

@@ -28,6 +28,7 @@ export class ServerService {
   url12 = this.server2+'/phpcashapp/getAllUser.php';
   url13 = this.server2+'/phpcashapp/responseParieur.php';
   url14 = this.server2+'/phpcashapp/setFollow.php';
+  url15 = this.server2+'/phpcashapp/getSignal.php';
   // option = new RequestOptions();
   header = new HttpHeaders({'Content-Type': 'application/json', "Accept": 'application/json'})
   constructor(public http: HttpClient) {
@@ -43,7 +44,7 @@ export class ServerService {
   chat = []
   badgeUser
   allusersubscription = new Subject()
-
+  signal
   getuserSubcription() {
     this.allusersubscription.next(this.allusers)
   }
@@ -98,6 +99,23 @@ export class ServerService {
     }
     this.getNotif()
     console.log('noooo ', this.notifications)
+  }
+  getsignal(user, victime, motif) {
+    return new Promise((resolve, reject)=> {
+      $.ajax({
+        method: 'POST',
+        url: this.url15,
+        dataType: 'json',
+        data: {'id_user': user, 'victime': victime, 'motif': motif},
+        success: (e)=> {
+          resolve(e)
+          this.signal = e.etat
+        },
+        error: (err)=> {
+          reject('erreur lors de la reque de signalement '+ err)
+        }
+      })
+    })
   }
   getAllUsers() {
       return new Promise((resolve, reject)=> {

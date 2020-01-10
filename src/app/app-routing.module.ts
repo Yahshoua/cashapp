@@ -100,6 +100,10 @@ const routes: Routes = [
   {
     path: 'signal',
     loadChildren: () => import('./signal/signal.module').then( m => m.SignalPageModule)
+  },
+  {
+    path: 'explorer',
+    loadChildren: () => import('./explorer/explorer.module').then( m => m.ExplorerPageModule)
   }
 ];
 

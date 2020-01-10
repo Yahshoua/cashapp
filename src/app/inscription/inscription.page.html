@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-icon name="arrow-round-back" (click)="goback()" slot="start" style="font-size: 22px;
     margin: 10px;color: rgb(18, 15, 219)" routerLinkActive="router-link-active"  routerLinkActive="router-link-active" ></ion-icon>
-    <ion-title style="text-align: center;margin-right: 12%;">Inscription par email</ion-title>
+    <ion-title style="text-align: center;margin-right: 12%;">Inscription avec votre Numéro </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,8 +17,8 @@
         <ion-input (ionFocus)="onInputs()" [(ngModel)]="nom" type="text" formControlName="nom" [autofocus] = "!focused"></ion-input>
     </ion-item>
         <ion-item class="myinp">
-              <ion-label position="floating">Email*</ion-label>
-              <ion-input (ionFocus)="onInputs()" [(ngModel)]="email" type="text" formControlName="email" [autofocus] = "!focused"></ion-input>
+              <ion-label position="floating">Numéro de téléphone*</ion-label>
+              <ion-input (ionFocus)="onInputs()" [(ngModel)]="numero" type="number" formControlName="numero" [autofocus] = "!focused"></ion-input>
           </ion-item>
           <ion-item class="myinp">
               <ion-label position="floating">Mot de passe*</ion-label>

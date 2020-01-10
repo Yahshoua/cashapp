@@ -17,6 +17,10 @@ const routes: Routes = [
         {
           path: 'vosparis',
           loadChildren: () => import('../vosparis/vosparis.module').then( m => m.VosparisPageModule)
+        },
+        {
+          path: 'explorer',
+          loadChildren: () => import('../explorer/explorer.module').then( m => m.ExplorerPageModule)
         }
     ]
   },
