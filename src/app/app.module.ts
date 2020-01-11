@@ -1,3 +1,4 @@
+import { ModalsmsPageModule } from './modalsms/modalsms.module';
 
 import { TabsComponent } from './tabs/tabs.component';
 import { OpinionPageModule } from './opinion/opinion.module';
@@ -33,7 +34,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
 @NgModule({
   declarations: [AppComponent, MesparisPage,ParisdetailPage, ProfilPage, DescriptionPage, ParticipantsPage, InvitationsPage],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule, MaodalinscriptionPageModule, OpinionPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule, MaodalinscriptionPageModule, OpinionPageModule, ModalsmsPageModule],
   providers: [
     StatusBar,
     SplashScreen,

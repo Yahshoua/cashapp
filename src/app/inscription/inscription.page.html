@@ -2,12 +2,12 @@
   <ion-toolbar>
     <ion-icon name="arrow-round-back" (click)="goback()" slot="start" style="font-size: 22px;
     margin: 10px;color: rgb(18, 15, 219)" routerLinkActive="router-link-active"  routerLinkActive="router-link-active" ></ion-icon>
-    <ion-title style="text-align: center;margin-right: 12%;">Inscription avec votre Numéro </ion-title>
+    <ion-title style="text-align: center;margin-right: 12%;font-size: 96%;">Inscription avec votre Numéro </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="formInscription" (ngSubmit)="connexion(formInscription.value)">
+  <form [formGroup]="formInscription" (ngSubmit)="confirm(formInscription.value)">
     <div style="margin-top:-10%;padding: 12%;"> 
       <div style="text-align: center;height: 100px;">
             <img src="assets/images/logo_transparent.png" style="width: 99px">

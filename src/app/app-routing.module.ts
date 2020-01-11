@@ -124,6 +124,10 @@ const routes: Routes = [
   {
     path: 'ancien',
     loadChildren: () => import('./ancien/ancien.module').then( m => m.AncienPageModule)
+  },
+  {
+    path: 'modalsms',
+    loadChildren: () => import('./modalsms/modalsms.module').then( m => m.ModalsmsPageModule)
   }
 ];
 

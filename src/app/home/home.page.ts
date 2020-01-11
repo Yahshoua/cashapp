@@ -1,3 +1,4 @@
+import { ModalsmsPage } from './../modalsms/modalsms.page';
 import { ServerService } from './../server.service';
 import { MaodalinscriptionPage } from './../maodalinscription/maodalinscription.page';
 import { Component, OnInit } from '@angular/core';
@@ -31,6 +32,10 @@ export class HomePage implements OnInit {
       email: ['', Validators.compose([Validators.required, Validators.email]) ],
       password: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)])]
     })
+    this.modalCtrl.dismiss({
+      component : ModalsmsPage,
+      'dismissed': true
+    });
   }
   
   connexion(user) {
