@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import  { Subject, from } from 'rxjs';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
-declare var $
+declare var $, moment
 import { resolve } from 'url';
 @Injectable({
   providedIn: 'root'
@@ -220,26 +220,23 @@ export class ServerService {
       data: paris
     }).done(res=> {
       let data = JSON.parse(res)
-      let monpari = data[0]
-      monpari.participants = []
-      this.paris.push(monpari)
-      this.paris = this.paris.sort((a, b)=> {
-        if (a.id_p < b.id_p ) {
-        return 1;
-          }
-          if (a.id_p > b.id_p ) {
-            return -1;
-          }
-          return 0;
+      this.getallparis().then(res=> {
+        console.log('le paris ', this.paris , 'resultat ', data)
       })
       this.getparis()
-      console.log('le paris ', this.paris , 'resultat ', data)
+      
       return this.paris
+    }).fail(err=> {
+      return [{
+        'erreur': err
+      }]
     })
     return await p;
   }
     //requete de creation d'un nouvel user
     async setUser(user) {
+      let dates = moment().format()
+      user.dates = dates
       let k = $.ajax({
         method: 'POST',
         url: this.url2,
@@ -316,6 +313,10 @@ export class ServerService {
             user: this.utilisateur,
             auth: this.auth
       }
+    }
+    logout() {
+      localStorage.removeItem('user');
+      this.auth = false
     }
     // Requete pour ajouter un nouveau parieur en BDD
     async setParieur(user, id, date, token) {

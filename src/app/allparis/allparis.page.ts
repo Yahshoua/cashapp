@@ -16,7 +16,6 @@ export class AllparisPage implements OnInit {
   ngOnInit() {
     this.services.parisSubscription.subscribe((e: any)=>{
       this.paris = e
-      console.log(typeof this.paris)
       console.log('ooook ', this.paris, ' e ', e)
     })
   this.services.getparis()

@@ -7,147 +7,195 @@
 </ion-header>
 
 <ion-content>
-  <div id="pagepiling">
     <form [formGroup]="formPari">
-      <div class="section">
-        <ion-item class="myinput">
-          <ion-label position="floating">Le nom du paris*</ion-label>
-          <ion-input [(ngModel)]="titre" formControlName="titre" type="text" maxlength="12" minlength="4" name="titre" required="true" #myInput></ion-input>
-        </ion-item>
-        <div style="text-align: center;padding: 30%;">
-          <ion-button shape="round" (click)="next1()">
-            suivant
-          <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
-          </ion-button>
-        </div>
-      </div>
-      <div class="section">
-        <ion-item class="myinput">
-          <ion-label position="floating">Determiner la date de début du paris*</ion-label>
-          <ion-datetime [dayShortNames]="customDayShortNames" displayFormat="DDDD DD-MMM-YYYY à H:mm"  placeholder="Choissisez la date et l'heure" dayShortNames="Lun, Mar, Merc, Jeu, Ven, Sa, Dim" dayNames="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche" doneText="Ok" cancelText="Retour" formControlName="debut" [(ngModel)]="debut" monthNames="Janvier, Fevrier, Mars, Avril, Mai, Juin, Juillet, Aout, Septembre, Octobre, Novembre, Decembre" [min]="dates"></ion-datetime>
-        </ion-item>
-          <div style="text-align: center;padding: 30%;">
-            <ion-button shape="round" (click)="next2()">
-              suivant
-            <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
-            </ion-button>
-          </div>
-      </div>
-      <div class="section">
-        <ion-item class="myinput">
-          <ion-label position="floating">Determiner la date de fin du paris*</ion-label>
-          <ion-datetime [dayShortNames]="customDayShortNames" displayFormat="DDDD DD-MMM-YYYY à H:mm"  placeholder="Choissisez la date et l'heure de fin" dayShortNames="Lun, Mar, Merc, Jeu, Ven, Sa, Dim" dayNames="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche" doneText="Ok" cancelText="Retour" formControlName="fin" [(ngModel)]="fin" monthNames="Janvier, Fevrier, Mars, Avril, Mai, Juin, Juillet, Aout, Septembre, Octobre, Novembre, Decembre" [min]="minFin"></ion-datetime>
-        </ion-item>
-          <div style="text-align: center;padding: 30%;">
-            <ion-button shape="round" (click)="next3()">
-              suivant
-            <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
-            </ion-button>
-          </div>
-
-      </div>
-      <div class="section">
-            <ion-row>
-                <ion-col size="8">
-                  <ion-item class="myinput">
-                    <ion-label position="floating">Prix du gagnant*</ion-label>
-                    <ion-input [(ngModel)]="prix" formControlName="prix" type="number" maxlength="12" minlength="4" name="titre" required="true"></ion-input>
-                  </ion-item>
-                </ion-col>
-                <ion-col size="4" style="margin-top: 2%;display: flex">
-                    <span style="    text-align: left;
-                    margin: auto;
-                    float: left;">Fcfa</span>
-                </ion-col>
-            </ion-row>
-         
-          <div style="text-align: center;padding: 30%;">
-            <ion-button shape="round" (click)="next4()">
-              suivant
-            <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
-            </ion-button>
-          </div>
-      </div>
-      <div class="section" style="display: grid;">
-        <div style="border-bottom: 1px solid #80808014;">
-          <p class="text">
-            Important: La participation c'est la somme que chaque parieur doit vous donner avant qu'il ne participe à votre paris.
-          </p>
-        </div>
-        <ion-row style="margin-top: 22%;">
-            <ion-col size="8">
+      <ion-slides (ionSlideNextEnd)="finish()" pager="false" [options]="slideOpts" class="swiper-container" #loopSlider>
+        
+        <ion-slide>
+          <div style="width: 100%;margin-top: 50%">
               <ion-item class="myinput">
-                <ion-label position="floating">Participation*</ion-label>
-                <ion-input [(ngModel)]="participation" formControlName="participation" type="number" maxlength="12" minlength="4" name="participation" required="true"></ion-input>
+                <ion-label position="floating">Le nom du paris*</ion-label>
+                <ion-input [(ngModel)]="titre" formControlName="titre" type="text" minlength="4" name="titre" required="true" #myInput></ion-input>
               </ion-item>
-            </ion-col>
-            <ion-col size="4" style="margin-top: 2%;display: flex">
-                <span style="    text-align: left;
-                margin: auto;
-                float: left;">Fcfa</span>
-            </ion-col>
-        </ion-row>
-     
-      <div style="text-align: center;padding: 27%;">
-        <ion-button shape="round" (click)="next5()">
-          suivant
-        <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
-        </ion-button>
-      </div>
-  </div>
+              <div style="text-align: center;padding: 30%;">
+                <ion-button shape="round" (click)="next1()">
+                  suivant
+                <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+                </ion-button>
+              </div>
+          </div>
+          
+        </ion-slide>
+        <ion-slide style="display: grid;">
+          <ion-item lines="full" class="myitem">
+            <ion-label>
+              <p>Choisissez un thème specifique à votre paris</p>
+            </ion-label>
+          </ion-item>
+          <div style="width: 100%;margin-top: 40%">
+              <ion-grid>
+                  <ion-row>
+                    <ion-col size="6">
+                      <ion-card (click)="choice('sport')">
+                        <img src="../assets/images/box.png" id="img1">
+                        <ion-card-header>
+                          <ion-card-subtitle>Paris sportif</ion-card-subtitle>
+                          <ion-card-title style="font-size: 83%;">Faites un paris concernant le sport</ion-card-title>
+                        </ion-card-header>
+
+                      </ion-card>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-card (click)="choice('divers')">
+                        <img src="../assets/images/3.png"  id="img2">
+                        <ion-card-header>
+                          <ion-card-subtitle>Paris divers</ion-card-subtitle>
+                          <ion-card-title style="font-size: 83%;">Faites un paris d'un sujet divers</ion-card-title>
+                        </ion-card-header>
+                       
+                      </ion-card>
+                    </ion-col>
+                  </ion-row>
+              </ion-grid>
+          </div>
+          
+        </ion-slide>
+        <ion-slide>
+          <div style="width: 100%;margin-top: 50%">
+            <ion-item class="myinput">
+              <ion-label position="floating">Determiner la date de début du paris*</ion-label>
+              <ion-datetime [dayShortNames]="customDayShortNames" displayFormat="DDDD DD-MMM-YYYY à H:mm"  placeholder="Choissisez la date et l'heure" dayShortNames="Lun, Mar, Merc, Jeu, Ven, Sa, Dim" dayNames="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche" doneText="Ok" cancelText="Retour" formControlName="debut" [(ngModel)]="debut" monthNames="Janvier, Fevrier, Mars, Avril, Mai, Juin, Juillet, Aout, Septembre, Octobre, Novembre, Decembre" [min]="dates"></ion-datetime>
+            </ion-item>
+              <div style="text-align: center;padding: 30%;">
+                <ion-button shape="round" (click)="next2()">
+                  suivant
+                <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+                </ion-button>
+              </div>
+          </div>
+          
+        </ion-slide>
+        <ion-slide>
+          <div style="width: 100%;margin-top: 50%">
+              <ion-item class="myinput">
+                <ion-label position="floating">Determiner la date de fin du paris*</ion-label>
+                <ion-datetime [dayShortNames]="customDayShortNames" displayFormat="DDDD DD-MMM-YYYY à H:mm"  placeholder="Choissisez la date et l'heure de fin" dayShortNames="Lun, Mar, Merc, Jeu, Ven, Sa, Dim" dayNames="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche" doneText="Ok" cancelText="Retour" formControlName="fin" [(ngModel)]="fin" monthNames="Janvier, Fevrier, Mars, Avril, Mai, Juin, Juillet, Aout, Septembre, Octobre, Novembre, Decembre" [min]="minFin"></ion-datetime>
+              </ion-item>
+                <div style="text-align: center;padding: 30%;">
+                  <ion-button shape="round" (click)="next3()">
+                    suivant
+                  <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+                  </ion-button>
+                </div>  
+          </div>
+          
+        </ion-slide>
+        <ion-slide>
+          <div style="width: 100%;margin-top: 50%">
+              <ion-row>
+                  <ion-col size="8">
+                    <ion-item class="myinput">
+                      <ion-label position="floating">Prix du gagnant*</ion-label>
+                      <ion-input [(ngModel)]="prix" formControlName="prix" type="number" maxlength="12" minlength="4" name="titre" required="true"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="4" style="margin-top: 2%;display: flex">
+                      <span style="    text-align: left;
+                      margin: auto;
+                      float: left;">Fcfa</span>
+                  </ion-col>
+              </ion-row>
+
+                <div style="text-align: center;padding: 30%;">
+                  <ion-button shape="round" (click)="next4()">
+                    suivant
+                  <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+                  </ion-button>
+                </div>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div style="width: 100%;">
+                <div style="border-bottom: 1px solid #80808014;">
+                          <p class="text" style="font-size: 71%;">
+                            Important: La participation c'est la somme que chaque parieur doit vous donner avant qu'il ne participe à votre paris.
+                          </p>
+                        </div>
+                        <ion-row style="margin-top: 32%;">
+                            <ion-col size="8">
+                              <ion-item class="myinput">
+                                <ion-label position="floating">Participation*</ion-label>
+                                <ion-input [(ngModel)]="participation" formControlName="participation" type="number" maxlength="12" minlength="4" name="participation" required="true"></ion-input>
+                              </ion-item>
+                            </ion-col>
+                            <ion-col size="4" style="margin-top: 2%;display: flex">
+                                <span style="    text-align: left;
+                                margin: auto;
+                                float: left;">Fcfa</span>
+                            </ion-col>
+                        </ion-row>
+                  
+                        <div style="text-align: center;padding: 27%;">
+                          <ion-button shape="round" (click)="next5()">
+                            suivant
+                          <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+                          </ion-button>
+                        </div>
+
+          </div>
+            
+        </ion-slide>
+            <ion-slide>
+              <div style="width: 100%;margin-top: 50%">
+                  <ion-item class="myinput">
+                    <ion-label position="floating">Description</ion-label>
+                    <ion-textarea [(ngModel)]="description" formControlName="description" placeholder="en quoi consiste votre pari ?" required="true"></ion-textarea>
+                  </ion-item>
+                  <div style="text-align: center;padding: 30%;">
+                    <ion-button shape="round" (click)="next6()">
+                      Terminer
+                    </ion-button>
+                  </div>
+              </div>
+            </ion-slide>
+            <ion-slide>
+              <div style="width: 100%;">
+                  <div class="col-suc">
+                        <ion-item lines="full" class="myinput">
+                          <ion-label>
+                            <ion-icon name="checkmark-circle-outline" color="succes"></ion-icon> <span>Bravo. Vous avez crée un paris !</span>
+                          </ion-label>
+                        </ion-item>
+                        <ion-item lines="full" class="myinput" style="display: grid;">
+                          <ion-label style="display: flex;">
+                            <i class="fas fa-exclamation-circle" style="font-size: 41px;color: #0e0d0d;"></i> 
+                            <div class="div-warn">
+                              <h2>Attention !</h2>
+                              <p> Si vous crée un paris à des fins abusives, votre compte sera definitivement supprimé de l'application. Lisez notre charte d'utilisation afin de vous informer des conditions d'utilisation de Cash app  </p>
+                              <ion-button [routerLink]="['/conditions']" routerLinkActive="router-link-active" >Lire la charte</ion-button>
+                            </div>
+                          </ion-label>
+                        </ion-item>
+                        <ion-item lines="full" class="myinput" style="display: grid;">
+                          <ion-label style="display: flex;">
+                            <i class="fas fa-edit" style="font-size: 41px;color: #0e0d0d;"></i>
+                            <div class="div-warn">
+                              <h2>Editer votre pari !</h2>
+                              <p> Votre paris desormais visible sur Cash app. Vous pouvez modifier les confidentialités de votre statut afin de limiter les accessibilités</p>
+                              <ion-button (click)="gotoEdite()">Editer mon paris</ion-button>
+                            </div>
+                          </ion-label>
+                        </ion-item>
+                    </div>
+              </div>
+            </ion-slide>
+      </ion-slides>
+     <!-- * 
       <div class="section">
-        <ion-item class="myinput">
-          <ion-label position="floating">Description</ion-label>
-          <ion-textarea [(ngModel)]="description" formControlName="description" placeholder="en quoi consiste votre pari ?" required="true"></ion-textarea>
-        </ion-item>
-        <div style="text-align: center;padding: 30%;">
-          <ion-button shape="round" (click)="next6()">
-            Terminer
-          </ion-button>
-        </div>
+        
       </div>
       <div class="section" style="display: grid;">
-        <div class="col-suc">
-          <ion-item lines="full" class="myinput">
-            <ion-label>
-              <ion-icon name="checkmark-circle-outline" color="succes"></ion-icon> <span>Bravo. Vous avez crée un paris !</span>
-            </ion-label>
-          </ion-item>
-          <ion-item lines="full" class="myinput" style="display: grid;">
-            <ion-label style="display: flex;">
-              <i class="fas fa-exclamation-circle" style="font-size: 41px;color: #0e0d0d;"></i> 
-              <div class="div-warn">
-                <h2>Attention !</h2>
-                <p> Si vous crée un paris à des fins abusives, votre compte sera definitivement supprimé de l'application. Lisez notre charte d'utilisation afin de vous informer des conditions d'utilisation de Cash app  </p>
-                <ion-button>Lire la charte</ion-button>
-              </div>
-            </ion-label>
-          </ion-item>
+        
         </div>
-        <!-- <div style="padding-top: 7%;">
-          <ion-item lines="none" class="myinput">
-            <ion-label class="succ">
-              <i class="fas fa-user-plus"></i>
-              <span> inviter les gens à relever votre paris </span>
-            </ion-label>
-          </ion-item>
-          <ion-item lines="none" class="myinput">
-            <ion-label>
-              Item
-            </ion-label>
-          </ion-item>
-          <ion-item lines="none" class="myinput">
-            <ion-label>
-              Item
-            </ion-label>
-          </ion-item>
-          <ion-item lines="none" class="myinput">
-            <ion-label>
-              Item
-            </ion-label>
-          </ion-item> 
-        </div> -->
-      </div>
+      *</div> -->
   </form>
-	</div>
 </ion-content>

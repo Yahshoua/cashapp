@@ -1,0 +1,17 @@
+<ion-content>
+
+  <div *ngIf="parieurs?.length <= 0" style="display: flex;margin-top: 50%">
+    <p class="monp">
+      Il n y a pas de personne inscrite plus de 7 jours. Peut-etre que tous les membres ce sont inscris il y a moins de 7 jours pour le moment.
+    </p>
+  </div>
+  <ion-item *ngFor="let item of parieurs" class="myitem">
+      <ion-avatar slot="start">
+        <img src={{item?.photo}}>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{item.nom}}</h2>
+      </ion-label>
+      <ion-button slot="end" color="primary"  (click)="follow(item.id)">Suivre</ion-button>
+  </ion-item>
+</ion-content>

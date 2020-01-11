@@ -7,8 +7,9 @@
 </div>
 <ion-grid style="margin-top: 5%;" *ngFor="let pari of paris">
   <ion-row>
-      <ion-col size="12" class="col-name">
+      <ion-col size="12" class="col-name" style="padding-bottom: 0;">
          <h2> {{pari.titre }} </h2>
+         <ion-badge color="light" style="font-size: 62%;">N o v i c e</ion-badge>
       </ion-col>
       <ion-col size="12" class="pari-item">
         <ion-row>
@@ -19,7 +20,7 @@
           </ion-col>
           <ion-col size="3" class="col-item">
                    <div style="font-size: 14px;height: 0">Début</div>
-                   <p style="font-size: 13px;"><strong> {{dateParse(debut)}} </strong></p>
+                   <p style="font-size: 65%;"><strong> {{dateParse(debut)}} </strong></p>
             </ion-col>
             <ion-col size="3" class="col-item">
               <div style="font-size: 14px;

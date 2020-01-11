@@ -1,0 +1,17 @@
+<ion-content>
+
+  <div *ngIf="parieurs?.length <= 0" style="display: flex;margin-top: 50%">
+    <p style="margin: auto;color: gray;font-size: 80%;text-align: center">
+      Il n y a pas de personne inscrite ces 7 derniers jours
+    </p>
+  </div>
+  <ion-item *ngFor="let item of parieurs" class="myitem">
+      <ion-avatar slot="start">
+        <img src={{item?.photo}}>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{item.nom}}</h2>
+      </ion-label>
+      <ion-button slot="end" color="primary" (click)="follow(item.id)">Suivre</ion-button>
+  </ion-item>
+</ion-content>

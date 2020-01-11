@@ -43,6 +43,8 @@ export class VisitprofilPage implements OnInit {
             this.navCtrl.navigateBack(['accueil'])
           })
         this.routes.navigate(['demande'], {relativeTo: this.route, queryParams: {'profil': JSON.stringify(this.profil), 'paris': JSON.stringify(this.paris)}})
+    } else {
+      this.profil = JSON.parse(this.route.snapshot.queryParams.profil)
     }
     
   }
@@ -67,6 +69,6 @@ export class VisitprofilPage implements OnInit {
     return await popover.present();
   }
   goback() {
-    this.navCtrl.navigateBack(['notification'])
+    this.navCtrl.back()
   }
 }

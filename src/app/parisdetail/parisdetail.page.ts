@@ -20,14 +20,18 @@ export class ParisdetailPage implements OnInit {
   participation
   @Input() canMacth: boolean
   @Input() closed: any;
+  type: any = ''
   constructor(public route: ActivatedRoute, public service: ServerService, public navCtrl: NavController, public router: Router, private location: Location, private alertController: AlertController, public toastController: ToastController, private modalCtrl: ModalController) { }
   parseDate(date) {
     moment().locale('fr')
     return moment(date).format('DD-MM-YY')
   }
   goback() {
+    if(this.route.snapshot.queryParams.type !== undefined) {
+        this.type = this.route.snapshot.queryParams.type
+    }
     this.navCtrl.navigateBack([this.prevUrl, { animated: true,
-      animationDirection: 'back'}])
+      animationDirection: 'back'}], {queryParams: {type: this.type}})
   }
   godesc() {
     this.router.navigate(['parisdetail',this.id, {outlets: {'outlet2': ['description']}}], { queryParams: { id: this.id } })

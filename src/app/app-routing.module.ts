@@ -104,6 +104,26 @@ const routes: Routes = [
   {
     path: 'explorer',
     loadChildren: () => import('./explorer/explorer.module').then( m => m.ExplorerPageModule)
+  },
+  {
+    path: 'category',
+    loadChildren: () => import('./category/category.module').then( m => m.CategoryPageModule)
+  },
+  {
+    path: 'parieurs',
+    loadChildren: () => import('./parieurs/parieurs.module').then( m => m.ParieursPageModule)
+  },
+  {
+    path: 'nouveau',
+    loadChildren: () => import('./nouveau/nouveau.module').then( m => m.NouveauPageModule)
+  },
+  {
+    path: 'professionnels',
+    loadChildren: () => import('./professionnels/professionnels.module').then( m => m.ProfessionnelsPageModule)
+  },
+  {
+    path: 'ancien',
+    loadChildren: () => import('./ancien/ancien.module').then( m => m.AncienPageModule)
   }
 ];
 

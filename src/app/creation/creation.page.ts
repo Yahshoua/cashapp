@@ -2,7 +2,7 @@ import { ServerService } from './../server.service';
 import { NavController, ToastController, AlertController } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-declare var $, moment
+declare var $, moment, Swiper
 @Component({
   selector: 'app-creation',
   templateUrl: './creation.page.html',
@@ -10,6 +10,7 @@ declare var $, moment
 })
 export class CreationPage implements OnInit {
   @ViewChild('myInput', {static: true}) myInput;
+  @ViewChild('loopSlider', {static: true}) loopSlider;
   formPari: FormGroup;
   customPickerOptions: any;
   dates
@@ -21,30 +22,42 @@ export class CreationPage implements OnInit {
   utilisateur: any
   formulaire: any
   participation = ''
+  slideOpts
   customDayShortNames = ['s\u00f8n', 'man', 'tir', 'ons', 'tor', 'fre', 'l\u00f8r'];
+  paris
+  category
   constructor(public navCtrl: NavController, public formBuild: FormBuilder, public toastController: ToastController, public alertController: AlertController, public service: ServerService) { }
 
   titre: String = ''
   messages: String
   ngOnInit() {
+      this.slideOpts = {
+        initialSlide: 0,
+        speed: 400,
+        pager: false,
+        swipeBackEnabled: false
+      };
+    // console.log('swiper ', swiper) 
+    this.loopSlider.lockSwipes(true)    
     this.dates = moment().format("YYYY-MM-DD") 
     console.log('date ', this.dates)
      this.formPari = this.formBuild.group({
-      titre: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)])],
+      titre: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(30)])],
       debut: ['', Validators.required],
       fin: ['', Validators.required],
       prix: ['', Validators.required],
       participation: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      category: ['', Validators.required]
     })
-    $('#pagepiling').pagepiling({
-      direction: 'horizontal',
-      navigation: false,
-      scrollingSpeed: 300,
-      keyboardScrolling: false,
-      sectionsColor: ['#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2']
-    });
-    $.fn.pagepiling.setAllowScrolling(false);
+    // $('#pagepiling').pagepiling({
+    //   direction: 'horizontal',
+    //   navigation: false,
+    //   scrollingSpeed: 300,
+    //   keyboardScrolling: false,
+    //   sectionsColor: ['#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2']
+    // });
+    // $.fn.pagepiling.setAllowScrolling(false);
   }
   async next2() {
     console.log('debut ', this.debut , 'date value ', this.formPari.value, 'parseDate ',moment(this.debut).format("DD-MM-YY"))
@@ -59,7 +72,8 @@ export class CreationPage implements OnInit {
     if(this.debut.length <= 0 || this.debut.length <= 3 || this.debut == undefined) {
       toast.present();
           } else {
-          $.fn.pagepiling.moveTo(3);
+            this.loopSlider.lockSwipes(false)
+            this.loopSlider.slideNext()
       }
   }
   async next3() {
@@ -73,7 +87,8 @@ export class CreationPage implements OnInit {
     if(this.fin.length <= 0 || this.fin.length <= 3 || this.fin == undefined) {
       toast.present();
           } else {
-          $.fn.pagepiling.moveTo(4);
+            this.loopSlider.lockSwipes(false)
+            this.loopSlider.slideNext()
       }
   }
   async next4() {
@@ -87,7 +102,8 @@ export class CreationPage implements OnInit {
     if(this.prix.length <= 0 || this.prix.length <= 3 || this.prix == undefined) {
       toast.present();
           } else {
-          $.fn.pagepiling.moveTo(5);
+            this.loopSlider.lockSwipes(false)
+            this.loopSlider.slideNext()
       }
   }
   async next5() {
@@ -101,7 +117,8 @@ export class CreationPage implements OnInit {
     if(this.participation.length <= 0 || this.participation.length <= 3 || this.participation == undefined) {
       toast.present();
           } else {
-          $.fn.pagepiling.moveTo(6);
+            this.loopSlider.lockSwipes(false)
+            this.loopSlider.slideNext()
       }
   }
   async next6() {
@@ -132,8 +149,10 @@ export class CreationPage implements OnInit {
             var date1 = moment(this.formPari.value.debut).format('DD-MM-YYYY')
             var date2 = moment(this.formPari.value.fin).format('DD-MM-YYYY')
             console.log('date debut parsé ', date1)
-            $.fn.pagepiling.moveTo(7);
+            this.loopSlider.lockSwipes(false)
+             this.loopSlider.slideNext();
             console.log(this.formPari.value)
+            this.formPari.value.category = this.category
             this.formulaire = this.formPari
             this.formulaire.value.id = this.utilisateur.id
             this.formulaire.value.auteur = this.utilisateur.nom
@@ -147,12 +166,17 @@ export class CreationPage implements OnInit {
             this.formulaire.value.participants = tab
             console.log('formulaire à send ', this.formulaire.value)
             this.service.setPari(this.formPari.value).then((res:any)=> {
-              console.log('resultait ', res)
+              console.log('resultait ', JSON.parse(res))
+              let resultat = JSON.parse(res)
+              this.paris = resultat[0]
             }).catch(async(err)=> {
               console.log('erreur ', err)
               await alert.present();
             })
       }
+  }
+  gotoEdite() {
+      this.navCtrl.navigateForward(['editer'], {queryParams: {'id': this.paris.id_p}})
   }
   async next1() {
     console.log(this.titre)
@@ -168,8 +192,21 @@ export class CreationPage implements OnInit {
     if(this.titre.length <= 0 || this.titre.length <= 3 || this.titre == undefined) {
           toast.present();
     } else {
-      $.fn.pagepiling.moveTo(2);
+     // $.fn.pagepiling.moveTo(2);
+     this.loopSlider.lockSwipes(false)
+     this.loopSlider.slideNext()
     }
+  }
+  choice(choice) {
+      this.category = choice
+      console.log('category ', choice, 'Form ', this.formPari.value)
+      setTimeout(()=> {
+        this.loopSlider.lockSwipes(false)
+        this.loopSlider.slideNext()
+      }, 1000)
+  }
+  finish() {
+    this.loopSlider.lockSwipes(true)
   }
   goback() {
     this.navCtrl.back({ animated: true,

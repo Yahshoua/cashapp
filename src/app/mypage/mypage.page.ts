@@ -43,4 +43,10 @@ export class MypagePage implements OnInit {
     this.navCtrl.navigateBack(this.url, { animated: true,
       animationDirection: 'back'})
   }
+  logout() {
+      this.service.logout()
+      setTimeout(()=> {
+          this.navCtrl.navigateBack(['home'])
+      }, 1000)
+  }
 }

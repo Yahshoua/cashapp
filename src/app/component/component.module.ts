@@ -1,3 +1,4 @@
+import { TabsparieurComponent } from './../tabsparieur/tabsparieur.component';
 import { TabsProfilComponent } from './../tabs-profil/tabs-profil.component';
 import { TabsComponent } from './../tabs/tabs.component';
 import { TestComponent } from './../test/test.component';
@@ -6,9 +7,9 @@ import { IonicModule } from "@ionic/angular";
 import { CommonModule } from '@angular/common';
 import { PopoveruserComponent } from './../popoveruser/popoveruser.component';
 @NgModule({
-    declarations: [TabsComponent, TestComponent, TabsProfilComponent, PopoveruserComponent],
+    declarations: [TabsComponent, TestComponent, TabsProfilComponent, PopoveruserComponent, TabsparieurComponent],
     imports: [IonicModule, CommonModule],
-    exports: [TabsComponent, TabsProfilComponent],
+    exports: [TabsComponent, TabsProfilComponent, TabsparieurComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })

@@ -64,15 +64,20 @@ ion-label {
 .col-item span:first-of-type {
     font-size: small
 }
-.col-item span, strong {
+.col-item span {
     font-family: 'ubuntu';
     font-size: 71% !important;
+}
+.col-item .strong {
+  font-size: 80% !important;
 }
 .pari-item {
     background-color: #fff;
     border-radius: 5px;
     padding-top: 5px;
-    height: 65px;
+    height: 65px !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,.12);
+    padding-bottom: 65px !important;
 }
 .plus {
     color: blue;
