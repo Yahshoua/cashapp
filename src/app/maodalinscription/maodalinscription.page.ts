@@ -1,3 +1,5 @@
+import { Push } from '@ionic-native/push/ngx';
+import { NavController, ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./maodalinscription.page.scss'],
 })
 export class MaodalinscriptionPage implements OnInit {
-
-  constructor() { }
+  constructor(private navCtrl: NavController, private modalCtrl: ModalController) { }
 
   ngOnInit() {
   }
-
+  inscSocial(texte) {
+    this.modalCtrl.dismiss({
+      component : [MaodalinscriptionPage],
+      componentProps: {'etat': texte},
+      'dismissed': true
+    });
+  }
 }

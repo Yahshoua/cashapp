@@ -1,6 +1,5 @@
+import { InscriptionPageModule } from './inscription/inscription.module';
 import { ModalsmsPageModule } from './modalsms/modalsms.module';
-
-import { TabsComponent } from './tabs/tabs.component';
 import { OpinionPageModule } from './opinion/opinion.module';
 import { GuardhomeService } from './guardhome.service';
 import { GuardService } from './guard.service';
@@ -9,7 +8,7 @@ import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-import { IonicModule, IonicRouteStrategy, PopoverController } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, PopoverController, NavParams } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
@@ -30,11 +29,10 @@ import { SMS } from '@ionic-native/sms/ngx';
 import { MenuController } from '@ionic/angular';
 import { MypagePage } from './mypage/mypage.page';
 import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
-import { FCM } from '@ionic-native/fcm/ngx';
 @NgModule({
   declarations: [AppComponent, MesparisPage,ParisdetailPage, ProfilPage, DescriptionPage, ParticipantsPage, InvitationsPage],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule, MaodalinscriptionPageModule, OpinionPageModule, ModalsmsPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule, MaodalinscriptionPageModule, OpinionPageModule, ModalsmsPageModule, InscriptionPageModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -47,7 +45,6 @@ import { FCM } from '@ionic-native/fcm/ngx';
     SMS,
     MenuController,
     Push,
-    FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -14,7 +14,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  email
+  numero
   password;
   focused: boolean;
   userData
@@ -29,7 +29,7 @@ export class HomePage implements OnInit {
 
    ngOnInit() {
     this.formConnexion = this.formBuild.group({
-      email: ['', Validators.compose([Validators.required, Validators.email]) ],
+      numero: ['', Validators.compose([Validators.required]) ],
       password: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)])]
     })
     this.modalCtrl.dismiss({
@@ -67,6 +67,14 @@ export class HomePage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: MaodalinscriptionPage,
       cssClass: 'my-custom-modal-css'
+    })
+    modal.onDidDismiss().then(e=> {
+      let etat = event.detail.data.componentProps.etat
+      if(etat == 'facebook') {
+          this.facebook()
+      } else if(etat == 'google') {
+        this.twiter()
+      }
     })
     return await modal.present();
   }

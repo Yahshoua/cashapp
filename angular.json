@@ -49,6 +49,9 @@
               },
               {
                 "input": "src/assets/css/Chart.css"
+              },
+              {
+                "input": "node_modules/flag-icon-css/css/flag-icon.css"
               }
             ],
             "scripts": [

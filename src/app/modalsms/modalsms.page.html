@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>modalsms</ion-title>
+    <ion-icon name="close-circle" slot="start" style="font-size: 22px;
+    margin: 10px;color: #7f8184;top: 0;" (click)="goback(false)"></ion-icon>
+    <ion-title style="font-size: 80%">  Code de confirmation</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="col-confirm">
+    <p style="text-align: center;font-size: 80%;font-size: 84%;
+    margin-top: 20%;color: gray;">Entrez le code reçu par sms au {{indicatif}} {{ numero }}</p>
+    <div style="text-align: center;"> {{timer}} </div>
+      <div style="display: flex;height: 80%;margin-top: 29%">
+        <div style="margin: auto;display: grid">
+          <ion-item>
+              <ion-input placeholder="Entrez le code secret" (ionInput)="type()"></ion-input>
+          </ion-item>
+            <div style="text-align: center;margin-top: 8%;">
+                <ion-button (click)="resends()" shape="round" [disabled]="!resend">Renvoyer le code</ion-button>
+            </div>
+        </div>
+        
+      </div>
+  </div>
 </ion-content>
+

@@ -1,9 +1,9 @@
 import { ModalsmsPage } from './../modalsms/modalsms.page';
 import { ServerService } from './../server.service';
-import { NavController, ModalController, AlertController,ToastController  } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { NavController, ModalController, AlertController,ToastController, NavParams } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MaodalinscriptionPage } from '../maodalinscription/maodalinscription.page';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, ValidatorFn } from '@angular/forms';
 import { Sim } from '@ionic-native/sim/ngx';
 @Component({
   selector: 'app-inscription',
@@ -11,6 +11,7 @@ import { Sim } from '@ionic-native/sim/ngx';
   styleUrls: ['./inscription.page.scss'],
 })
 export class InscriptionPage implements OnInit {
+  @ViewChild('myselect', {'static': true}) select1
   formInscription: FormGroup
   password: ''
   password2: ''
@@ -19,29 +20,24 @@ export class InscriptionPage implements OnInit {
   text = 'password'
   eye = 'eye-off'
   text2 = 'password'
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController,public formBuild: FormBuilder, private service: ServerService, private alertCtrl: AlertController, private toastCtrl: ToastController,private sim: Sim) {}
+  pays
+  flag = 'ga'
+  indicatif= '+241'
+  numero: ''
+  modal
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController,public formBuild: FormBuilder, private service: ServerService, private alertCtrl: AlertController, private toastCtrl: ToastController,private sim: Sim, public alertController: AlertController, public toastController: ToastController) {}
 
   ngOnInit() {
+    this.pays = this.service.countrycode
+    console.log('pays ', this.pays)
     this.modalCtrl.dismiss({
       component : [MaodalinscriptionPage, ModalsmsPage],
       'dismissed': true
     });
-    this.sim.getSimInfo().then(
-      (info) => console.log('Sim info: ', info),
-      (err) => console.log('Unable to get sim info: ', err)
-    );
-    
-    this.sim.hasReadPermission().then(
-      (info) => console.log('Has permission: ', info)
-    );
-    
-    this.sim.requestReadPermission().then(
-      () => console.log('Permission granted'),
-      () => console.log('Permission denied')
-    );
+  
     this.formInscription = this.formBuild.group({
       nom: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      numero: ['', Validators.compose([Validators.required, Validators.minLength(6)]) ],
+      numero: ['', Validators.compose([Validators.required,Validators.minLength(6)]) ],
       type: 'formulaire',
       password: ['', Validators.compose([Validators.required, Validators.minLength(4),Validators.maxLength(10)])],
       password2: ['', Validators.compose([Validators.required, Validators.minLength(4),Validators.maxLength(10)])]
@@ -50,6 +46,37 @@ export class InscriptionPage implements OnInit {
       validator: this.passwords.bind(this)
     }
     )
+   
+  }
+  ionViewWillEnter(){
+    
+  }
+  openselect() {
+    this.select1.open()
+  }
+  async checkLimit(number) {
+    let regExp = /^\d+$/
+
+    if (regExp.test(number)) {
+      console.log('valide')
+        this.confirm()
+        return true
+    }
+    const toast = await this.toastController.create({
+      message: 'Votre numéro de tel est incorrecte',
+      position: 'top',
+      color: 'danger',
+      duration: 4000
+    });
+    toast.present();
+    return null;
+  }
+  getSelect() {
+    let obj: any = event
+    this.flag = (obj.detail.value.flag).toLowerCase()
+    this.indicatif = obj.detail.value.indicatif
+    console.log('obj ', obj ,'flag ', this.flag , 'ind ', this.indicatif)
+
   }
   goback() {
     this.navCtrl.navigateBack('/home', {queryParams: {'id': 0}} )
@@ -75,18 +102,51 @@ export class InscriptionPage implements OnInit {
   }
   async confirm() {
     console.log(this.formInscription)
-    const modal = await this.modalCtrl.create({
-      component: ModalsmsPage
+    var numero = this.indicatif+' '+this.formInscription.value.numero
+    const alert = await this.alertController.create({
+      header: 'Confirmation',
+      message: `${numero} est bien votre numero de téléphone ?`,
+      buttons: [
+        {
+          text: 'je me suis trompé',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Oui',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.popupconfirmation(this.indicatif, this.formInscription.value.numero)
+          }
+        }
+      ]
     });
+    await alert.present()
+    return
+  }
+  async popupconfirmation(indicatif, numero) {
+    let modal = await this.modalCtrl.create({
+      component: ModalsmsPage,
+      componentProps: {'indicatif': indicatif, 'numero': numero}
+    });
+    modal.onDidDismiss().then(e=> {
+        let etat = event.detail.data.componentProps.etat
+        if(etat == true) {
+          console.log('form ', this.formInscription.value)
+          this.formInscription.value.prefixenumero = indicatif+' '+numero
+            this.connexion(this.formInscription.value)
+        }
+    })
     return await modal.present();
   }
   async connexion(form) {
      
       this.service.setUser(form).then(async (e:any)=> {
         console.log('reponse ', e, 'couleur ', e.couleur)
-        if(e.tab == '0') {
-          e.response += '. Confirmez votre numéro !'
-        } else if (e.tab == '1') {
+        e = JSON.parse(e)
+        if (e.tab == '1') {
           e.response += '. Connectez-vous'
         }
         const toast = await this.toastCtrl.create({
@@ -96,6 +156,10 @@ export class InscriptionPage implements OnInit {
           color: e.couleur
         });
         toast.present();
+        this.formInscription.reset()
+        this.service.setStorage(e).then(res=> {
+          this.navCtrl.navigateForward(['accueil'])
+      })
       }).catch(async (err)=>{
         console.log('erreur ', err)
         const alert = await this.alertCtrl.create({

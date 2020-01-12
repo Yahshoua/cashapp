@@ -9,3 +9,18 @@ ion-content {
     font-size: 14px;
     color: gray;
 }
+.item-native {
+    padding: 0 !important;
+}
+.col-flag {
+    height: 32px;
+    width: 46px;
+    display: flex;
+    margin: auto;
+    border-right: 1px solid #c7c2c2;
+}
+.col-flag span {
+    left: 0;
+    right: 0;
+    margin: auto;
+}
