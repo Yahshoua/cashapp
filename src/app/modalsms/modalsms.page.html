@@ -14,7 +14,7 @@
       <div style="display: flex;height: 80%;margin-top: 29%">
         <div style="margin: auto;display: grid">
           <ion-item>
-              <ion-input placeholder="Entrez le code secret" (ionInput)="type()"></ion-input>
+              <ion-input placeholder="Entrez le code secret" (ionInput)="type($e)"></ion-input>
           </ion-item>
             <div style="text-align: center;margin-top: 8%;">
                 <ion-button (click)="resends()" shape="round" [disabled]="!resend">Renvoyer le code</ion-button>

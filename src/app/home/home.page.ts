@@ -68,8 +68,9 @@ export class HomePage implements OnInit {
       component: MaodalinscriptionPage,
       cssClass: 'my-custom-modal-css'
     })
-    modal.onDidDismiss().then(e=> {
-      let etat = event.detail.data.componentProps.etat
+    modal.onDidDismiss().then((e: any)=> {
+      console.log('eeeeeeeeee ', e)
+       var etat = e.data.componentProps.etat
       if(etat == 'facebook') {
           this.facebook()
       } else if(etat == 'google') {

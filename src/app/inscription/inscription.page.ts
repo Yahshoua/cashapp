@@ -131,8 +131,8 @@ export class InscriptionPage implements OnInit {
       component: ModalsmsPage,
       componentProps: {'indicatif': indicatif, 'numero': numero}
     });
-    modal.onDidDismiss().then(e=> {
-        let etat = event.detail.data.componentProps.etat
+    modal.onDidDismiss().then((e: any)=> {
+        let etat = e.data.componentProps.etat
         if(etat == true) {
           console.log('form ', this.formInscription.value)
           this.formInscription.value.prefixenumero = indicatif+' '+numero

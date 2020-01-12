@@ -3,7 +3,9 @@
     <ion-icon name="arrow-round-back" slot="start" style="font-size: 22px;
     margin: 10px;color: #2196F3;margin-bottom: 50%;position: absolute;
     top: 0;" (click)="goback()" routerLinkActive="router-link-active" ></ion-icon>
-    
+    <div class="col">
+      <p >Attention! ce paris a dèjà depassé la date d'expiration. Vous ne pouvez plus parier</p>
+    </div>
      <div style="margin-top: 25%">
         <ion-avatar style="margin: auto;height: 100%;width: 100%;text-align: center;">
           <img src={{pari.photo}} style="width: 100px;height: 100px;">
@@ -16,7 +18,7 @@
         </div>
      </div>
      <div style="text-align: center;">
-       <ion-button shape="round" [disabled]="parier() || canMacth" (click)="parigo()">Parier avec {{pari.auteur}}</ion-button>
+       <ion-button shape="round" [disabled]="parier().canBet || canMacth" (click)="parigo()">Parier avec {{pari.auteur}}</ion-button>
      </div>
   </ion-toolbar>
 </ion-header>
@@ -36,8 +38,8 @@
               <span> {{parseDate(pari.debut)}} </span>
             </ion-col>
             <ion-col size="3" style="display: grid;">
-              <font>  date de fin </font>
-              <span> {{parseDate(pari.date2)}} </span>
+              <font [ngClass]="{'warning': perime}">  date de fin </font>
+              <span [ngClass]="{'warning': perime}"> {{parseDate(pari.fin)}} </span>
             </ion-col>
         </ion-row>
       </ion-grid>

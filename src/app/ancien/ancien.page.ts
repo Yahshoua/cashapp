@@ -8,7 +8,7 @@ declare var moment
   styleUrls: ['./ancien.page.scss'],
 })
 export class AncienPage implements OnInit {
-  parieurs
+  parieurs= []
   constructor(private service: ServerService, private navCtrl: NavController) { }
 
   ngOnInit() {

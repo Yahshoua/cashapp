@@ -10,7 +10,7 @@
         <ion-label>Message</ion-label>
         <ion-badge *ngIf="notification?.length >= 1">{{notification?.length}}</ion-badge>
       </ion-tab-button>
-      <ion-tab-button tab="explorer">
+      <ion-tab-button (click)="goExplorer()" >
         <i class="fab fa-safari" style="font-size: 20px;padding: 2px"></i>
         <ion-label>Explorer</ion-label>
       </ion-tab-button>

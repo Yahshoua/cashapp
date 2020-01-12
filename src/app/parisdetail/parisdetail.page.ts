@@ -18,6 +18,7 @@ export class ParisdetailPage implements OnInit {
   id
   prevUrl
   participation
+  perime
   @Input() canMacth: boolean
   @Input() closed: any;
   type: any = ''
@@ -71,7 +72,17 @@ export class ParisdetailPage implements OnInit {
         })
       })
       this.service.getparis()
+      var dates = moment(this.pari.fin).format('YYYYMMDD')
+      var today= moment().format('YYYYMMDD')
+      var a = moment(today, 'YYYYMMDD');
+      var b = moment(dates, 'YYYYMMDD');
+      var diff = a.diff(b, 'days')
+      console.log(' dates', dates, ' a ', a, ' difference ', diff)
       console.log('le pari current ', this.pari)
+      if(diff > 0) {
+        this.canMacth = true
+        this.perime = true
+      }
     // console.log('taille de paris ', this.pari.length)
     // if(this.pari.length<=0) {
     //   this.service.getallparis()
@@ -102,7 +113,9 @@ export class ParisdetailPage implements OnInit {
     var monID = parseInt(this.service.utilisateur.data.id)
     var idAuteurPari = parseInt(this.pari.id_auteur)
     var res = monID == idAuteurPari? true: false
-    return res
+    return {
+        canBet: res
+    } 
   }
     ionViewWillEnter(){
       let swipsize = $('.item-active').width()

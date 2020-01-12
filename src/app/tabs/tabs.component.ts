@@ -57,4 +57,7 @@ export class TabsComponent implements OnInit {
    // this.navCtrl.navigateForward(['mypage'])
    this.navCtrl.navigateForward(['mypage'], {queryParams: {'url': 'accueil'}})
   }
+  goExplorer() {
+    this.navCtrl.navigateForward(['parieurs', 'nouveau'])
+  }
 }

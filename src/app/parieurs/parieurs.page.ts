@@ -14,6 +14,6 @@ export class ParieursPage implements OnInit {
   ngOnInit() {
   }
   goback() {
-    this.navCtrl.navigateForward(['accueil', 'accueil', 'explorer'])
+    this.navCtrl.navigateForward(['accueil', 'accueil', 'allparis'])
   }
 }
