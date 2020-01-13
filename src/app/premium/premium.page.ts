@@ -1,3 +1,4 @@
+import { ServerService } from './../server.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./premium.page.scss'],
 })
 export class PremiumPage implements OnInit {
-
-  constructor() { }
+  badge
+  constructor(private service: ServerService) { }
 
   ngOnInit() {
+    this.badge = this.service.utilisateur.data.badge
   }
 
 }

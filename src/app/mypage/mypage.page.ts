@@ -13,6 +13,7 @@ export class MypagePage implements OnInit {
   pari
   profil
   url
+  alluser
   constructor(private navCtrl: NavController, private menu: MenuController, private service: ServerService,public toastController: ToastController, private route: ActivatedRoute) { }
   openmenu() {
       this.menu.enable(true, 'first');
@@ -25,6 +26,8 @@ export class MypagePage implements OnInit {
     $('.hamburger').removeClass('is-active')
   }
   ngOnInit() {
+    this.alluser = this.service.allusers
+    console.log('alluser ', this.alluser)
     this.url = this.route.snapshot.queryParams.url
     this.service.parisSubscription.subscribe((e: any)=> {
       this.pari = e.filter(i=> {
@@ -48,5 +51,27 @@ export class MypagePage implements OnInit {
       setTimeout(()=> {
           this.navCtrl.navigateBack(['home'])
       }, 1000)
+  }
+  getFollowme() {
+    var q = []
+     var users: any = this.alluser.filter(e=> {
+        return e.id !== this.profil.id || []
+      })
+     for(var i=0;i<users.length;i++) {
+        if(users[i].followers.id == this.profil.id) {
+          q.push(users[i])
+        }
+     }
+     return q.length
+  }
+  getFollowus() {
+    var q = []
+    var users: any = this.alluser.find(e=> {
+       return e.id == this.profil.id
+     })
+     console.log('qqqq ', users)
+     q = users.followers
+
+    return q.length
   }
 }

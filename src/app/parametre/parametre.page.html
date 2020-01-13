@@ -1,0 +1,32 @@
+<ion-content>
+    <ion-grid>
+        <ion-row>
+          <ion-col size="12" style="text-align: center;">
+            <p style="margin-top: 14%;font-family: oswald;">
+              Entrez votre numero de téléphone
+            </p>
+          </ion-col>
+            <ion-col size="12">
+              <ion-item >
+                <ion-label position="fixed" (click)="openselect()" style="z-index: 1000000;--z-index: 10000000">
+                  <span id="mylabel" class="flag-icon flag-icon-{{flag}} flag-icon-squared"></span>
+                  <ion-icon name="arrow-dropdown"></ion-icon>
+                </ion-label>
+                <ion-input [(ngModel)]="number" type="tel" minlength="8" maxlength="10" placeholder="Numéro de téléphone" #myinput></ion-input>
+              </ion-item>
+              <div style="text-align: center;margin-top: 7%;">
+                <ion-button expand="full" (click)="checkLimit(number)">Suivant</ion-button>
+                <p style="margin-top: 1%;color: gray;font-size: 80%">
+                  Vous pouvez recevoir des mises à jour par texto de Cash app et vous désabonner à tout moment
+                </p>
+              </div>
+            </ion-col>
+            <ion-item class="myinp" style="display: none">
+              <ion-label style="color: #616161;font-weight: bold;">Pays</ion-label>
+              <ion-select #myselect (ionChange)="getSelect($event)">
+                <ion-select-option *ngFor="let item of pays" [value]="{'flag': item.code, 'indicatif': item.dial_code}">{{item.name}} ({{item.dial_code}})</ion-select-option>
+              </ion-select>
+            </ion-item>
+        </ion-row>
+    </ion-grid>
+</ion-content>

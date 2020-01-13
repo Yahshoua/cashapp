@@ -2,19 +2,25 @@
     <ion-grid>
         <ion-row>
             <ion-col size="12" style="text-align: center;">
-                <p class="text-add"> Votre numéro de téléphone est </p>
+                <p class="text-add"> Votre numéro de téléphone est  {{mynumber}} </p>
                 <ion-button style="font-size: 10px;width: 95%">
-                  <ion-icon slot="start" name="add"></ion-icon>
-                  Ajouter un numéro de téléphone
+                  <ion-icon slot="start" [name]="getBtn().textIcon"></ion-icon>
+                      {{getBtn().textBtn}}
                 </ion-button>
             </ion-col>
+            <div *ngIf="pari?.length <=0" style="text-align: center;width: 100%;padding-top: 7%;">
+              <p style="color: gray;">
+                Vous n'avez encore fait aucun paris
+              </p>
+              <ion-icon name="add-circle" [routerLink]="['/creation']" routerLinkActive="router-link-active" style="font-size: 30px;color: #1348c5;"></ion-icon>
+            </div>
         </ion-row>
     </ion-grid>
     <ion-item lines="none" *ngFor="let p of pari">
       <ion-label>
         <div>
           <h2 style="float: left;margin: 0;font-family: Oswald;color: gray"> {{p.titre}} </h2>
-          <ion-button class="btn" color="trans" style="float: right;margin: 0;border: 1px solid;color: 000" [routerLink]="['/editer']" [queryParams]="{id: p.id_p}" routerLinkActive="router-link-active" >Editer</ion-button>
+          <ion-button class="primary" fill="outline" style="float: right;margin: 0" [routerLink]="['/editer']" [queryParams]="{id: p.id_p}" routerLinkActive="router-link-active" >Editer</ion-button>
         </div>
         <p style="clear: both;padding-top: 3%;">
           {{p.descriptions}}

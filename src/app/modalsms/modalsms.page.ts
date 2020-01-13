@@ -64,8 +64,8 @@ export class ModalsmsPage implements OnInit {
       'dismissed': true
     });
   }
-  async type($e: any) {
-    let text = $e.target.value
+  async type($event) {
+    let text = $event.target.value
     console.log('type ', text)
     if(text == this.code && this.resend == false) {
       this.clearCountdown()

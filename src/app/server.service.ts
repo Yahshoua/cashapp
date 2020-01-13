@@ -29,6 +29,7 @@ export class ServerService {
   url13 = this.server2+'/phpcashapp/responseParieur.php';
   url14 = this.server2+'/phpcashapp/setFollow.php';
   url15 = this.server2+'/phpcashapp/getSignal.php';
+  url16 = this.server2+'/phpcashapp/setNumberphone.php';
   // option = new RequestOptions();
   header = new HttpHeaders({'Content-Type': 'application/json', "Accept": 'application/json'})
   constructor(public http: HttpClient) {
@@ -134,6 +135,27 @@ export class ServerService {
         })
       })
   }
+  setNumberPhone(form) {
+    return new Promise((resolve, reject)=> {
+      $.ajax({
+          method: 'POST',
+          url: this.url16,
+          dataType: 'json',
+          data: form,
+          success: (res)=> {
+            resolve(res)
+            this.utilisateur.data.numero = form.numero
+            this.utilisateur.data.prefixe_numero = form.prefixenumber
+            console.log('resultat ', res)
+            this.setStorage(res)
+          },
+          error: err=> {
+            reject('erreur lors de la mise à jour du numero de telephone !')
+          }
+      })
+    })
+  }
+
   responseParieur(id_fol?, id_user?, id_pari?, reponse?) {
     return new Promise((resolve, reject)=> {
       $.ajax({
@@ -220,6 +242,14 @@ export class ServerService {
       type: 'POST',
       data: paris
     }).done(res=> {
+      let users = this.allusers
+      var nom = this.utilisateur.data.nom
+      for(var i=0;i<users.length;i++) {
+        if(users[i].id !== this.utilisateur.data.id) {
+          var token = users[i].token
+            this.sendNotification(token, `Nouveau paris`, `${users[i].nom}, ${nom} vient de lancer un nouveau paris !`)
+        }
+      }
       let data = JSON.parse(res)
       this.getallparis().then(res=> {
         console.log('le paris ', this.paris , 'resultat ', data)
@@ -339,7 +369,7 @@ export class ServerService {
               url: this.url5,
               data: user
             }).done(e=> {
-              this.sendNotification(token,'Paticipation', user.nom+' veut participer à ton paris')
+              this.sendNotification(token, 'Paticipation', user.nom+' veut participer à ton paris')
               console.log('envoie reussi...')
               this.getparis()
             }).fail(err=> {

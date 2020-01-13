@@ -13,25 +13,25 @@
         <div class="col-perso-detail">
             <h3>{{profil.nom}}</h3>
             <span style="font-size: 10px">
-              Libreville
+              {{profil.badge}}
             </span>
         </div>
      </div>
   </ion-toolbar>
-  <div class="col-info-paris" style="margin: auto;">
+  <div class="col-info-paris" style="margin: auto;box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);">
       <ion-grid>
         <ion-row>
             <ion-col size="4" style="display: grid;" class="activates" [routerLink]="[{outlets: { myoutlet: ['mesparis'] } }]" routerLinkActive="router-link-active">
                 <font>Abonné</font>
-                <span> 0 </span>
+                <span> {{getFollowus()}} </span>
             </ion-col>
             <ion-col size="4" style="display: grid;">
               <font> Argent gagné </font>
-              <span> 200k </span>
+              <span> {{profil.argent==null?0:profil.argent}}k </span>
             </ion-col>
             <ion-col size="4" style="display: grid;">
               <font>  Abonnement </font>
-              <span> 2 </span>
+              <span> {{getFollowme()}}  </span>
             </ion-col>
         </ion-row>
       </ion-grid>
@@ -61,7 +61,7 @@
       </ion-item>
          
         <br>
-      <ion-item lines="none" class="ion-activatable"><i class="fas fa-question-circle" style="color: #05cdff"></i> <span>A propos</span> 
+      <ion-item lines="none" [routerLink]="['/propos']" routerLinkActive="router-link-active"  class="ion-activatable"><i class="fas fa-question-circle" style="color: #05cdff"></i> <span>A propos</span> 
         <ion-ripple-effect type="unbounded"></ion-ripple-effect> 
       </ion-item>
       <br>

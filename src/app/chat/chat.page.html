@@ -7,7 +7,7 @@
 <ion-content class="cnt" style="position: relative"  id="mydiv">
   <ion-grid style="margin-top: 12%;" class="mydiv" *ngIf="chating?.length >= 1">
       <div style="position: absolute;bottom: 0;right: 0;
-      left: 0;height: 100%;" id="madiv" #content>
+      left: 0;" id="madiv" #content>
           <ion-item *ngFor="let chat of chating" lines="none" style="background: #ffffffed">
           <ion-avatar [slot]="slot(chat.id_exp)">
             <img src={{chat?.photo}}>

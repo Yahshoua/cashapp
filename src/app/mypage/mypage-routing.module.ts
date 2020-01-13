@@ -14,6 +14,10 @@ const routes: Routes = [
     {
         path: 'premium',
         loadChildren: () => import('../premium/premium.module').then( m => m.PremiumPageModule)
+    },
+    {
+      path: 'parametre',
+      loadChildren: () => import('../parametre/parametre.module').then( m => m.ParametrePageModule)
     }
   ]
   },

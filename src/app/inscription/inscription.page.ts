@@ -29,7 +29,6 @@ export class InscriptionPage implements OnInit {
 
   ngOnInit() {
     this.pays = this.service.countrycode
-    console.log('pays ', this.pays)
     this.modalCtrl.dismiss({
       component : [MaodalinscriptionPage, ModalsmsPage],
       'dismissed': true
@@ -71,8 +70,9 @@ export class InscriptionPage implements OnInit {
     toast.present();
     return null;
   }
-  getSelect() {
-    let obj: any = event
+  getSelect($event) {
+    console.log($event.detail)
+    let obj: any = $event
     this.flag = (obj.detail.value.flag).toLowerCase()
     this.indicatif = obj.detail.value.indicatif
     console.log('obj ', obj ,'flag ', this.flag , 'ind ', this.indicatif)

@@ -128,6 +128,14 @@ const routes: Routes = [
   {
     path: 'modalsms',
     loadChildren: () => import('./modalsms/modalsms.module').then( m => m.ModalsmsPageModule)
+  },
+  {
+    path: 'parametre',
+    loadChildren: () => import('./parametre/parametre.module').then( m => m.ParametrePageModule)
+  },
+  {
+    path: 'propos',
+    loadChildren: () => import('./propos/propos.module').then( m => m.ProposPageModule)
   }
 ];
 
